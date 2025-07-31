@@ -5,6 +5,7 @@ import {
 
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from '@openedx/paragon';
+import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCourseTools";
 
 const config = {
   ...process.env,
@@ -74,6 +75,21 @@ const config = {
               <a className="font-weight-bold small" href={props.href}>
                 {props.messages}
               </a>
+            ),
+          },
+        },
+      ],
+    },
+    course_tools_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "course_tools_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <CustomCourseTools {...props}/>
             ),
           },
         },
