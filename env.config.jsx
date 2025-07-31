@@ -9,6 +9,7 @@ import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCours
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
 import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/CustomWeeklyLearningGoalCard";
+import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
 
 const config = {
   ...process.env,
@@ -138,6 +139,21 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <CustomWeeklyLearningGoalCard {...props}/>
+            ),
+          },
+        },
+      ],
+    },
+    outline_tab_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "outline_tab_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <CustomOutlineTab {...props}/>
             ),
           },
         },
