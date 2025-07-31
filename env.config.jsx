@@ -7,6 +7,8 @@ import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from '@openedx/paragon';
 import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCourseTools";
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
+import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
+
 const config = {
   ...process.env,
   pluginSlots: {
@@ -105,6 +107,21 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <CustomDateSummary {...props}/>
+            ),
+          },
+        },
+      ],
+    },
+    flag_button_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "flag_button_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <CustomFlagButton {...props}/>
             ),
           },
         },
