@@ -7,6 +7,7 @@ import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { DisabledVisible } from '@openedx/paragon/icons';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import SequenceLink from './SequenceLink';
 import { useModel } from '../../generic/model-store';
 
@@ -94,20 +95,36 @@ const Section = ({
         open={open}
         onToggle={() => { setOpen(!open); }}
         iconWhenClosed={(
-          <IconButton
-            alt={intl.formatMessage(messages.openSection)}
-            icon={faPlus}
-            onClick={() => { setOpen(true); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_open_plugin_slot"
+            pluginProps={{
+              alt: intl.formatMessage(messages.policy),
+              onClick: () => { setOpen(true); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(messages.openSection)}
+              icon={faPlus}
+              onClick={() => { setOpen(true); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
         iconWhenOpen={(
-          <IconButton
-            alt={intl.formatMessage(genericMessages.close)}
-            icon={faMinus}
-            onClick={() => { setOpen(false); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_close_plugin_slot"
+            pluginProps={{
+              alt: intl.formatMessage(genericMessages.close),
+              onClick: () => { setOpen(false); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(genericMessages.close)}
+              icon={faMinus}
+              onClick={() => { setOpen(false); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
       >
         <ol className="list-unstyled">
