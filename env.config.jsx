@@ -8,6 +8,7 @@ import { IconButton } from '@openedx/paragon';
 import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCourseTools";
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
+import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/CustomWeeklyLearningGoalCard";
 
 const config = {
   ...process.env,
@@ -122,6 +123,21 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <CustomFlagButton {...props}/>
+            ),
+          },
+        },
+      ],
+    },
+    weekly_learning_goal_card_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "weekly_learning_goal_card_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <CustomWeeklyLearningGoalCard {...props}/>
             ),
           },
         },
