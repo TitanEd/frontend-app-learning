@@ -62,6 +62,23 @@ const config = {
         },
       ],
     },
+    course_dates_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "course_dates_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <a className="font-weight-bold small" href={props.href}>
+                {props.messages}
+              </a>
+            ),
+          },
+        },
+      ],
+    },
   },
 };
 
