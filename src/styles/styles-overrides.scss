@@ -62,17 +62,42 @@
   transition: border 0.2s, box-shadow 0.2s, background 0.2s;
   box-shadow: none;
 }
+
 .weekly-goal-card.selected {
   border: 2px solid #2196f3;
   background: #f0f7ff;
-  box-shadow: 0 2px 8px 0 rgba(33,150,243,0.08);
+  box-shadow: 0 2px 8px 0 rgba(33, 150, 243, 0.08);
 }
+
 .weekly-goal-card:active {
-  box-shadow: 0 2px 8px 0 rgba(33,150,243,0.12);
+  box-shadow: 0 2px 8px 0 rgba(33, 150, 243, 0.12);
 }
 
 .weekly-goal-switch {
   margin-left: 1rem;
   display: flex;
   align-items: center;
+}
+
+.badge-border-radius {
+  border-radius: 0.5rem;
+}
+
+.badge-gap{
+  gap: 12px;
+}
+
+.bookmarks-badge{
+  text-decoration: none; 
+  font-weight: 500; 
+  font-size: 1rem; 
+  height: 40px;
+}
+
+.badge-style {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  height: 40px;
+  flex: 1 1 0;
 }

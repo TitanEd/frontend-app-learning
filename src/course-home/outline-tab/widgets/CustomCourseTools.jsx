@@ -15,38 +15,31 @@ const CustomCourseTools = ({
       {courseTools.filter((courseTool) => courseTool.analyticsId === 'edx.bookmarks').map((courseTool) => (
         <Badge
           key={courseTool.analyticsId}
-          className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center w-100 mb-2 rounded-pill"
+          className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center w-100 mb-2 badge-border-radius bookmarks-badge"
           as="a"
           href={courseTool.url}
           onClick={() => logClick(courseTool.analyticsId)}
-          style={{
-            textDecoration: 'none', fontWeight: 500, fontSize: '1rem', height: '40px',
-          }}
         >
           <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
           {courseTool.title}
         </Badge>
       ))}
       {/* Updates and Launch tour in a row */}
-      <div className="d-flex flex-row gap-2 w-100">
+      <div className="d-flex flex-row w-100 badge-gap">
         {courseTools.filter((courseTool) => courseTool.analyticsId === 'edx.updates').map((courseTool) => (
           <Badge
             key={courseTool.analyticsId}
-            className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center flex-fill rounded-pill"
+            className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center badge-border-radius badge-style"
             as="a"
             href={courseTool.url}
             onClick={() => logClick(courseTool.analyticsId)}
-            style={{
-              textDecoration: 'none', fontWeight: 500, fontSize: '1rem', height: '40px',
-            }}
           >
             <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
             {courseTool.title}
           </Badge>
         ))}
         <Badge
-          className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center flex-fill rounded-pill"
-          style={{ fontWeight: 500, fontSize: '1rem', height: '40px' }}
+          className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center badge-border-radius badge-style"
         >
           <LaunchCourseHomeTourButton />
         </Badge>
