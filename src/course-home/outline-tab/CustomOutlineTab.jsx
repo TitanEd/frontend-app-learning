@@ -98,7 +98,7 @@ const CustomOutlineTab = ({
           />
         </div>
         <div className="col col-12 col-md-8">
-          <Card className="mb-4 shadow-sm" style={{ borderRadius: '1rem' }}>
+          <Card className="mb-4 shadow-sm" style={{ borderRadius: '12px' }}>
             <div className="row no-gutters align-items-center">
               <div className="col-auto">
                 <img
@@ -119,7 +119,7 @@ const CustomOutlineTab = ({
                   </div>
                   {resumeCourseUrl && (
                     <Button
-                      variant="brand"
+                      // variant="brand"
                       href={resumeCourseUrl}
                       onClick={logResumeCourseClick}
                     >
