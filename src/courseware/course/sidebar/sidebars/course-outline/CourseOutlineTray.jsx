@@ -6,6 +6,7 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   MenuOpen as MenuOpenIcon,
   ChevronLeft as ChevronLeftIcon,
+  MenuIcon,
 } from '@openedx/paragon/icons';
 
 import { useModel } from '@src/generic/model-store';
@@ -81,7 +82,7 @@ const CourseOutlineTray = ({ intl }) => {
       <IconButton
         alt={intl.formatMessage(messages.toggleCourseOutlineTrigger)}
         className="outline-sidebar-toggle-btn flex-shrink-0 text-dark bg-light-200"
-        iconAs={MenuOpenIcon}
+        iconAs={MenuIcon}
         onClick={handleToggleCollapse}
       />
     </div>

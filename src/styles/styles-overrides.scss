@@ -136,11 +136,42 @@
 
 .sequence {
   border-radius: 1rem;
+  background-color: #FFFFFF;
 }
 
 .outline-sidebar-wrapper {
   width: 25rem;
 }
+
+.outline-sidebar-heading-wrapper {
+  border: 1px solid #E5E6E6;
+}
+
+#outline-sidebar-outline {
+  border: 1px solid #E5E6E6;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+  .bg-info-100 {
+    border-left: 3px solid #2B2399;
+    background-color: #E6EDFF !important;
+  }
+
+  .course-sidebar-section {
+    border: none;
+  }
+
+  .mb-2 {
+    margin-bottom: 0 !important;
+  }
+}
+
+.course-sidebar-section {
+  border-bottom: none;
+  border-top: none;
+}
+
+
 
 // Course Tabs Navigation Styles
 .course-tabs-navigation {
@@ -151,7 +182,7 @@
   border-radius: 4px;
 }
 
-.nav-underline-tabs .nav-link.active { 
+.nav-underline-tabs .nav-link.active {
   background-color: #FFFFFF;
   border-bottom: none;
   border-radius: 0.5rem;
@@ -313,7 +344,7 @@
   }
 }
 
-.raised-card{
+.raised-card {
   margin-top: -85px;
   border-radius: 12px;
 }
