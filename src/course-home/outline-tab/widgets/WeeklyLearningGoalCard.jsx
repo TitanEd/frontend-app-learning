@@ -9,6 +9,7 @@ import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Email } from '@openedx/paragon/icons';
 import { useSelector } from 'react-redux';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import messages from '../messages';
 import LearningGoalButton from './LearningGoalButton';
 import { saveWeeklyLearningGoal } from '../../data';
@@ -88,6 +89,22 @@ const WeeklyLearningGoalCard = ({
   }, [location.search]);
 
   return (
+    <PluginSlot
+      id="weekly_learning_goal_card_plugin_slot"
+      pluginProps={{
+        administrator,
+        daysPerWeek,
+        daysPerWeekGoal,
+        subscribedToReminders,
+        location,
+        intl,
+        courseId,
+        isMasquerading,
+        org,
+        handleSelect,
+        handleSubscribeToReminders,
+      }}
+    >
     <Card
       id="courseHome-weeklyLearningGoal"
       className="row w-100 m-0 mb-3 raised-card"
@@ -146,6 +163,7 @@ const WeeklyLearningGoalCard = ({
         </Card.Section>
       )}
     </Card>
+    </PluginSlot>
   );
 };
 

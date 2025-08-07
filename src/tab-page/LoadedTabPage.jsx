@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { getConfig } from '@edx/frontend-platform';
 import { useToggle } from '@openedx/paragon';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { CourseTabsNavigation } from '../course-tabs';
 import { useModel } from '../generic/model-store';
 import { AlertList } from '../generic/user-messages';
@@ -53,6 +54,11 @@ const LoadedTabPage = ({
       <Helmet>
         <title>{`${activeTab ? `${activeTab.title} | ` : ''}${title} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
+      <PluginSlot
+        id="loaded_tab_page_plugin_slot"
+        pluginProps={{
+        }}
+      >
       {originalUserIsStaff && (
         <InstructorToolbar
           courseId={courseId}
@@ -60,6 +66,7 @@ const LoadedTabPage = ({
           tab={activeTabSlug}
         />
       )}
+      </PluginSlot>
       <StreakModal
         courseId={courseId}
         metadataModel={metadataModel}

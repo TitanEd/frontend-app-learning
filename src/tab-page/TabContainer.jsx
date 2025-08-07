@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { OuterExamTimer } from '@edx/frontend-lib-special-exams';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import TabPage from './TabPage';
 
 const TabContainer = (props) => {
@@ -36,6 +37,16 @@ const TabContainer = (props) => {
   } = useSelector(state => state[slice]);
 
   return (
+    <PluginSlot
+      id="custom_tab_container_plugin_slot"
+      pluginProps={{
+        children,
+        tab,
+        courseId,
+        courseStatus,
+        metadataModel: `${slice}Meta`,
+      }}
+    >
     <TabPage
       activeTabSlug={tab}
       courseId={courseId}
@@ -45,6 +56,7 @@ const TabContainer = (props) => {
       {courseId && <OuterExamTimer courseId={courseId} />}
       {children}
     </TabPage>
+    </PluginSlot>
   );
 };
 

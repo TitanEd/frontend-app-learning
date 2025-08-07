@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
+
 const FlagButton = ({
   buttonIcon,
   title,
@@ -9,6 +11,16 @@ const FlagButton = ({
   handleSelect,
   isSelected,
 }) => (
+  <PluginSlot
+    id="flag_button_plugin_slot"
+    pluginProps={{
+      buttonIcon,
+      title,
+      text,
+      handleSelect,
+      isSelected,
+    }}
+  >
   <button
     type="button"
     className={classnames(
@@ -30,6 +42,7 @@ const FlagButton = ({
       {text}
     </div>
   </button>
+  </PluginSlot>
 );
 
 FlagButton.propTypes = {
