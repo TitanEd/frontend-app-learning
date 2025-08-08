@@ -85,6 +85,12 @@ const LoadedTabPage = ({
             ...logistrationAlert,
           }}
         />
+        <PluginSlot
+          id="course_header_plugin_slot"
+          pluginProps={{
+            title,
+          }}
+        />
         <CourseTabsNavigation tabs={tabs} className="mb-3" activeTabSlug={activeTabSlug} />
         <div className="container-xl">
           {children}

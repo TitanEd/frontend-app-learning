@@ -10,7 +10,7 @@ import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
 import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/CustomWeeklyLearningGoalCard";
 import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
-import CustomTabContainer from "./src/tab-page/CustomTabContainer";
+import CourseHeader from "./src/tab-page/CourseHeader";
 
 const config = {
   ...process.env,
@@ -160,19 +160,19 @@ const config = {
         },
       ],
     },
-    loaded_tab_page_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "outline_tab_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: (props) =>{},
-          },
-        },
-      ],
-    },
+    // loaded_tab_page_plugin_slot: {
+    //   plugins: [
+    //     {
+    //       op: PLUGIN_OPERATIONS.Hide,
+    //       widget: {
+    //         id: "outline_tab_plugin_slot",
+    //         type: DIRECT_PLUGIN,
+    //         priority: 1,
+    //         RenderWidget: (props) =>{},
+    //       },
+    //     },
+    //   ],
+    // },
     hide_header_plugin_slot: {
       plugins: [
         {
@@ -186,21 +186,36 @@ const config = {
         },
       ],
     },
-    custom_tab_container_plugin_slot: {
+    course_header_plugin_slot: {
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: "custom_tab_container_plugin_slot",
+            id: "course_header_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => (
-              <CustomTabContainer {...props}/>
+              <CourseHeader {...props} />
             ),
           },
         },
       ],
     },
+    // custom_tab_container_plugin_slot: {
+    //   plugins: [
+    //     {
+    //       op: PLUGIN_OPERATIONS.Insert,
+    //       widget: {
+    //         id: "custom_tab_container_plugin_slot",
+    //         type: DIRECT_PLUGIN,
+    //         priority: 1,
+    //         RenderWidget: (props) => (
+    //           <CustomTabContainer {...props}/>
+    //         ),
+    //       },
+    //     },
+    //   ],
+    // },
   },
 };
 
