@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // } = useModel('courseHomeMeta', courseId);
 
 const CourseHeader = (props) => (
-  <div className="container-xl">
+  <div className="container-xl course-header mb-2">
     <div className="ca-breadcrumb-bg">
       <div className="ca-breadcrumb-container">
         <div className="ca-breadcrumb">

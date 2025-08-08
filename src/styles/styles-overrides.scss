@@ -176,10 +176,10 @@
 // Course Tabs Navigation Styles
 .course-tabs-navigation {
   background-color: #E6EDFF;
-  margin: 0 1rem;
   font-weight: 400;
-  // width: 972px;
   border-radius: 4px;
+  margin-left: 12px;
+  margin-bottom: 1.5rem !important;
 
   .nav a {
     &:not(.active):hover {
@@ -199,6 +199,9 @@
   padding: 0.5rem 0;
 }
 
+.course-header {
+  margin-left: -15px;
+}
 
 /* Breadcrumb and Title styles */
 .ca-breadcrumb-bg {
