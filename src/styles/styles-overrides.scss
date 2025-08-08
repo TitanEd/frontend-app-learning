@@ -180,6 +180,12 @@
   font-weight: 400;
   // width: 972px;
   border-radius: 4px;
+
+  .nav a {
+    &:not(.active):hover {
+      border-radius: 0.5rem;
+    }
+  }
 }
 
 .nav-underline-tabs .nav-link.active {
@@ -347,4 +353,45 @@
 .raised-card {
   margin-top: -85px;
   border-radius: 12px;
+}
+
+// Progress tab styles
+.progress-tab-card-style {
+  background-color: #FFFFFF !important;
+  border-radius: 0.5rem !important;
+}
+
+.related-links-styles {
+  padding: 1rem 1.5rem;
+  margin-top: -5px;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2) !important;
+  font-size: 1.2rem !important;
+  color: rgb(31.2, 50.4, 37.6) !important;
+
+  .h4 {
+    font-size: 1.5rem;
+  }
+
+  .pgn__hyperlink {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+.donut-chart-label {
+  transform: translateY(-2.3em);
+}
+
+.donut-chart-number {
+  transform: translateY(0.1em);
+}
+
+.donut-ring, .donut-segment {
+  stroke-width: 4px;
+}
+
+.donut-ring, .donut-segment, .donut-hole {
+  &.complete-stroke {
+    stroke: #2B2399;
+  }
 }

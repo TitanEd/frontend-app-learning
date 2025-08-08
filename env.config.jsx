@@ -4,13 +4,14 @@ import {
 } from "@openedx/frontend-plugin-framework";
 
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { IconButton } from '@openedx/paragon';
+import { IconButton } from "@openedx/paragon";
 import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCourseTools";
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
 import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/CustomWeeklyLearningGoalCard";
 import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
 import CourseHeader from "./src/tab-page/CourseHeader";
+import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
 
 const config = {
   ...process.env,
@@ -38,11 +39,11 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <IconButton
-              alt={props.alt}
-              icon={faChevronDown}
-              onClick={ props.onClick }
-              size="sm"
-            />
+                alt={props.alt}
+                icon={faChevronDown}
+                onClick={props.onClick}
+                size="sm"
+              />
             ),
           },
         },
@@ -58,11 +59,11 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <IconButton
-              alt={props.alt}
-              icon={faChevronUp}
-              onClick={ props.onClick }
-              size="sm"
-            />
+                alt={props.alt}
+                icon={faChevronUp}
+                onClick={props.onClick}
+                size="sm"
+              />
             ),
           },
         },
@@ -93,9 +94,7 @@ const config = {
             id: "course_tools_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <CustomCourseTools {...props}/>
-            ),
+            RenderWidget: (props) => <CustomCourseTools {...props} />,
           },
         },
       ],
@@ -108,9 +107,7 @@ const config = {
             id: "date_summary_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <CustomDateSummary {...props}/>
-            ),
+            RenderWidget: (props) => <CustomDateSummary {...props} />,
           },
         },
       ],
@@ -123,9 +120,7 @@ const config = {
             id: "flag_button_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <CustomFlagButton {...props}/>
-            ),
+            RenderWidget: (props) => <CustomFlagButton {...props} />,
           },
         },
       ],
@@ -139,7 +134,7 @@ const config = {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => (
-              <CustomWeeklyLearningGoalCard {...props}/>
+              <CustomWeeklyLearningGoalCard {...props} />
             ),
           },
         },
@@ -153,9 +148,7 @@ const config = {
             id: "outline_tab_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <CustomOutlineTab {...props}/>
-            ),
+            RenderWidget: (props) => <CustomOutlineTab {...props} />,
           },
         },
       ],
@@ -168,7 +161,7 @@ const config = {
             id: "outline_tab_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) =>{},
+            RenderWidget: (props) => {},
           },
         },
       ],
@@ -181,7 +174,7 @@ const config = {
             id: "hide_header_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) =>{},
+            RenderWidget: (props) => {},
           },
         },
       ],
@@ -194,28 +187,24 @@ const config = {
             id: "course_header_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <CourseHeader {...props} />
-            ),
+            RenderWidget: (props) => <CourseHeader {...props} />,
           },
         },
       ],
     },
-    // custom_tab_container_plugin_slot: {
-    //   plugins: [
-    //     {
-    //       op: PLUGIN_OPERATIONS.Insert,
-    //       widget: {
-    //         id: "custom_tab_container_plugin_slot",
-    //         type: DIRECT_PLUGIN,
-    //         priority: 1,
-    //         RenderWidget: (props) => (
-    //           <CustomTabContainer {...props}/>
-    //         ),
-    //       },
-    //     },
-    //   ],
-    // },
+    progress_tab_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "progress_tab_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomProgressTab {...props} />,
+          },
+        },
+      ],
+    },
   },
 };
 
