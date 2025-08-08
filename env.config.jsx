@@ -160,19 +160,19 @@ const config = {
         },
       ],
     },
-    // loaded_tab_page_plugin_slot: {
-    //   plugins: [
-    //     {
-    //       op: PLUGIN_OPERATIONS.Hide,
-    //       widget: {
-    //         id: "outline_tab_plugin_slot",
-    //         type: DIRECT_PLUGIN,
-    //         priority: 1,
-    //         RenderWidget: (props) =>{},
-    //       },
-    //     },
-    //   ],
-    // },
+    loaded_tab_page_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widget: {
+            id: "outline_tab_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) =>{},
+          },
+        },
+      ],
+    },
     hide_header_plugin_slot: {
       plugins: [
         {

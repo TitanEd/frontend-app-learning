@@ -59,13 +59,13 @@ const LoadedTabPage = ({
         pluginProps={{
         }}
       >
-      {originalUserIsStaff && (
+        {originalUserIsStaff && (
         <InstructorToolbar
           courseId={courseId}
           unitId={unitId}
           tab={activeTabSlug}
         />
-      )}
+        )}
       </PluginSlot>
       <StreakModal
         courseId={courseId}
