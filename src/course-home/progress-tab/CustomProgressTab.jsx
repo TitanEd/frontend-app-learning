@@ -19,7 +19,7 @@ const CustomProgressTab = ({
   <>
     <div className="row w-100 m-0">
       {/* Main body */}
-      <div className="col-12 col-md-8 p-0 mt-6">
+      <div className="col-12 col-md-8 p-0">
         <div className="progress-tab-card-style">
           {!disableProgressGraph && <CourseCompletion />}
         </div>
