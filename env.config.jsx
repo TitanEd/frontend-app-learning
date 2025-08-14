@@ -12,6 +12,8 @@ import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/
 import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
 import CourseHeader from "./src/tab-page/CourseHeader";
 import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
+import classNames from 'classnames';
+
 
 const config = {
   ...process.env,
@@ -201,6 +203,55 @@ const config = {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => <CustomProgressTab {...props} />,
+          },
+        },
+      ],
+    },
+    footer_hide_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widget: {
+            id: "footer_hide_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: () => {},
+          },
+        },
+      ],
+    },
+    day_timeline_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "day_timeline_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <div>
+                {props.first ? <div className={classNames(props.color, 'dates-dot border border-gray-900 first')} />
+                : props.last ? <div className={classNames(props.color, 'dates-dot border last')} />
+                : <div className={classNames(props.color, 'dates-dot border border-gray-900 today')} />}
+              </div>
+            ),
+          },
+        },
+      ],
+    },
+    dates_tab_description_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "dates_tab_description_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => (
+              <div>
+              {props.item.description && <div className="small mb-2 dates-info">{props.item.description}</div>}
+              </div>
+            ),
           },
         },
       ],

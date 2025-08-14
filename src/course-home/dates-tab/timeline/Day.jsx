@@ -12,6 +12,7 @@ import { Tooltip, OverlayTrigger } from '@openedx/paragon';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../../generic/model-store';
 
 import { getBadgeListAndColor } from './badgelist';
@@ -41,7 +42,14 @@ const Day = ({
       {!first && <div className="dates-line-top border-1 border-left border-gray-900 bg-gray-900" />}
 
       {/* Dot */}
+      <PluginSlot
+        id="day_timeline_plugin_slot"
+        pluginProps={{
+          first, last, color,
+        }}
+      >
       <div className={classNames(color, 'dates-dot border border-gray-900')} />
+      </PluginSlot>
 
       {/* Bottom Line */}
       {!last && <div className="dates-line-bottom border-1 border-left border-gray-900 bg-gray-900" />}
@@ -57,8 +65,8 @@ const Day = ({
             year="numeric"
             {...timezoneFormatArgs}
           />
-          {badges}
         </div>
+        {badges}
         {items.map((item) => {
           const { badges: itemBadges } = getBadgeListAndColor(date, intl, item, items);
 
@@ -96,7 +104,14 @@ const Day = ({
                   </OverlayTrigger>
                 )}
               </div>
+              <PluginSlot
+                id="dates_tab_description_plugin_slot"
+                pluginProps={{
+                  item,
+                }}
+              >
               {item.description && <div className="small mb-2">{item.description}</div>}
+              </PluginSlot>
             </div>
           );
         })}

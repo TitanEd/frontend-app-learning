@@ -83,7 +83,11 @@ const TabPage = ({ intl, ...props }) => {
           {intl.formatMessage(messages.failure)}
         </p>
       )}
+      <PluginSlot
+        id="footer_hide_plugin_slot"
+      >
       <FooterSlot />
+      </PluginSlot>
     </>
   );
 };
