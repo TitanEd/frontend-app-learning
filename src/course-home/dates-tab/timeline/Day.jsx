@@ -38,21 +38,21 @@ const Day = ({
 
   return (
     <li className="dates-day pb-4" data-testid="dates-day">
+      <PluginSlot
+        id="day_timeline_plugin_slot"
+        pluginProps={{
+          first, last, color, date,
+        }}
+      >
       {/* Top Line */}
       {!first && <div className="dates-line-top border-1 border-left border-gray-900 bg-gray-900" />}
 
       {/* Dot */}
-      <PluginSlot
-        id="day_timeline_plugin_slot"
-        pluginProps={{
-          first, last, color,
-        }}
-      >
       <div className={classNames(color, 'dates-dot border border-gray-900')} />
-      </PluginSlot>
 
       {/* Bottom Line */}
       {!last && <div className="dates-line-bottom border-1 border-left border-gray-900 bg-gray-900" />}
+      </PluginSlot>
 
       {/* Content */}
       <div className="d-inline-block ml-3 pl-2">
