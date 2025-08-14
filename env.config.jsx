@@ -1,3 +1,4 @@
+import React from "react";
 import {
   DIRECT_PLUGIN,
   PLUGIN_OPERATIONS,
@@ -5,6 +6,7 @@ import {
 
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "@openedx/paragon";
+import { FormattedDate } from "@edx/frontend-platform/i18n";
 import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCourseTools";
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
@@ -12,8 +14,7 @@ import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/
 import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
 import CourseHeader from "./src/tab-page/CourseHeader";
 import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
-import classNames from 'classnames';
-
+import classNames from "classnames";
 
 const config = {
   ...process.env,
@@ -249,9 +250,54 @@ const config = {
             priority: 1,
             RenderWidget: (props) => (
               <div>
-              {props.item.description && <div className="small mb-2 dates-info">{props.item.description}</div>}
+                {props.item.description && (
+                  <div className="small mb-2 dates-info">
+                    {props.item.description}
+                  </div>
+                )}
               </div>
             ),
+          },
+        },
+      ],
+    },
+    dates_tab_today_date_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "dates_tab_today_date_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => {
+              // Function to check if the date is today
+              const isToday = (dateToCheck) => {
+                const today = new Date();
+                return dateToCheck.toDateString() === today.toDateString();
+              };
+
+              // Check if current date is today
+              const isCurrentDateToday = isToday(props.date);
+
+              return (
+                <div
+                  className={classNames(
+                    "row w-100 m-0 mb-1 align-items-center text-primary-700",
+                    { "today-date-style": isCurrentDateToday }
+                  )}
+                  data-testid="dates-header"
+                >
+                  <FormattedDate
+                    value={props.date}
+                    day="numeric"
+                    month="short"
+                    weekday="short"
+                    year="numeric"
+                    {...props.timezoneFormatArgs}
+                  />
+                </div>
+              );
+            },
           },
         },
       ],

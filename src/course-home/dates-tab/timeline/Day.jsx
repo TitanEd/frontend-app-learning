@@ -56,6 +56,13 @@ const Day = ({
 
       {/* Content */}
       <div className="d-inline-block ml-3 pl-2">
+        <PluginSlot
+          id="dates_tab_today_date_plugin_slot"
+          pluginProps={{
+            date,
+            ...timezoneFormatArgs,
+          }}
+        >
         <div className="row w-100 m-0 mb-1 align-items-center text-primary-700" data-testid="dates-header">
           <FormattedDate
             value={date}
@@ -66,6 +73,7 @@ const Day = ({
             {...timezoneFormatArgs}
           />
         </div>
+        </PluginSlot>
         {badges}
         {items.map((item) => {
           const { badges: itemBadges } = getBadgeListAndColor(date, intl, item, items);
