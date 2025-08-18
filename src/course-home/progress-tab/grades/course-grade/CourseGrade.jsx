@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../../../generic/model-store';
 
 import CourseGradeFooter from './CourseGradeFooter';
 import CourseGradeHeader from './CourseGradeHeader';
 import GradeBar from './GradeBar';
 import CreditInformation from '../../credit-information/CreditInformation';
-
 import messages from '../messages';
 
 const CourseGrade = ({ intl }) => {
@@ -34,7 +34,7 @@ const CourseGrade = ({ intl }) => {
       {(gradesFeatureIsFullyLocked || gradesFeatureIsPartiallyLocked) && <CourseGradeHeader />}
       <div className={applyLockedOverlay} aria-hidden={gradesFeatureIsFullyLocked}>
         <div className="row w-100 m-0 p-4">
-          <div className="col-12 col-sm-6 p-0 pr-sm-5.5">
+          <div className="col-12 p-0 pr-sm-5.5">
             <h2>{creditCourseRequirements
               ? intl.formatMessage(messages.gradesAndCredit)
               : intl.formatMessage(messages.grades)}
@@ -48,7 +48,11 @@ const CourseGrade = ({ intl }) => {
           <GradeBar passingGrade={passingGrade} />
           <CreditInformation />
         </div>
+        <PluginSlot
+          id="course_grade_footer_plugin_slot"
+        >
         <CourseGradeFooter passingGrade={passingGrade} />
+        </PluginSlot>
       </div>
     </section>
   );

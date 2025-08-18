@@ -15,6 +15,7 @@ import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
 import CourseHeader from "./src/tab-page/CourseHeader";
 import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
 import classNames from "classnames";
+import CustomGradeBar from "./src/course-home/progress-tab/grades/course-grade/CustomGradeBar";
 
 const config = {
   ...process.env,
@@ -333,6 +334,32 @@ const config = {
                 </div>
               );
             },
+          },
+        },
+      ],
+    },
+    grade_bar_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "progress_tab_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomGradeBar {...props} />,
+          },
+        },
+      ],
+    },
+    course_grade_footer_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widget: {
+            id: "course_grade_footer_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => {},
           },
         },
       ],

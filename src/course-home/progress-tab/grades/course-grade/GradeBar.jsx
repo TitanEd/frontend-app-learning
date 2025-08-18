@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import {
   getLocale, injectIntl, intlShape, isRtl,
 } from '@edx/frontend-platform/i18n';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../../../generic/model-store';
 import CurrentGradeTooltip from './CurrentGradeTooltip';
 import PassingGradeTooltip from './PassingGradeTooltip';
-
 import messages from '../messages';
 
 const GradeBar = ({ intl, passingGrade }) => {
@@ -31,6 +31,19 @@ const GradeBar = ({ intl, passingGrade }) => {
   const adjustedRtlStyle = (percentOffest) => (isRtl(getLocale()) ? { transform: `translateX(${100 - percentOffest}%)` } : {});
 
   return (
+    <PluginSlot
+      id="grade_bar_plugin_slot"
+      pluginProps={{
+        intl,
+        passingGrade,
+        courseId,
+        isPassing,
+        percent,
+        gradesFeatureIsFullyLocked,
+        currentGrade,
+        adjustedRtlStyle,
+      }}
+    >
     <div className="col-12 col-sm-6 align-self-center p-0">
       <div className="sr-only">{intl.formatMessage(messages.courseGradeBarAltText, { currentGrade, passingGrade })}</div>
       <svg width="100%" height="100px" className="grade-bar" aria-hidden="true">
@@ -48,6 +61,7 @@ const GradeBar = ({ intl, passingGrade }) => {
         <CurrentGradeTooltip tooltipClassName={lockedTooltipClassName} />
       </svg>
     </div>
+    </PluginSlot>
   );
 };
 
