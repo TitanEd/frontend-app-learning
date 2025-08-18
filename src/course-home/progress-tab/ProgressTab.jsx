@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { breakpoints, useWindowSize } from '@openedx/paragon';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 
 import CertificateStatus from './certificate-status/CertificateStatus';
 import CourseCompletion from './course-completion/CourseCompletion';
@@ -33,7 +34,15 @@ const ProgressTab = () => {
 
   const wideScreen = windowWidth >= breakpoints.large.minWidth;
   return (
-    <>
+    <PluginSlot
+      id="progress_tab_plugin_slot"
+      pluginProps={{
+        disableProgressGraph,
+        wideScreen,
+        applyLockedOverlay,
+        gradesFeatureIsFullyLocked,
+      }}
+    >
       <ProgressHeader />
       <div className="row w-100 m-0">
         {/* Main body */}
@@ -53,7 +62,7 @@ const ProgressTab = () => {
           <RelatedLinks />
         </div>
       </div>
-    </>
+    </PluginSlot>
   );
 };
 
