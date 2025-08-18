@@ -43,9 +43,9 @@ const CourseGrade = ({ intl }) => {
               {intl.formatMessage(messages.courseGradeBody)}
             </p>
           </div>
-          <GradeBar passingGrade={passingGrade} />
         </div>
         <div className="row w-100 m-0 px-4">
+          <GradeBar passingGrade={passingGrade} />
           <CreditInformation />
         </div>
         <CourseGradeFooter passingGrade={passingGrade} />
