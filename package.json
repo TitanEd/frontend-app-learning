@@ -18,7 +18,7 @@
     "prepare": "husky install",
     "postinstall": "patch-package",
     "snapshot": "fedx-scripts jest --updateSnapshot",
-    "start": "fedx-scripts webpack-dev-server --progress",
+    "start": "set PUBLIC_PATH=/learning/&&fedx-scripts webpack-dev-server --progress --host apps.local.openedx.io",
     "dev": "PUBLIC_PATH=/learning/ MFE_CONFIG_API_URL='http://localhost:8000/api/mfe_config/v1' fedx-scripts webpack-dev-server --progress --host apps.local.openedx.io",
     "test": "fedx-scripts jest --coverage --passWithNoTests",
     "types": "tsc --noEmit"
@@ -75,7 +75,8 @@
     "sass": "^1.79.3",
     "sass-loader": "^16.0.2",
     "source-map-loader": "^5.0.0",
-    "truncate-html": "1.0.4"
+    "truncate-html": "1.0.4",
+    "titaned-lib": "^0.0.106"
   },
   "devDependencies": {
     "@edx/reactifex": "2.2.0",
