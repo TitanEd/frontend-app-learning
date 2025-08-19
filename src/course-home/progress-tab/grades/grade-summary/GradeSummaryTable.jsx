@@ -6,8 +6,8 @@ import {
   getLocale, injectIntl, intlShape, isRtl,
 } from '@edx/frontend-platform/i18n';
 import { DataTable } from '@openedx/paragon';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../../../generic/model-store';
-
 import AssignmentTypeCell from './AssignmentTypeCell';
 import DroppableAssignmentFootnote from './DroppableAssignmentFootnote';
 import GradeSummaryTableFooter from './GradeSummaryTableFooter';
@@ -91,7 +91,16 @@ const GradeSummaryTable = ({ intl, setAllOfSomeAssignmentTypeIsLocked }) => {
   const getCell = (locked, value) => <span className={locked ? 'greyed-out' : ''}>{value}</span>;
 
   return (
-    <>
+    <PluginSlot
+      id="progress_grade_summary_plugin_slot"
+      pluginProps={{
+        intl,
+        assignmentPolicies,
+        setAllOfSomeAssignmentTypeIsLocked,
+        footnotes,
+        getFootnoteId,
+      }}
+    >
       <DataTable
         data={gradeSummaryData}
         itemCount={gradeSummaryData.length}
@@ -132,7 +141,7 @@ const GradeSummaryTable = ({ intl, setAllOfSomeAssignmentTypeIsLocked }) => {
       {footnotes && (
         <DroppableAssignmentFootnote footnotes={footnotes} />
       )}
-    </>
+    </PluginSlot>
   );
 };
 

@@ -16,6 +16,7 @@ import CourseHeader from "./src/tab-page/CourseHeader";
 import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
 import classNames from "classnames";
 import CustomGradeBar from "./src/course-home/progress-tab/grades/course-grade/CustomGradeBar";
+import CustomGradeSummaryTable from "./src/course-home/progress-tab/grades/grade-summary/CustomGradeSummaryTable";
 
 const config = {
   ...process.env,
@@ -360,6 +361,19 @@ const config = {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => {},
+          },
+        },
+      ],
+    },
+    progress_grade_summary_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "progress_grade_summary_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomGradeSummaryTable {...props} />,
           },
         },
       ],
