@@ -11,6 +11,7 @@ import './FlagButton.scss';
 
 const CustomWeeklyLearningGoalCard = ({
   daysPerWeekGoal,
+  subscribedToReminders,
   intl,
   handleSelect,
 }) => {
@@ -19,6 +20,9 @@ const CustomWeeklyLearningGoalCard = ({
     3: daysPerWeekGoal === 3,
     5: daysPerWeekGoal === 5,
   });
+
+  // State for reminder subscription
+  const [isGetReminderSelected, setGetReminderSelected] = useState(subscribedToReminders);
 
   // Create reminderMap based on switchStates for the reminder box
   const reminderMap = {
@@ -37,8 +41,22 @@ const CustomWeeklyLearningGoalCard = ({
     };
     setSwitchStates(newSwitchStates);
 
-    // Call the original handleSelect
-    handleSelect(days);
+    // Set the subscription button if this is the first time selecting a goal
+    const selectReminders = daysPerWeekGoal === null ? true : isGetReminderSelected;
+    setGetReminderSelected(selectReminders);
+
+    // Call the original handleSelect with reminder preference
+    handleSelect(days, selectReminders);
+  };
+
+  const handleSubscribeToReminders = (event) => {
+    const isGetReminderChecked = event.target.checked;
+    setGetReminderSelected(isGetReminderChecked);
+    
+    // Call handleSelect to update the reminder preference
+    if (daysPerWeekGoal) {
+      handleSelect(daysPerWeekGoal, isGetReminderChecked);
+    }
   };
 
   return (
@@ -117,16 +135,31 @@ const CustomWeeklyLearningGoalCard = ({
             </div>
           </div>
         </div>
-        <div className={classnames('weekly-goal-reminder-box', reminderMap[daysPerWeekGoal] ? 'active' : '')}>
-          <div className="row w-100 m-0 small align-center">
-            <div className="d-flex align-items-center pr-1">
-              <Icon className="text-primary-500" src={MailOutline} />
-            </div>
-            <div className="col">
-              {intl.formatMessage(messages.goalReminderDetail)}
+        
+        {/* Reminder subscription switch */}
+        <div className="d-flex pt-3">
+          <Form.Switch
+            checked={isGetReminderSelected}
+            onChange={handleSubscribeToReminders}
+            disabled={!daysPerWeekGoal}
+          >
+            <small>{intl.formatMessage(messages.setGoalReminder)}</small>
+          </Form.Switch>
+        </div>
+
+        {/* Reminder detail section */}
+        {isGetReminderSelected && (
+          <div className="weekly-goal-reminder-box active">
+            <div className="row w-100 m-0 small align-center">
+              <div className="d-flex align-items-center pr-1">
+                <Icon className="text-primary-500" src={MailOutline} />
+              </div>
+              <div className="col">
+                {intl.formatMessage(messages.goalReminderDetail)}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
@@ -134,12 +167,14 @@ const CustomWeeklyLearningGoalCard = ({
 
 CustomWeeklyLearningGoalCard.propTypes = {
   daysPerWeekGoal: PropTypes.number,
+  subscribedToReminders: PropTypes.bool,
   intl: intlShape.isRequired,
   handleSelect: PropTypes.func.isRequired,
 };
 
 CustomWeeklyLearningGoalCard.defaultProps = {
   daysPerWeekGoal: null,
+  subscribedToReminders: false,
 };
 
 export default injectIntl(CustomWeeklyLearningGoalCard);
