@@ -89,6 +89,10 @@
 
 .badge-gap {
   gap: 12px;
+
+  .btn-link {
+    color: #222121;
+  }
 }
 
 .bookmarks-badge {
@@ -107,9 +111,10 @@
 }
 
 .weekly-goal-reminder-box {
-  background-color: rgb(245, 243, 212);
+  background-color: #F5F5F5;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  color: #535862;
 }
 
 .outline-sidebar-heading-wrapper {
@@ -470,10 +475,10 @@
 
 .text-dark {
   background-color: white !important;
-  color: #2B2399 !important;
+  color: #222121 !important;
   font-size: 14px;
-  margin-left: -0.5rem;
-  border: none !important;
+  // margin-left: -0.5rem;
+  border: 1px solid #E0E0E0 !important;
 }
 
 .last {

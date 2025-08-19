@@ -1,7 +1,7 @@
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AccessTime, BookmarkBorder } from '@openedx/paragon/icons';
 
-import { Badge } from '@openedx/paragon';
+import { Badge, Icon } from '@openedx/paragon';
 import messages from '../messages';
 import LaunchCourseHomeTourButton from '../../../product-tours/newUserCourseHomeTour/LaunchCourseHomeTourButton';
 
@@ -20,7 +20,7 @@ const CustomCourseTools = ({
           href={courseTool.url}
           onClick={() => logClick(courseTool.analyticsId)}
         >
-          <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
+          <Icon className="mr-2" src={BookmarkBorder} />
           {courseTool.title}
         </Badge>
       ))}
@@ -34,7 +34,7 @@ const CustomCourseTools = ({
             href={courseTool.url}
             onClick={() => logClick(courseTool.analyticsId)}
           >
-            <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
+            <Icon className="mr-2" src={AccessTime} />
             {courseTool.title}
           </Badge>
         ))}

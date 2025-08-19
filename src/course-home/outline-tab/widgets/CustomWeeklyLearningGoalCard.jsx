@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Form, Icon } from '@openedx/paragon';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Email } from '@openedx/paragon/icons';
+import { Email, MailOutline } from '@openedx/paragon/icons';
 import messages from '../messages';
 import LearningGoalButton from './LearningGoalButton';
 import { saveWeeklyLearningGoal } from '../../data';
@@ -135,7 +135,7 @@ const CustomWeeklyLearningGoalCard = ({
         <div className={classnames('weekly-goal-reminder-box', reminderMap[daysPerWeekGoal] ? 'active' : '')}>
           <div className="row w-100 m-0 small align-center">
             <div className="d-flex align-items-center pr-1">
-              <Icon className="text-primary-500" src={Email} />
+              <Icon className="text-primary-500" src={MailOutline} />
             </div>
             <div className="col">
               {intl.formatMessage(messages.goalReminderDetail)}
