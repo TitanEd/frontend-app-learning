@@ -38,8 +38,8 @@ const CustomGradeBar = ({
           <circle
             className="grade-bar--passing"
             cx={`${isLocaleRtl ? 100 - passingGrade : passingGrade}%`}
-            cy="23"
-            r="3"
+            cy="24"
+            r="4"
           />
           <text
             className="x-small"

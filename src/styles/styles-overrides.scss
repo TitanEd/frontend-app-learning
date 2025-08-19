@@ -509,3 +509,15 @@
   border-left-color: #2B2399 !important;
   border: 2px solid #2B2399;
 }
+
+.apexcharts-toolbar {
+  display: none !important;
+}
+
+.grade-bar .grade-bar--passing {
+  fill: #2B2399 !important;
+}
+
+.grade-bar rect {
+    height: 8px !important;
+}

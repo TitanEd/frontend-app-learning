@@ -1,13 +1,7 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { useModel } from '../../../../generic/model-store';
-
 import DroppableAssignmentFootnote from './DroppableAssignmentFootnote';
-
 import messages from '../messages';
 
 const CustomGradeSummaryTable = ({
@@ -103,14 +97,13 @@ const CustomGradeSummaryTable = ({
     legend: {
       position: 'top',
     },
-    colors: ['#008FFB', '#00E396', '#FEB019'],
+    colors: ['#2B2399', '#00E396', '#FEB019'],
   };
 
   return (
     <>
       {/* ApexCharts Basic Column (Bar) Chart with Dynamic Data */}
       <div className="chart-container mb-4">
-        <h5 className="mb-3">Grade Summary Chart</h5>
         <Chart
           options={chartOptions}
           series={chartSeries}
