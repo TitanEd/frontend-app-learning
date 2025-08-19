@@ -24,7 +24,25 @@ const CustomWeeklyLearningGoalCard = ({
   });
 
   const handleCardClick = (days) => {
-    // Update switch states
+    // Check if this goal is already selected - if so, toggle it off
+    if (daysPerWeekGoal === days) {
+      // Toggle off the current goal
+      setDaysPerWeekGoal(null);
+      setSwitchStates({
+        1: false,
+        3: false,
+        5: false,
+      });
+      setGetReminderSelected(false);
+
+      // Notify parent component that goal is removed
+      if (onGoalChange) {
+        onGoalChange(null, false);
+      }
+      return;
+    }
+
+    // Select a new goal
     const newSwitchStates = {
       1: false,
       3: false,
@@ -35,7 +53,7 @@ const CustomWeeklyLearningGoalCard = ({
     setDaysPerWeekGoal(days);
 
     // Set the subscription button if this is the first time selecting a goal
-    const selectReminders = daysPerWeek === null ? true : isGetReminderSelected;
+    const selectReminders = daysPerWeekGoal === null ? true : isGetReminderSelected;
     setGetReminderSelected(selectReminders);
 
     // Notify parent component
