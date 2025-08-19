@@ -10,52 +10,48 @@ import LearningGoalButton from './LearningGoalButton';
 import './FlagButton.scss';
 
 const CustomWeeklyLearningGoalCard = ({
-  daysPerWeekGoal,
+  daysPerWeek,
   subscribedToReminders,
   intl,
-  handleSelect,
+  onGoalChange,
+  onReminderChange,
 }) => {
+  const [daysPerWeekGoal, setDaysPerWeekGoal] = useState(daysPerWeek);
+  const [isGetReminderSelected, setGetReminderSelected] = useState(subscribedToReminders);
   const [switchStates, setSwitchStates] = useState({
-    1: daysPerWeekGoal === 1,
-    3: daysPerWeekGoal === 3,
-    5: daysPerWeekGoal === 5,
+    1: daysPerWeek === 1,
+    3: daysPerWeek === 3,
+    5: daysPerWeek === 5,
   });
 
-  // State for reminder subscription
-  const [isGetReminderSelected, setGetReminderSelected] = useState(subscribedToReminders);
-
-  // Create reminderMap based on switchStates for the reminder box
-  const reminderMap = {
-    1: switchStates[1],
-    3: switchStates[3],
-    5: switchStates[5],
-  };
-
   const handleCardClick = (days) => {
-    // Toggle the switch state
+    // Update switch states
     const newSwitchStates = {
       1: false,
       3: false,
       5: false,
-      [days]: !switchStates[days],
+      [days]: true,
     };
     setSwitchStates(newSwitchStates);
+    setDaysPerWeekGoal(days);
 
     // Set the subscription button if this is the first time selecting a goal
-    const selectReminders = daysPerWeekGoal === null ? true : isGetReminderSelected;
+    const selectReminders = daysPerWeek === null ? true : isGetReminderSelected;
     setGetReminderSelected(selectReminders);
 
-    // Call the original handleSelect with reminder preference
-    handleSelect(days, selectReminders);
+    // Notify parent component
+    if (onGoalChange) {
+      onGoalChange(days, selectReminders);
+    }
   };
 
   const handleSubscribeToReminders = (event) => {
     const isGetReminderChecked = event.target.checked;
     setGetReminderSelected(isGetReminderChecked);
-    
-    // Call handleSelect to update the reminder preference
-    if (daysPerWeekGoal) {
-      handleSelect(daysPerWeekGoal, isGetReminderChecked);
+
+    // Notify parent component
+    if (onReminderChange && daysPerWeekGoal) {
+      onReminderChange(daysPerWeekGoal, isGetReminderChecked);
     }
   };
 
@@ -70,7 +66,11 @@ const CustomWeeklyLearningGoalCard = ({
         <div className="text-muted small">{intl.formatMessage(messages.setWeeklyGoalDetail)}</div>
       </div>
       <div className="text-gray-700 small">
-        <div className="weekly-goal-options">
+        <div
+          role="radiogroup"
+          aria-labelledby="set-weekly-goal-header"
+          className="weekly-goal-options"
+        >
           <div
             className={classnames('weekly-goal-card', 'goal-casual', { selected: daysPerWeekGoal === 1 })}
             role="button"
@@ -135,7 +135,7 @@ const CustomWeeklyLearningGoalCard = ({
             </div>
           </div>
         </div>
-        
+
         {/* Reminder subscription switch */}
         <div className="d-flex pt-3">
           <Form.Switch
@@ -166,15 +166,18 @@ const CustomWeeklyLearningGoalCard = ({
 };
 
 CustomWeeklyLearningGoalCard.propTypes = {
-  daysPerWeekGoal: PropTypes.number,
+  daysPerWeek: PropTypes.number,
   subscribedToReminders: PropTypes.bool,
   intl: intlShape.isRequired,
-  handleSelect: PropTypes.func.isRequired,
+  onGoalChange: PropTypes.func,
+  onReminderChange: PropTypes.func,
 };
 
 CustomWeeklyLearningGoalCard.defaultProps = {
-  daysPerWeekGoal: null,
+  daysPerWeek: null,
   subscribedToReminders: false,
+  onGoalChange: null,
+  onReminderChange: null,
 };
 
 export default injectIntl(CustomWeeklyLearningGoalCard);
