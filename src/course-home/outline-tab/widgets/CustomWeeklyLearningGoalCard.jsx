@@ -3,54 +3,42 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { Form, Icon } from '@openedx/paragon';
-import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Email, MailOutline } from '@openedx/paragon/icons';
+import { MailOutline } from '@openedx/paragon/icons';
 import messages from '../messages';
 import LearningGoalButton from './LearningGoalButton';
-import { saveWeeklyLearningGoal } from '../../data';
 import './FlagButton.scss';
 
 const CustomWeeklyLearningGoalCard = ({
-  administrator,
-  daysPerWeek,
   daysPerWeekGoal,
-  subscribedToReminders,
-  location,
   intl,
-  courseId,
-  isMasquerading,
-  org,
   handleSelect,
-  handleSubscribeToReminders,
-  handleNextSectionCelebration,
 }) => {
-  const [reminderMap, setReminderMap] = useState({
-    1: subscribedToReminders,
-    3: false,
-    5: false,
+  const [switchStates, setSwitchStates] = useState({
+    1: daysPerWeekGoal === 1,
+    3: daysPerWeekGoal === 3,
+    5: daysPerWeekGoal === 5,
   });
 
-  const handleReminderToggle = (days) => (event) => {
-    const { checked } = event.target;
-    if (checked) {
-      // Only one switch can be on at a time
-      setReminderMap({
-        1: false, 3: false, 5: false, [days]: true,
-      });
-    } else {
-      setReminderMap({ 1: false, 3: false, 5: false });
-    }
-    if (!isMasquerading) {
-      saveWeeklyLearningGoal(courseId, days, checked);
-      sendTrackEvent('edx.ui.lms.goal.reminder-selected.changed', {
-        org_key: org,
-        courserun_key: courseId,
-        is_staff: administrator,
-        num_days: days,
-        reminder_selected: checked,
-      });
-    }
+  // Create reminderMap based on switchStates for the reminder box
+  const reminderMap = {
+    1: switchStates[1],
+    3: switchStates[3],
+    5: switchStates[5],
+  };
+
+  const handleCardClick = (days) => {
+    // Toggle the switch state
+    const newSwitchStates = {
+      1: false,
+      3: false,
+      5: false,
+      [days]: !switchStates[days],
+    };
+    setSwitchStates(newSwitchStates);
+
+    // Call the original handleSelect
+    handleSelect(days);
   };
 
   return (
@@ -69,19 +57,18 @@ const CustomWeeklyLearningGoalCard = ({
             className={classnames('weekly-goal-card', 'goal-casual', { selected: daysPerWeekGoal === 1 })}
             role="button"
             tabIndex={0}
-            onClick={() => handleSelect(1)}
-            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleSelect(1); } }}
+            onClick={() => handleCardClick(1)}
+            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleCardClick(1); } }}
           >
             <LearningGoalButton
               level="casual"
               isSelected={daysPerWeekGoal === 1}
-              handleSelect={handleSelect}
+              handleSelect={() => handleCardClick(1)}
             />
             <div className="weekly-goal-switch">
               <Form.Switch
-                checked={!!reminderMap[1]}
-                onChange={handleReminderToggle(1)}
-                disabled={daysPerWeekGoal !== 1}
+                checked={switchStates[1]}
+                onChange={() => {}} // No-op since we handle it in card click
                 aria-label={intl.formatMessage(messages.setGoalReminder)}
                 tabIndex={-1}
               />
@@ -91,19 +78,18 @@ const CustomWeeklyLearningGoalCard = ({
             className={classnames('weekly-goal-card', 'goal-regular', { selected: daysPerWeekGoal === 3 })}
             role="button"
             tabIndex={0}
-            onClick={() => handleSelect(3)}
-            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleSelect(3); } }}
+            onClick={() => handleCardClick(3)}
+            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleCardClick(3); } }}
           >
             <LearningGoalButton
               level="regular"
               isSelected={daysPerWeekGoal === 3}
-              handleSelect={handleSelect}
+              handleSelect={() => handleCardClick(3)}
             />
             <div className="weekly-goal-switch">
               <Form.Switch
-                checked={!!reminderMap[3]}
-                onChange={handleReminderToggle(3)}
-                disabled={daysPerWeekGoal !== 3}
+                checked={switchStates[3]}
+                onChange={() => {}} // No-op since we handle it in card click
                 aria-label={intl.formatMessage(messages.setGoalReminder)}
                 tabIndex={-1}
               />
@@ -113,19 +99,18 @@ const CustomWeeklyLearningGoalCard = ({
             className={classnames('weekly-goal-card', 'goal-intense', { selected: daysPerWeekGoal === 5 })}
             role="button"
             tabIndex={0}
-            onClick={() => handleSelect(5)}
-            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleSelect(5); } }}
+            onClick={() => handleCardClick(5)}
+            onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') { handleCardClick(5); } }}
           >
             <LearningGoalButton
               level="intense"
               isSelected={daysPerWeekGoal === 5}
-              handleSelect={handleSelect}
+              handleSelect={() => handleCardClick(5)}
             />
             <div className="weekly-goal-switch">
               <Form.Switch
-                checked={!!reminderMap[5]}
-                onChange={handleReminderToggle(5)}
-                disabled={daysPerWeekGoal !== 5}
+                checked={switchStates[5]}
+                onChange={() => {}} // No-op since we handle it in card click
                 aria-label={intl.formatMessage(messages.setGoalReminder)}
                 tabIndex={-1}
               />
@@ -148,13 +133,13 @@ const CustomWeeklyLearningGoalCard = ({
 };
 
 CustomWeeklyLearningGoalCard.propTypes = {
-  daysPerWeek: PropTypes.number,
-  subscribedToReminders: PropTypes.bool,
+  daysPerWeekGoal: PropTypes.number,
   intl: intlShape.isRequired,
+  handleSelect: PropTypes.func.isRequired,
 };
 
 CustomWeeklyLearningGoalCard.defaultProps = {
-  daysPerWeek: null,
-  subscribedToReminders: false,
+  daysPerWeekGoal: null,
 };
+
 export default injectIntl(CustomWeeklyLearningGoalCard);
