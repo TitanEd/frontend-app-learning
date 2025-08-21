@@ -183,7 +183,7 @@ const CustomOutlineTab = ({
             {/* Group all sidebar widgets in a single card */}
             <Card className="mb-3 raised-card" data-testid="course-sidebar-card">
               <Card.Body className="p-4">
-                {(!enableProctoredExams || proctoringPanelStatus === 'loaded') && !weeklyLearningGoalEnabled && (
+                {(!enableProctoredExams || proctoringPanelStatus === 'loaded') && weeklyLearningGoalEnabled && (
                   <WeeklyLearningGoalCard
                     daysPerWeek={selectedGoal && 'daysPerWeek' in selectedGoal ? selectedGoal.daysPerWeek : null}
                     subscribedToReminders={selectedGoal && 'subscribedToReminders' in selectedGoal ? selectedGoal.subscribedToReminders : false}
