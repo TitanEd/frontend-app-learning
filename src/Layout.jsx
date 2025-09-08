@@ -255,7 +255,13 @@ const Layout = () => {
   }, []);
 
   const handleNavigate = (path) => {
-    navigate(path);
+    if (path === '/my-courses') {
+      window.location.href = `${LMS_BASE_URL}/dashboard`;
+    } else if (path === '/home') {
+      window.location.href = `${LMS_BASE_URL}/dashboard`;
+    } else {
+      navigate(path);
+    }
   };
 
   return (
