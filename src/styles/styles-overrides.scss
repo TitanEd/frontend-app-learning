@@ -525,8 +525,15 @@
     height: 8px !important;
 }
 
-.course-subContent {
-  margin-left: 3rem;
+.course-outline-tab {
+  .list-unstyled {
+    margin-left: 3rem;
+  }
+
+  .border-top, .border-light {
+    border-top: 0 !important;
+    border-color: transparent !important;
+  }
 }
 
 /* Scope everything to this card so styles don't leak */
