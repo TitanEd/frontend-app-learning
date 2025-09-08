@@ -524,3 +524,121 @@
 .grade-bar rect {
     height: 8px !important;
 }
+
+.course-outline-tab {
+  .list-unstyled {
+    margin-left: 3rem;
+  }
+
+  .border-top, .border-light {
+    border-top: 0 !important;
+    border-color: transparent !important;
+  }
+}
+
+/* Scope everything to this card so styles don't leak */
+#courseHome-weeklyLearningGoal {
+  /* ---- Shared card layout you already have ---- */
+  .learningCardContainer{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  padding: 0%;
+  .goal-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+    margin-bottom: 12px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+ 
+  .goal-card.selected {
+    border-color: #47a3ff;
+    box-shadow: 0 0 0 3px rgba(71, 163, 255, 0.12) inset;
+    background: #ffffff !important;
+  }
+ 
+  .goal-card-body {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between icon and text */
+    min-height: 48px;
+    flex: 1 1 auto;
+  }
+ 
+  /* ---- Icon styling (covers Paragon <Icon> and raw <svg>) ---- */
+  .goal-card-body .pgn__icon,
+  .goal-card-body svg {
+    /* make the icon sit inside a circle */
+    width: 28px;
+    height: 28px;
+    padding: 6px;            /* inner breathing room for the glyph */
+    border-radius: 9999px;   /* perfect circle */
+    flex: 0 0 auto;
+    box-sizing: content-box; /* keep the circle round with padding */
+    /* make stroke/fill inherit from color we’ll set per level */
+    color: inherit;
+    fill: currentColor;
+    stroke: currentColor;
+  }
+ 
+  /* Default (unselected) tint for each level */
+  .casual-goal .goal-card-body .pgn__icon,
+  .casual-goal .goal-card-body svg {
+    background: #e8f4ff;   /* light blue */
+    color: #1e88e5;        /* blue glyph */
+  }
+ 
+  .regular-goal .goal-card-body .pgn__icon,
+  .regular-goal .goal-card-body svg {
+    background: #eaf7ec;   /* light green */
+    color: #2e7d32;        /* green glyph */
+  }
+ 
+  .intense-goal .goal-card-body .pgn__icon,
+  .intense-goal .goal-card-body svg {
+    background: #fff5e5;   /* light amber */
+    color: #b26a00;        /* amber glyph */
+  }
+ 
+  /* Slightly stronger tint when that card is selected */
+  .casual-goal.selected .goal-card-body .pgn__icon,
+  .casual-goal.selected .goal-card-body svg {
+    background: #e0f0ff;
+  }
+ 
+  .regular-goal.selected .goal-card-body .pgn__icon,
+  .regular-goal.selected .goal-card-body svg {
+    background: #e3f6e7;
+  }
+ 
+  .intense-goal.selected .goal-card-body .pgn__icon,
+  .intense-goal.selected .goal-card-body svg {
+    background: #fff0d9;
+  }
+  .pgn__form-switch-input:checked {
+      background-color: #00bbf9;
+  }
+  /* Keep the switch pinned right */
+  .goal-card-switch {
+    margin-left: auto;
+  }
+ 
+  /* Optional: tighter look on very small screens */
+  @media (max-width: 420px) {
+    .goal-card-body .pgn__icon,
+    .goal-card-body svg {
+      width: 24px;
+      height: 24px;
+      padding: 5px;
+    }
+  }
+}

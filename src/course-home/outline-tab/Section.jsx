@@ -127,7 +127,7 @@ const Section = ({
           </PluginSlot>
         )}
       >
-        <ol className="list-unstyled">
+        <ol className="list-unstyled ">
           {sequenceIds.map((sequenceId, index) => (
             <SequenceLink
               key={sequenceId}
