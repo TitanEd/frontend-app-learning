@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { MainHeader, Sidebar, SidebarProvider } from 'titaned-lib';
+import { MainHeader, Sidebar, SidebarProvider } from 'titaned-frontend-library';
 import { AppContext } from '@edx/frontend-platform/react';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import {

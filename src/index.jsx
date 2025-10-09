@@ -38,7 +38,7 @@ import DecodePageRoute from './decode-page-route';
 import { DECODE_ROUTES, ROUTES } from './constants';
 import PreferencesUnsubscribe from './preferences-unsubscribe';
 
-import 'titaned-lib/dist/index.css';
+import 'titaned-frontend-library/dist/index.css';
 import './styles/styles-overrides.scss';
 
 subscribe(APP_READY, () => {

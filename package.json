@@ -78,7 +78,7 @@
     "sass-loader": "^16.0.2",
     "source-map-loader": "^5.0.0",
     "truncate-html": "1.0.4",
-    "titaned-lib": "^0.0.106"
+    "titaned-frontend-library": "^1.0.5"
   },
   "devDependencies": {
     "@edx/reactifex": "2.2.0",
