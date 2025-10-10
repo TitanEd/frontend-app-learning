@@ -18,9 +18,12 @@ import classNames from "classnames";
 import CustomGradeBar from "./src/course-home/progress-tab/grades/course-grade/CustomGradeBar";
 import CustomGradeSummaryTable from "./src/course-home/progress-tab/grades/grade-summary/CustomGradeSummaryTable";
 
-const config = {
-  ...process.env,
-  pluginSlots: {
+const getPluginSlots = () => {
+  if (typeof window !== 'undefined' && localStorage.getItem('oldUI') === 'true') {
+    return {};
+  }
+
+  return {
     example_plugin_slot: {
       plugins: [
         {
@@ -378,6 +381,14 @@ const config = {
         },
       ],
     },
+  };
+};
+
+// Load environment variables from .env file
+const config = {
+  ...process.env,
+  get pluginSlots() {
+    return getPluginSlots();
   },
 };
 
