@@ -201,6 +201,12 @@
   font-weight: 600;
 }
 
+.nav-underline-tabs .nav-link {
+  &:hover {
+    color: var(--primary) !important;
+  }
+}
+
 .nav-menu {
   padding: 0.5rem 0;
   margin-left: -4px;
@@ -640,5 +646,19 @@
       height: 24px;
       padding: 5px;
     }
+  }
+}
+
+.btn-link {
+  color: var(--primary) !important;
+  &:hover {
+    color: var(--primary-hover) !important;
+  }
+}
+
+a {
+  color: var(--primary) !important;
+  &:hover {
+    color: var(--primary-hover) !important;
   }
 }

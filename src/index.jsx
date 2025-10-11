@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 import { getMessages, IntlProvider } from '@edx/frontend-platform/i18n';
 import {
@@ -11,6 +12,8 @@ import ReactDOM from 'react-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
+import { dynamicTheme } from 'titaned-frontend-library';
+import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import Layout from './Layout';
 import { fetchDiscussionTab, fetchLiveTab } from './course-home/data/thunks';
 import DiscussionTab from './course-home/discussion-tab/DiscussionTab';
@@ -38,7 +41,6 @@ import CourseAccessErrorPage from './generic/CourseAccessErrorPage';
 import DecodePageRoute from './decode-page-route';
 import { DECODE_ROUTES, ROUTES } from './constants';
 import PreferencesUnsubscribe from './preferences-unsubscribe';
-import { dynamicTheme } from 'titaned-frontend-library';
 
 // import 'titaned-frontend-library/dist/index.css';
 // import './styles/styles-overrides.scss';
@@ -333,7 +335,6 @@ const MainApp = () => {
                   ))}
                 </>
               ) }
-              
 
             </Routes>
           </UserMessagesProvider>

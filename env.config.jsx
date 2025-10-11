@@ -17,6 +17,9 @@ import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab"
 import classNames from "classnames";
 import CustomGradeBar from "./src/course-home/progress-tab/grades/course-grade/CustomGradeBar";
 import CustomGradeSummaryTable from "./src/course-home/progress-tab/grades/grade-summary/CustomGradeSummaryTable";
+import CustomDayTimeline from "./src/course-home/dates-tab/timeline/CustomDayTimeline";
+import CustomDateDescription from "./src/course-home/dates-tab/timeline/CustomDateDescription";
+import CustomTodayDate from "./src/course-home/dates-tab/timeline/CustomTodayDate";
 
 const getPluginSlots = () => {
   if (typeof window !== 'undefined' && localStorage.getItem('oldUI') === 'true') {
@@ -234,48 +237,7 @@ const getPluginSlots = () => {
             id: "day_timeline_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => {
-              // Function to check if the date is today
-              const isToday = (dateToCheck) => {
-                const today = new Date();
-                return dateToCheck.toDateString() === today.toDateString();
-              };
-
-              // Check if current date is today
-              const isCurrentDateToday = isToday(props.date);
-
-              // Determine line color - use custom color for line above today's date
-              const getTopLineClassName = () => {
-                if (isCurrentDateToday) {
-                  return "dates-line-top border-1 border-left today-line";
-                }
-                return "dates-line-top border-1 border-left border-gray-900 bg-gray-900";
-              };
-
-              const getBottomLineClassName = () => {
-                if (isCurrentDateToday) {
-                  return "dates-line-bottom border-1 border-left border-gray-900 bg-gray-900";
-                }
-                return "dates-line-bottom border-1 border-left today-line";
-              };
-
-              return (
-                <>
-                {/* Top Line */}
-                {!props.first && <div className={getTopLineClassName()} />}
-                
-                {/* Dot */}
-                <div>
-                  {props.first ? <div className={classNames(props.color, 'dates-dot border border-gray-900 first')} />
-                  : props.last ? <div className={classNames(props.color, 'dates-dot border last')} />
-                  :<div className={classNames(props.color, 'dates-dot border border-gray-900 today')} />}
-                </div>
-                
-                {/* Bottom Line */}
-                {!props.last && <div className={getBottomLineClassName()} />}
-              </>
-            );
-          },
+            RenderWidget: (props) => <CustomDayTimeline {...props} />,
           },
         },
       ],
@@ -288,15 +250,7 @@ const getPluginSlots = () => {
             id: "dates_tab_description_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => (
-              <div>
-                {props.item.description && (
-                  <div className="small mb-2 dates-info">
-                    {props.item.description}
-                  </div>
-                )}
-              </div>
-            ),
+            RenderWidget: (props) => <CustomDateDescription {...props} />,
           },
         },
       ],
@@ -309,35 +263,7 @@ const getPluginSlots = () => {
             id: "dates_tab_today_date_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => {
-              // Function to check if the date is today
-              const isToday = (dateToCheck) => {
-                const today = new Date();
-                return dateToCheck.toDateString() === today.toDateString();
-              };
-
-              // Check if current date is today
-              const isCurrentDateToday = isToday(props.date);
-
-              return (
-                <div
-                  className={classNames(
-                    "row w-100 m-0 mb-1 align-items-center text-primary-700",
-                    { "today-date-style": isCurrentDateToday }
-                  )}
-                  data-testid="dates-header"
-                >
-                  <FormattedDate
-                    value={props.date}
-                    day="numeric"
-                    month="short"
-                    weekday="short"
-                    year="numeric"
-                    {...props.timezoneFormatArgs}
-                  />
-                </div>
-              );
-            },
+            RenderWidget: (props) => <CustomTodayDate {...props} />,
           },
         },
       ],
