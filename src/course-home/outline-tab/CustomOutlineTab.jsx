@@ -84,6 +84,15 @@ const CustomOutlineTab = ({
       url: resumeCourseUrl,
     });
   };
+  const formatCourseIdWithBreaks = (id) => {
+    const parts = id.split(/([:\+\-_])/);
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part}
+        {index < parts.length - 1 && /[:\+\-_]/.test(parts[index + 1]) && <wbr />}
+      </React.Fragment>
+    ));
+  };
 
   return (
     <>
@@ -114,7 +123,7 @@ const CustomOutlineTab = ({
                   <Badge variant="light" className="mb-2 text-dark">Course</Badge>
                   <div className="h4 font-weight-bold mb-2">{title}</div>
                   <div className="mb-3 text-muted" style={{ maxWidth: 500, height: 110 }}>
-                    Course ID: {courseId} <br />
+                    Course ID: {formatCourseIdWithBreaks('course-v1:TitanEd+21STCENTURYLITERATURE11_GENON_ALLADOR+SY25_26')} <br />
                     Org: {org}
                   </div>
                   {resumeCourseUrl && (
