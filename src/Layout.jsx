@@ -334,7 +334,7 @@ const Layout = () => {
         const success = await setUIPreference(false);
         if (success) {
           console.log('Successfully switched to old UI, reloading page...');
-          window.location.href = '/learning/';
+          window.location.reload();
         } else {
           console.error('Failed to switch to old UI');
         }
