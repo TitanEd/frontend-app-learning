@@ -113,7 +113,7 @@ const CustomOutlineTab = ({
             }}
           />
         </div>
-        <div className="col col-12 col-md-8">
+        <div className="col col-12 col-md-8 custom-outline-tab-content">
           <Card className="mb-4 shadow-sm " style={{ borderRadius: '12px', overflow: 'hidden' }}>
             <div className="row no-gutters align-items-center custom-course-display-outline">
               <div className="col-12 col-md-auto">

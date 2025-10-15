@@ -855,7 +855,10 @@ a {
     padding: 1rem !important;
   }
 }
- 
+.custom-outline-tab-content {
+  padding-left: 0rem !important;
+}
+
 // Remove default Card.Body padding on mobile since parent has padding
 .course-info-card-body {
   @media (max-width: 767px) {
