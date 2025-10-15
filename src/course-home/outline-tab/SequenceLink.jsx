@@ -94,7 +94,7 @@ const SequenceLink = ({
               <FontAwesomeIcon
                 icon={fasCheckCircle}
                 fixedWidth
-                className="float-left text-success mt-1"
+                className="float-left text-success mt-1 custom-icon-styles"
                 aria-hidden={complete}
                 title={intl.formatMessage(messages.completedAssignment)}
               />
@@ -102,7 +102,7 @@ const SequenceLink = ({
               <FontAwesomeIcon
                 icon={farCheckCircle}
                 fixedWidth
-                className="float-left text-gray-400 mt-1"
+                className="float-left text-gray-400 mt-1 custom-icon-styles"
                 aria-hidden={complete}
                 title={intl.formatMessage(messages.incompleteAssignment)}
               />

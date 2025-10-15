@@ -32,7 +32,7 @@ const CourseDates = ({
     <section className="mb-4">
       <div id="courseHome-dates">
         <h2 className="h4">{intl.formatMessage(messages.dates)}</h2>
-        <ol className="list-unstyled">
+        <ol className="list-unstyled imp-dates-styles">
           {courseDateBlocks.map((courseDateBlock) => (
             <DateSummary
               key={courseDateBlock.title + courseDateBlock.date}

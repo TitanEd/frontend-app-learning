@@ -51,7 +51,7 @@ const Section = ({
           <FontAwesomeIcon
             icon={fasCheckCircle}
             fixedWidth
-            className="float-left mt-1 text-success"
+            className="float-left mt-1 text-success custom-icon-styles"
             aria-hidden="true"
             title={intl.formatMessage(messages.completedSection)}
           />
@@ -59,7 +59,7 @@ const Section = ({
           <FontAwesomeIcon
             icon={farCheckCircle}
             fixedWidth
-            className="float-left mt-1 text-gray-400"
+            className="float-left mt-1 text-gray-400 custom-icon-styles"
             aria-hidden="true"
             title={intl.formatMessage(messages.incompleteSection)}
           />
@@ -127,7 +127,7 @@ const Section = ({
           </PluginSlot>
         )}
       >
-        <ol className="list-unstyled ">
+        <ol className="list-unstyled course-content-subcontent">
           {sequenceIds.map((sequenceId, index) => (
             <SequenceLink
               key={sequenceId}

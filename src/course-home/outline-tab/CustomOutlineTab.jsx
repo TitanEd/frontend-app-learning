@@ -107,23 +107,27 @@ const CustomOutlineTab = ({
           />
         </div>
         <div className="col col-12 col-md-8">
-          <Card className="mb-4 shadow-sm" style={{ borderRadius: '12px' }}>
-            <div className="row no-gutters align-items-center">
-              <div className="col-auto">
+          <Card className="mb-4 shadow-sm " style={{ borderRadius: '12px', overflow: 'hidden' }}>
+            <div className="row no-gutters align-items-center custom-course-display-outline">
+              <div className="col-12 col-md-auto">
                 <img
                   src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
                   alt="Course"
-                  style={{
-                    width: 350, height: 235, objectFit: 'cover', borderRadius: '0.75rem', margin: 16,
-                  }}
+                  className="course-card-image-responsive"
                 />
               </div>
-              <div className="col">
+              <div className="col-12 col-md custom-outline-card-body">
                 <Card.Body>
                   <Badge variant="light" className="mb-2 text-dark">Course</Badge>
                   <div className="h4 font-weight-bold mb-2">{title}</div>
-                  <div className="mb-3 text-muted" style={{ maxWidth: 500, height: 110 }}>
-                    Course ID: {formatCourseIdWithBreaks('course-v1:TitanEd+21STCENTURYLITERATURE11_GENON_ALLADOR+SY25_26')} <br />
+                  <div
+                    className="mb-3 text-muted"
+                    style={{
+                      maxWidth: 500,
+                      height: 110,
+                    }}
+                  >
+                    Course ID: {formatCourseIdWithBreaks(courseId)} <br />
                     Org: {org}
                   </div>
                   {resumeCourseUrl && (
@@ -158,7 +162,7 @@ const CustomOutlineTab = ({
           <WelcomeMessage courseId={courseId} />
           {rootCourseId && (
             <Card className="mb-3" data-testid="course-outline-card">
-              <Card.Body className="p-4">
+              <Card.Body className="course-outline-card-body">
                 <div className="row w-100 m-0 mb-3 justify-content-between align-items-center">
                   <div className="col-auto p-0">
                     <h4 className="mb-0">Course Content</h4>

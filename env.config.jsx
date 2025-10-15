@@ -20,6 +20,7 @@ import CustomGradeSummaryTable from "./src/course-home/progress-tab/grades/grade
 import CustomDayTimeline from "./src/course-home/dates-tab/timeline/CustomDayTimeline";
 import CustomDateDescription from "./src/course-home/dates-tab/timeline/CustomDateDescription";
 import CustomTodayDate from "./src/course-home/dates-tab/timeline/CustomTodayDate";
+import CustomProgressGradeSummary from "./src/course-home/outline-tab/widgets/CustomProgressGradeSummary";
 
 const getPluginSlots = () => {
   if (typeof window !== 'undefined' && localStorage.getItem('oldUI') === 'true') {
@@ -303,6 +304,19 @@ const getPluginSlots = () => {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => <CustomGradeSummaryTable {...props} />,
+          },
+        },
+      ],
+    },
+    progress_tab_grade_summary_plugin_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "progress_tab_grade_summary_plugin_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomProgressGradeSummary {...props} />,
           },
         },
       ],

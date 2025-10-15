@@ -2,6 +2,70 @@
   background-color: #F4F7FF;
 }
 
+// Mixins
+@mixin card-style1 {
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+ 
+@mixin card-style2 {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+ 
+@mixin card-style3 {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+ 
+@mixin sub-header-title-style1 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+  margin-bottom: 1rem !important;
+}
+ 
+@mixin section-title-style1 {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+}
+ 
+@mixin section-title-style2 {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+}
+ 
+@mixin section-title-style3 {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+}
+ 
+.custom-progress-tabs-titles {
+  @include sub-header-title-style1;
+}
+ 
+.customHr {
+  border: 'none';
+  border-top: 1px solid var(--border-color) ;
+  margin: '0 0 0 0';
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+ 
+.custom-progress-tabs-subtitles{
+  font-size: 16px !important;
+}
+
 .flag-button-container {
   display: block;
 }
@@ -439,7 +503,7 @@
       padding: 12px 16px;
       border-radius: 8px;
       margin-top: 4rem;
-      margin-left: -3rem;
+      margin-left: 0rem;
     }
   }
 }
@@ -532,15 +596,106 @@
 }
 
 .course-outline-tab {
-  .list-unstyled {
-    margin-left: 3rem;
-  }
+  // .list-unstyled {
+  //   margin-left: 3rem;
+  // }
+  margin-left: 0rem !important;
 
   .border-top, .border-light {
     border-top: 0 !important;
     border-color: transparent !important;
   }
 }
+.course-content-subcontent {
+  padding-left: 3rem !important;
+ }
+ 
+ .imp-dates-styles {
+  padding-left: 0rem !important;
+ }
+ 
+// Mobile responsive adjustments for course outline
+#courseHome-outline {
+  @media (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+ 
+  // Add spacing between subsections (sequence links)
+  .collapsible-body {
+    ol.list-unstyled {
+      > li {
+        margin-bottom: 1rem;
+ 
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+ 
+  // Fix section title alignment on mobile
+  @media (max-width: 768px) {
+    .collapsible-trigger {
+      .d-flex.row {
+        align-items: flex-start !important;
+        margin: 0 !important;
+ 
+        .col-auto {
+          padding: 0 !important;
+          margin-right: 0.75rem !important;
+        }
+ 
+        .col-7 {
+          flex: 1 !important;
+          max-width: 100% !important;
+          padding: 0 !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+ 
+    // Fix subsection link alignment on mobile
+    .collapsible-body {
+      .row.w-100 {
+        align-items: flex-start !important;
+        margin: 0 !important;
+ 
+        .col-auto {
+          padding: 0 !important;
+          margin-right: 0.75rem !important;
+        }
+ 
+        .col-10 {
+          flex: 1 !important;
+          max-width: 100% !important;
+          padding: 0 !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+    .custom-icon-styles{
+      margin-top: 0.5rem !important;
+    }
+  }
+}
+ 
+// Course outline card body responsive padding
+.course-outline-card-body {
+  padding: 1.5rem;
+ 
+ 
+  @media (max-width: 768px) {
+    .collapsible-trigger{
+      padding-left: 0px !important;
+    }
+ 
+    padding: 0.75rem;
+  }
+}
+ 
 
 /* Scope everything to this card so styles don't leak */
 #courseHome-weeklyLearningGoal {
@@ -660,5 +815,68 @@ a {
   color: var(--primary) !important;
   &:hover {
     color: var(--primary-hover) !important;
+  }
+}
+
+// Custom Outline Tab Course Card Image
+.course-card-image-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  margin: 16px;
+  max-width: 100%;
+ 
+  @media (min-width: 768px) {
+    max-width: 350px;
+    min-height: 235px;
+  }
+ 
+  @media (max-width: 767px) {
+    margin: 0;
+    display: block;
+  }
+}
+ 
+// Parent div padding for both image and content on mobile
+.custom-course-display-outline {
+  @media (max-width: 767px) {
+    padding: 1rem !important;
+  }
+}
+ 
+// Remove default Card.Body padding on mobile since parent has padding
+.course-info-card-body {
+  @media (max-width: 767px) {
+    padding: 0 !important;
+  }
+}
+ 
+// Fix for course tabs navigation width - align with content on large screens
+@media (min-width: 1700px) {
+  .course-tabs-navigation {
+    background-color: transparent !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+   
+    .container-xl {
+      background-color: #E6EDFF;
+      border-radius: 4px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+}
+
+.sequence-container {
+  @media (max-width: 768px) {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .outline-sidebar-wrapper {
+    @media (max-width: 768px) {
+      height: 100% !important;
+    }
   }
 }
