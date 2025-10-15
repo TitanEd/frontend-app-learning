@@ -78,6 +78,7 @@ export function normalizeMetadata(metadata) {
     courseGoals: camelCaseObject(data.course_goals),
     id: data.id,
     title: data.name,
+    shortDescription: data.short_description,
     offer: camelCaseObject(data.offer),
     enrollmentStart: data.enrollment_start,
     enrollmentEnd: data.enrollment_end,

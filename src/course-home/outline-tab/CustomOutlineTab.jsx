@@ -13,7 +13,7 @@ import CourseHandouts from './widgets/CourseHandouts';
 import StartOrResumeCourseCard from './widgets/StartOrResumeCourseCard';
 import WeeklyLearningGoalCard from './widgets/WeeklyLearningGoalCard';
 import CourseTools from './widgets/CourseTools';
-import { fetchOutlineTab } from '../data';
+import { fetchOutlineTabWithMetadata } from '../data';
 import messages from './messages';
 import Section from './Section';
 import ShiftDatesAlert from '../suggested-schedule-messaging/ShiftDatesAlert';
@@ -69,6 +69,13 @@ const CustomOutlineTab = ({
           daysPerWeek,
           subscribedToReminders,
 }) => {
+  // Fetch shortDescription directly from courseHomeMeta
+  const courseHomeMeta = useModel('courseHomeMeta', courseId);
+  const shortDescriptionFromMeta = courseHomeMeta.shortDescription;
+
+  console.log('shortDescription in CUSTOM OUTLINE TAB::::', shortDescriptionFromMeta);
+  console.log('shortDescription from courseHomeMeta:', shortDescriptionFromMeta);
+
   const {
     resumeCourse: {
       hasVisitedCourse,
@@ -121,14 +128,13 @@ const CustomOutlineTab = ({
                   <Badge variant="light" className="mb-2 text-dark">Course</Badge>
                   <div className="h4 font-weight-bold mb-2">{title}</div>
                   <div
-                    className="mb-3 text-muted"
+                    className="mb-3 text-muted course-outline-tab-short-description"
                     style={{
                       maxWidth: 500,
                       height: 110,
                     }}
                   >
-                    Course ID: {formatCourseIdWithBreaks(courseId)} <br />
-                    Org: {org}
+                    {shortDescriptionFromMeta}
                   </div>
                   {resumeCourseUrl && (
                     <Button
@@ -155,7 +161,7 @@ const CustomOutlineTab = ({
           />
           {isSelfPaced && hasDeadlines && (
             <>
-              <ShiftDatesAlert model="outline" fetch={fetchOutlineTab} />
+              <ShiftDatesAlert model="outline" fetch={fetchOutlineTabWithMetadata} />
               <UpgradeToShiftDatesAlert model="outline" logUpgradeLinkClick={logUpgradeToShiftDatesLinkClick} />
             </>
           )}

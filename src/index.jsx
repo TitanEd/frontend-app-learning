@@ -31,7 +31,12 @@ import GoalUnsubscribe from './course-home/goal-unsubscribe';
 import ProgressTab from './course-home/progress-tab/ProgressTab';
 import { TabContainer } from './tab-page';
 
-import { fetchDatesTab, fetchOutlineTab, fetchProgressTab } from './course-home/data';
+import {
+  fetchDatesTab,
+  fetchOutlineTab,
+  fetchOutlineTabWithMetadata,
+  fetchProgressTab,
+} from './course-home/data';
 import { fetchCourse } from './courseware/data';
 import initializeStore from './store';
 import NoticesProvider from './generic/notices';
@@ -169,9 +174,15 @@ const MainApp = () => {
                     path={DECODE_ROUTES.HOME}
                     element={(
                       <DecodePageRoute>
-                        <TabContainer tab="outline" fetch={fetchOutlineTab} slice="courseHome">
-                          <OutlineTab />
-                        </TabContainer>
+                        {oldUI === 'false' ? (
+                          <TabContainer tab="outline" fetch={fetchOutlineTabWithMetadata} slice="courseHome">
+                            <OutlineTab />
+                          </TabContainer>
+                        ) : (
+                          <TabContainer tab="outline" fetch={fetchOutlineTab} slice="courseHome">
+                            <OutlineTab />
+                          </TabContainer>
+                        )}
                       </DecodePageRoute>
                     )}
                   />
@@ -258,7 +269,7 @@ const MainApp = () => {
                     path={DECODE_ROUTES.HOME}
                     element={(
                       <DecodePageRoute>
-                        <TabContainer tab="outline" fetch={fetchOutlineTab} slice="courseHome">
+                        <TabContainer tab="outline" fetch={fetchOutlineTabWithMetadata} slice="courseHome">
                           <OutlineTab />
                         </TabContainer>
                       </DecodePageRoute>
