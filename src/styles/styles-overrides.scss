@@ -818,6 +818,10 @@ a {
   }
 }
 
+.custom-unit-navigation {
+  margin-top: -0.5rem;
+}
+
 // Custom Outline Tab Course Card Image
 .course-card-image-responsive {
   width: 100%;
@@ -893,4 +897,44 @@ a {
       height: 100% !important;
     }
   }
+}
+
+.custom-unit-navigation-button {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    background-color: transparent !important;
+    border-radius: 8px !important;
+  
+    &:hover {
+      color: var(--primary-light) !important;
+      background-color: var(--primary) !important;
+      border-color: var(--primary) !important;
+    }
+  
+    &:active,
+    &.active {
+      color: var(--primary-light) !important;
+      background-color: var(--primary-active) !important;
+      border-color: var(--primary-active) !important;
+    }
+  
+    &:disabled {
+      color: var(--disabled) !important;
+      border-color: var(--disabled) !important;
+      background-color: transparent !important;
+    }
+
+    // &:disabled.hover {
+    //   color: var(--disabled) !important;
+    //   border-color: var(--disabled) !important;
+    //   background-color: transparent !important;
+    // }
+  
+    &:focus::before {
+      border: none !important;
+    }
+  
+    &:focus-visible {
+      outline: none !important;
+    }
 }

@@ -7,6 +7,7 @@ import { breakpoints, useWindowSize } from '@openedx/paragon';
 
 import { AlertList } from '@src/generic/user-messages';
 import { useModel } from '@src/generic/model-store';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { getCoursewareOutlineSidebarSettings } from '../data/selectors';
 import { Trigger as CourseOutlineTrigger } from './sidebar/sidebars/course-outline';
 import Chat from './chat/Chat';
@@ -70,11 +71,15 @@ const Course = ({
 
   const SidebarProviderComponent = isNewDiscussionSidebarViewEnabled ? NewSidebarProvider : SidebarProvider;
 
+  console.log('navigationDisabled', navigationDisabled);
+  console.log('shouldDisplayChat', shouldDisplayChat);
+  console.log('navigationDisabled || shouldDisplayChat', navigationDisabled || shouldDisplayChat);
   return (
     <SidebarProviderComponent courseId={courseId} unitId={unitId}>
       <Helmet>
         <title>{`${pageTitleBreadCrumbs.join(' | ')} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
+      {(!navigationDisabled || !shouldDisplayChat) && (
       <div className="position-relative d-flex align-items-xl-center mb-4 mt-1 flex-column flex-xl-row">
         {navigationDisabled || (
         <>
@@ -101,9 +106,20 @@ const Course = ({
         )}
         <div className="w-100 d-flex align-items-center">
           <CourseOutlineTrigger isMobileView />
-          {isNewDiscussionSidebarViewEnabled ? <NewSidebarTriggers /> : <SidebarTriggers /> }
+          {isNewDiscussionSidebarViewEnabled ? <NewSidebarTriggers /> : (
+            <>
+              {useWindowSize().width < breakpoints.small.minWidth ? (<SidebarTriggers />) : (
+                <PluginSlot
+                  id="course_sidebar_triggers_slot"
+                >
+                  <SidebarTriggers />
+                </PluginSlot>
+              )}
+            </>
+          ) }
         </div>
       </div>
+      ) }
 
       <AlertList topic="sequence" />
       <Sequence

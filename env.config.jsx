@@ -21,7 +21,7 @@ import CustomDayTimeline from "./src/course-home/dates-tab/timeline/CustomDayTim
 import CustomDateDescription from "./src/course-home/dates-tab/timeline/CustomDateDescription";
 import CustomTodayDate from "./src/course-home/dates-tab/timeline/CustomTodayDate";
 import CustomProgressGradeSummary from "./src/course-home/outline-tab/widgets/CustomProgressGradeSummary";
-
+import CustomUnitNavigation from "./src/courseware/course/sequence/CustomUnitNavigation";
 const getPluginSlots = () => {
   if (typeof window !== 'undefined' && localStorage.getItem('oldUI') === 'true') {
     return {};
@@ -321,6 +321,31 @@ const getPluginSlots = () => {
         },
       ],
     },
+    custom_unit_navigation_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "custom_unit_navigation_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomUnitNavigation {...props} />,
+          },
+        },
+      ],
+    },
+    course_sidebar_triggers_slot: {
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widget: {
+            id: "course_sidebar_triggers_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+          },
+        },
+      ],
+    }
   };
 };
 
