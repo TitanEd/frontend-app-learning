@@ -341,9 +341,10 @@ const Layout = () => {
       } catch (error) {
         console.error('Error switching to old UI:', error);
       }
-    }
-    else if (path === '/' || path === '/my-courses') {
+    } else if (path === '/') {
       window.location.href = `${getConfig().LMS_BASE_URL}${path}`;
+    } else if (path === '/my-courses') {
+      window.location.href = `${getConfig().LMS_BASE_URL}/learner-dashboard${path}`;
     } else {
       navigate(path);
     }
