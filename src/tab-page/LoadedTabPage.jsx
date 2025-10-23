@@ -55,7 +55,7 @@ const LoadedTabPage = ({
         <title>{`${activeTab ? `${activeTab.title} | ` : ''}${title} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
       <PluginSlot
-        id="loaded_tab_page_plugin_slot"
+        id="loaded_tab_page_plugin_slott"
         pluginProps={{
         }}
       >
