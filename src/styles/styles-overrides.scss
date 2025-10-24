@@ -950,31 +950,43 @@ a {
 
 .custom-instructor-toolbar {
   background-color: var(--primary) !important;
-  color: var(--primary-alt) !important;
+  color: var(--text-white) !important;
 
   .btn-inverse-outline-primary {
-    color: var(--primary-alt) !important;
-    border-color: var(--primary-alt) !important;
+    color: var(--text-white) !important;
+    border-color: var(--text-white) !important;
     // background-color: transparent !important;
 
     &:hover {
       color: var(--primary) !important;
-      border-color: var(--primary-alt) !important;
-      background-color: var(--primary-alt) !important;
+      border-color: var(--text-white) !important;
+      background-color: var(--text-white) !important;
     }
 
     &:focus {
-      border-color: var(--primary-alt) !important;
+      border-color: var(--text-white) !important;
     }
 
     &:focus::before {
-      border-color: var(--primary-alt) !important;
+      border-color: var(--text-white) !important;
     }
 
     &:active {
       color: var(--primary) !important;
-      border-color: var(--primary-alt) !important;
-      background-color: var(--primary-alt) !important;
+      border-color: var(--text-white) !important;
+      background-color: var(--text-white) !important;
     }
+  }
+
+  .show > .btn-inverse-outline-primary.dropdown-toggle {
+    color: var(--primary) !important;
+  }
+
+  .dropdown-item:hover {
+    color: var(--primary) !important;
+  }
+
+  .dropdown-item:active, .dropdown-item.active {
+    color: var(--text-white) !important;
   }
 }
