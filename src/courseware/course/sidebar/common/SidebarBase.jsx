@@ -36,7 +36,7 @@ const SidebarBase = ({
 
   return (
     <section
-      className={classNames('ml-0 border border-light-400 rounded-sm h-auto align-top zindex-0', {
+      className={classNames('ml-0 border border-light-400 rounded-sm h-auto align-top zindex-0, custom-sidebar-base-iframe', {
         'bg-white m-0 border-0 fixed-top vh-100 rounded-0': shouldDisplayFullScreen,
         'align-self-start': !shouldDisplayFullScreen,
         'd-none': currentSidebar !== sidebarId,
