@@ -45,7 +45,7 @@ const Section = ({
   }, []);
 
   const sectionTitle = (
-    <div className="d-flex row w-100 m-0">
+    <div className="d-flex row w-100 m-0 section-title-fix">
       <div className="col-auto p-0">
         {complete ? (
           <FontAwesomeIcon
