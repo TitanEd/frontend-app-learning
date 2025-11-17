@@ -394,7 +394,7 @@ const Layout = () => {
               // menuAlignment={headerData.menu.align}
               // menuList={headerData.menu.menuList}
               // loginSignupButtons={headerData.menu.loginSignupButtons}
-            authenticatedUser={authenticatedUser}
+            authenticatedUser={updatedAuthenticatedUser}
             userMenuItems={userMenuItems}
             onLanguageChange={handleLanguageChange}
             // getBaseUrl={() => '/account'}
