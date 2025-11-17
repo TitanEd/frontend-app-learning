@@ -726,7 +726,7 @@
   }
  
   .goal-card.selected {
-    border-color: #47a3ff;
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(71, 163, 255, 0.12) inset;
     background: #ffffff !important;
   }
@@ -789,9 +789,50 @@
   .intense-goal.selected .goal-card-body svg {
     background: #fff0d9;
   }
-  .pgn__form-switch-input:checked {
-      background-color: #00bbf9;
+  /* Switch styles - border and thumb for unchecked state */
+  .pgn__form-switch-input:not(:checked) {
+    border-color: var(--primary) !important;
+    /* Override the background-image SVG and use a solid color approach */
+    background-image: none !important;
+    background-color: #fff !important;
+    position: relative;
+    
+    /* Create the thumb circle using a pseudo-element */
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: var(--primary) !important;
+      transition: left 150ms ease;
+    }
   }
+  
+  /* Switch styles for checked state */
+  .pgn__form-switch-input:checked {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    background-image: none !important;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(100% - 1rem - 2px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #fff !important;
+      transition: left 150ms ease, background-color 150ms ease;
+    }
+  }
+  
   /* Keep the switch pinned right */
   .goal-card-switch {
     margin-left: auto;
