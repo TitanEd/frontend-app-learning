@@ -198,7 +198,7 @@ const CustomWeeklyLearningGoalCard = ({ intl }) => {
         <Card.Section muted>
           <div className="row w-100 m-0 small align-center">
             <div className="d-flex align-items-center pr-1">
-              <Icon className="text-primary-500" src={Email} />
+              <Icon className="text-primary-500 reminder-primary-icon" src={Email} />
             </div>
             <div className="col">
               {intl.formatMessage(messages.goalReminderDetail)}
