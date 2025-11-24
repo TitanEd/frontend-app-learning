@@ -475,8 +475,11 @@
 .donut-segment,
 .donut-hole {
   &.complete-stroke {
-    stroke: #2B2399;
+    stroke: var(--primary);
   }
+}
+.donut-chart-text{
+  fill: var(--primary) !important;
 }
 
 .dates-tab-container {
@@ -1163,6 +1166,16 @@ a {
 
     @media (max-width: 768px) {
       margin-top: 0.2rem !important;
+    }
+  }
+}
+
+.nav-underline-tabs {
+  .nav-link {
+    &:hover,
+    &:focus,
+    &.active {
+      border-bottom-color: transparent !important;
     }
   }
 }
