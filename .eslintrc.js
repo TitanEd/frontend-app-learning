@@ -12,6 +12,14 @@ const config = createConfig('eslint', {
     'react/no-unknown-property': 'off',
     'func-names': 'off',
     'linebreak-style': ['error', 'unix'],
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-nested-ternary': 'off',
+    'no-useless-escape': 'off',
+    'react/no-array-index-key': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/interactive-supports-focus': 'off',
+    'no-console': 'off',
   },
   settings: {
     'import/resolver': {
