@@ -104,22 +104,23 @@ const Course = ({
             />
           </>
         )}
-        <div className="w-100 d-flex align-items-center">
-          <CourseOutlineTrigger isMobileView />
-          {isNewDiscussionSidebarViewEnabled ? <NewSidebarTriggers /> : (
-            <>
-              {useWindowSize().width < breakpoints.small.minWidth ? (<SidebarTriggers />) : (
-                <PluginSlot
-                  id="course_sidebar_triggers_slot"
-                >
-                  <SidebarTriggers />
-                </PluginSlot>
-              )}
-            </>
-          ) }
-        </div>
+
       </div>
       ) }
+      <div className="w-100 d-flex align-items-center">
+        <CourseOutlineTrigger isMobileView />
+        {isNewDiscussionSidebarViewEnabled ? <NewSidebarTriggers /> : (
+          <>
+            {useWindowSize().width < breakpoints.small.minWidth ? (<SidebarTriggers />) : (
+              <PluginSlot
+                id="course_sidebar_triggers_slot"
+              >
+                <SidebarTriggers />
+              </PluginSlot>
+            )}
+          </>
+        ) }
+      </div>
 
       <AlertList topic="sequence" />
       <Sequence

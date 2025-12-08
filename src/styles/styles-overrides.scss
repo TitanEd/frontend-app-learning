@@ -1179,3 +1179,35 @@ a {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .mobile-view-sidebar-course-home {
+    padding-left: 0 !important;
+  }
+
+  .custom-mobile-view-expand-all-button {
+    max-width: fit-content !important;
+  }
+}
+
+.navbarContainer .usermenu-dropdown .dropdown-item:active {
+  color: var(--text-white) !important;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mobile-view-sidebar-course-home {
+    max-width: 40% !important;
+  }
+
+  .custom-outline-tab-content {
+    max-width: 60% !important;
+  }
+
+  .custom-outline-card-body {
+    padding: 1rem !important;
+  }
+
+  .sidebar.collapsed {
+    display: none !important;
+  }
+}
