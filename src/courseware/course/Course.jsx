@@ -71,9 +71,6 @@ const Course = ({
 
   const SidebarProviderComponent = isNewDiscussionSidebarViewEnabled ? NewSidebarProvider : SidebarProvider;
 
-  console.log('navigationDisabled', navigationDisabled);
-  console.log('shouldDisplayChat', shouldDisplayChat);
-  console.log('navigationDisabled || shouldDisplayChat', navigationDisabled || shouldDisplayChat);
   return (
     <SidebarProviderComponent courseId={courseId} unitId={unitId}>
       <Helmet>

@@ -73,8 +73,6 @@ const CustomOutlineTab = ({
   const courseHomeMeta = useModel('courseHomeMeta', courseId);
   const shortDescriptionFromMeta = courseHomeMeta.shortDescription;
 
-  console.log('shortDescription in CUSTOM OUTLINE TAB::::', shortDescriptionFromMeta);
-  console.log('shortDescription from courseHomeMeta:', shortDescriptionFromMeta);
 
   const {
     resumeCourse: {
