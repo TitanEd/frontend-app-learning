@@ -15,8 +15,8 @@ const CustomTodayDate = (props) => {
   return (
     <div
       className={classNames(
-        "row w-100 m-0 mb-1 align-items-center text-primary-700",
-        { "today-date-style": isCurrentDateToday }
+        'row w-100 m-0 mb-1 align-items-center text-primary-700',
+        { 'today-date-style': isCurrentDateToday },
       )}
       data-testid="dates-header"
     >
@@ -33,4 +33,3 @@ const CustomTodayDate = (props) => {
 };
 
 export default CustomTodayDate;
-

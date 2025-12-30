@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { } from 'react';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
-import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Button, Card, Badge } from '@openedx/paragon';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
@@ -10,7 +7,6 @@ import { AlertList } from '../../generic/user-messages';
 
 import CourseDates from './widgets/CourseDates';
 import CourseHandouts from './widgets/CourseHandouts';
-import StartOrResumeCourseCard from './widgets/StartOrResumeCourseCard';
 import WeeklyLearningGoalCard from './widgets/WeeklyLearningGoalCard';
 import CourseTools from './widgets/CourseTools';
 import { fetchOutlineTabWithMetadata } from '../data';
@@ -19,60 +15,54 @@ import Section from './Section';
 import ShiftDatesAlert from '../suggested-schedule-messaging/ShiftDatesAlert';
 import UpgradeNotification from '../../generic/upgrade-notification/UpgradeNotification';
 import UpgradeToShiftDatesAlert from '../suggested-schedule-messaging/UpgradeToShiftDatesAlert';
-import useCertificateAvailableAlert from './alerts/certificate-status-alert';
-import useCourseEndAlert from './alerts/course-end-alert';
-import useCourseStartAlert from '../../alerts/course-start-alert';
-import usePrivateCourseAlert from './alerts/private-course-alert';
-import useScheduledContentAlert from './alerts/scheduled-content-alert';
 import { useModel } from '../../generic/model-store';
 import WelcomeMessage from './widgets/WelcomeMessage';
 import ProctoringInfoPanel from './widgets/ProctoringInfoPanel';
 import AccountActivationAlert from '../../alerts/logistration-alert/AccountActivationAlert';
 
-const CustomOutlineTab = ({ 
+const CustomOutlineTab = ({
   intl,
-          courseId,
-          proctoringPanelStatus,
-          isSelfPaced,
-          org,
-          title,
-          userTimezone,
-          accessExpiration,
-          courseStartAlert,
-          courseEndAlert,
-          certificateAvailableAlert,
-          privateCourseAlert,
-          scheduledContentAlert,
-          eventProperties,
-          navigate,
-          rootCourseId,
-          hasDeadlines,
-          isEnterpriseUser,
-          logUpgradeToShiftDatesLinkClick,
-          handleNextSectionCelebration,
-          learnerType,
-          location,
-          expandAll,
-          setExpandAll,
-          enableProctoredExams,
-          selectedGoal,
-          offer,
-          verifiedMode,
-          datesBannerInfo,
-          marketingUrl,
-          timeOffsetMillis,
-          courses,
-          sections,
-          sectionIds,
-          resumeBlock,
-          weeklyLearningGoalEnabled,
-          daysPerWeek,
-          subscribedToReminders,
+  courseId,
+  proctoringPanelStatus,
+  isSelfPaced,
+  org,
+  title,
+  userTimezone,
+  accessExpiration,
+  courseStartAlert,
+  courseEndAlert,
+  certificateAvailableAlert,
+  privateCourseAlert,
+  scheduledContentAlert,
+  eventProperties,
+  navigate,
+  rootCourseId,
+  hasDeadlines,
+  isEnterpriseUser,
+  logUpgradeToShiftDatesLinkClick,
+  handleNextSectionCelebration,
+  learnerType,
+  location,
+  expandAll,
+  setExpandAll,
+  enableProctoredExams,
+  selectedGoal,
+  offer,
+  verifiedMode,
+  datesBannerInfo,
+  marketingUrl,
+  timeOffsetMillis,
+  courses,
+  sections,
+  sectionIds,
+  resumeBlock,
+  weeklyLearningGoalEnabled,
+  daysPerWeek,
+  subscribedToReminders,
 }) => {
   // Fetch shortDescription directly from courseHomeMeta
   const courseHomeMeta = useModel('courseHomeMeta', courseId);
   const shortDescriptionFromMeta = courseHomeMeta.shortDescription;
-
 
   const {
     resumeCourse: {

@@ -14,30 +14,30 @@ const CustomDayTimeline = (props) => {
   // Determine line color - use custom color for line above today's date
   const getTopLineClassName = () => {
     if (isCurrentDateToday) {
-      return "dates-line-top border-1 border-left today-line";
+      return 'dates-line-top border-1 border-left today-line';
     }
-    return "dates-line-top border-1 border-left border-gray-900 bg-gray-900";
+    return 'dates-line-top border-1 border-left border-gray-900 bg-gray-900';
   };
 
   const getBottomLineClassName = () => {
     if (isCurrentDateToday) {
-      return "dates-line-bottom border-1 border-left border-gray-900 bg-gray-900";
+      return 'dates-line-bottom border-1 border-left border-gray-900 bg-gray-900';
     }
-    return "dates-line-bottom border-1 border-left today-line";
+    return 'dates-line-bottom border-1 border-left today-line';
   };
 
   return (
     <>
       {/* Top Line */}
       {!props.first && <div className={getTopLineClassName()} />}
-      
+
       {/* Dot */}
       <div>
         {props.first ? <div className={classNames(props.color, 'dates-dot border border-gray-900 first')} />
-        : props.last ? <div className={classNames(props.color, 'dates-dot border last')} />
-        :<div className={classNames(props.color, 'dates-dot border border-gray-900 today')} />}
+          : props.last ? <div className={classNames(props.color, 'dates-dot border last')} />
+            : <div className={classNames(props.color, 'dates-dot border border-gray-900 today')} />}
       </div>
-      
+
       {/* Bottom Line */}
       {!props.last && <div className={getBottomLineClassName()} />}
     </>
@@ -45,4 +45,3 @@ const CustomDayTimeline = (props) => {
 };
 
 export default CustomDayTimeline;
-
