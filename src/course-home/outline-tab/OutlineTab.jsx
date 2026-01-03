@@ -125,7 +125,44 @@ const OutlineTab = ({ intl }) => {
   }, [location.search]);
 
   return (
-    <>
+    <PluginSlot
+      id="outline_tab_plugin_slot"
+      pluginProps={{
+        intl,
+        courseId,
+        proctoringPanelStatus,
+        isSelfPaced,
+        org,
+        title,
+        userTimezone,
+        accessExpiration,
+        courseStartAlert,
+        courseEndAlert,
+        certificateAvailableAlert,
+        privateCourseAlert,
+        scheduledContentAlert,
+        eventProperties,
+        navigate,
+        rootCourseId,
+        hasDeadlines,
+        isEnterpriseUser,
+        logUpgradeToShiftDatesLinkClick,
+        learnerType,
+        location,
+        expandAll,
+        setExpandAll,
+        enableProctoredExams,
+        selectedGoal,
+        offer,
+        verifiedMode,
+        datesBannerInfo,
+        marketingUrl,
+        timeOffsetMillis,
+        courses,
+        sections,
+        weeklyLearningGoalEnabled,
+      }}
+    >
       <div data-learner-type={learnerType} className="row w-100 mx-0 my-3 justify-content-between">
         <div className="col-12 col-sm-auto p-0">
           <div role="heading" aria-level="1" className="h2">{title}</div>
@@ -221,7 +258,7 @@ const OutlineTab = ({ intl }) => {
           </div>
         )}
       </div>
-    </>
+    </PluginSlot>
   );
 };
 

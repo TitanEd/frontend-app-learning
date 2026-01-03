@@ -14,6 +14,7 @@ import { useToggle } from '@openedx/paragon';
 import PageLoading from '@src/generic/PageLoading';
 import { useModel } from '@src/generic/model-store';
 import { useSequenceBannerTextAlert, useSequenceEntranceExamAlert } from '@src/alerts/sequence-alerts/hooks';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import SequenceContainerSlot from '../../../plugin-slots/SequenceContainerSlot';
 
 import { getCoursewareOutlineSidebarSettings } from '../../data/selectors';
@@ -148,19 +149,36 @@ const Sequence = ({
   const gated = sequence && sequence.gatedContent !== undefined && sequence.gatedContent.gated;
 
   const renderUnitNavigation = (isAtTop) => (
-    <UnitNavigation
-      sequenceId={sequenceId}
-      unitId={unitId}
-      isAtTop={isAtTop}
-      onClickPrevious={() => {
-        logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
-        handlePrevious();
+    <PluginSlot
+      id="custom_unit_navigation_slot"
+      pluginProps={{
+        sequenceId,
+        unitId,
+        isAtTop,
+        onClickPrevious: () => {
+          logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
+          handlePrevious();
+        },
+        onClickNext: () => {
+          logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
+          handleNext();
+        },
       }}
-      onClickNext={() => {
-        logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
-        handleNext();
-      }}
-    />
+    >
+      <UnitNavigation
+        sequenceId={sequenceId}
+        unitId={unitId}
+        isAtTop={isAtTop}
+        onClickPrevious={() => {
+          logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
+          handlePrevious();
+        }}
+        onClickNext={() => {
+          logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
+          handleNext();
+        }}
+      />
+    </PluginSlot>
   );
 
   const defaultContent = (

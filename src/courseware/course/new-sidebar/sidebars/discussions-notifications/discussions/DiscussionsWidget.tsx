@@ -25,7 +25,7 @@ const DiscussionsWidget = () => {
   return (
     <iframe
       src={`${discussionsUrl}?inContextSidebar`}
-      className={classNames('d-flex w-100 flex-fill border border-light-400 rounded-sm', {
+      className={classNames('d-flex w-100 flex-fill border border-light-400 rounded-sm custom-discussions-widget-sidebar', {
         'vh-100': !shouldDisplayFullScreen,
         'min-height-700': shouldDisplayFullScreen,
       })}

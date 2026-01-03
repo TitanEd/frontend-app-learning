@@ -35,7 +35,7 @@ const DetailedGradesTable = ({ intl }) => {
 
       const detailedGradesData = subsectionScores.map((subsection) => ({
         subsectionTitle: <SubsectionTitleCell subsection={subsection} />,
-        score: <span className={subsection.learnerHasAccess ? '' : 'greyed-out'}>{subsection.numPointsEarned}{isLocaleRtl ? '\\' : '/'}{subsection.numPointsPossible}</span>,
+        score: <span className={subsection.learnerHasAccess ? 'custom-detailed-grades-accordion-title' : 'greyed-out custom-detailed-grades-accordion-title'}>{subsection.numPointsEarned}{isLocaleRtl ? '\\' : '/'}{subsection.numPointsPossible}</span>,
       }));
 
       return (
@@ -47,13 +47,13 @@ const DetailedGradesTable = ({ intl }) => {
               {
                 Header: chapter.displayName,
                 accessor: 'subsectionTitle',
-                headerClassName: 'h5 mb-0',
+                headerClassName: 'h5 mb-0 custom-detailed-grades-subtitles',
                 cellClassName: 'mw-100',
               },
               {
                 Header: `${intl.formatMessage(messages.score)}`,
                 accessor: 'score',
-                headerClassName: 'justify-content-end h5 mb-0',
+                headerClassName: 'justify-content-end h5 mb-0 custom-detailed-grades-subtitles',
                 cellClassName: 'align-top text-right small',
               },
             ]}

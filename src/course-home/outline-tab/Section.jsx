@@ -7,6 +7,7 @@ import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { DisabledVisible } from '@openedx/paragon/icons';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import SequenceLink from './SequenceLink';
 import { useModel } from '../../generic/model-store';
 
@@ -44,13 +45,13 @@ const Section = ({
   }, []);
 
   const sectionTitle = (
-    <div className="d-flex row w-100 m-0">
+    <div className="d-flex row w-100 m-0 section-title-fix">
       <div className="col-auto p-0">
         {complete ? (
           <FontAwesomeIcon
             icon={fasCheckCircle}
             fixedWidth
-            className="float-left mt-1 text-success"
+            className="float-left mt-1 text-success custom-icon-styles"
             aria-hidden="true"
             title={intl.formatMessage(messages.completedSection)}
           />
@@ -58,7 +59,7 @@ const Section = ({
           <FontAwesomeIcon
             icon={farCheckCircle}
             fixedWidth
-            className="float-left mt-1 text-gray-400"
+            className="float-left mt-1 text-gray-400 custom-icon-styles"
             aria-hidden="true"
             title={intl.formatMessage(messages.incompleteSection)}
           />
@@ -94,23 +95,39 @@ const Section = ({
         open={open}
         onToggle={() => { setOpen(!open); }}
         iconWhenClosed={(
-          <IconButton
-            alt={intl.formatMessage(messages.openSection)}
-            icon={faPlus}
-            onClick={() => { setOpen(true); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_open_plugin_slot"
+            pluginProps={{
+              alt: intl.formatMessage(messages.policy),
+              onClick: () => { setOpen(true); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(messages.openSection)}
+              icon={faPlus}
+              onClick={() => { setOpen(true); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
         iconWhenOpen={(
-          <IconButton
-            alt={intl.formatMessage(genericMessages.close)}
-            icon={faMinus}
-            onClick={() => { setOpen(false); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_close_plugin_slot"
+            pluginProps={{
+              alt: intl.formatMessage(genericMessages.close),
+              onClick: () => { setOpen(false); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(genericMessages.close)}
+              icon={faMinus}
+              onClick={() => { setOpen(false); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
       >
-        <ol className="list-unstyled">
+        <ol className="list-unstyled course-content-subcontent">
           {sequenceIds.map((sequenceId, index) => (
             <SequenceLink
               key={sequenceId}

@@ -16,6 +16,8 @@ import {
   searchCourseContentFromAPI,
 } from './api';
 
+import { getCourseMetadata } from '../../courseware/data/api';
+
 import {
   addModel, updateModel,
 } from '../../generic/model-store';
@@ -95,6 +97,68 @@ export function fetchProgressTab(courseId, targetUserId) {
 
 export function fetchOutlineTab(courseId) {
   return fetchTab(courseId, 'outline', getOutlineTabData);
+}
+
+// Enhanced function that also fetches courseware metadata to get shortDescription
+export function fetchOutlineTabWithMetadata(courseId) {
+  return async (dispatch) => {
+    dispatch(fetchTabRequest({ courseId }));
+    try {
+      const promisesToFulfill = [
+        getCourseHomeCourseMetadata(courseId, 'outline'),
+        getOutlineTabData(courseId),
+        getCourseMetadata(courseId), // Fetch courseware metadata to get shortDescription
+      ];
+      
+      const [
+        courseHomeCourseMetadataResult,
+        outlineTabDataResult,
+        coursewareMetadataResult,
+      ] = await Promise.allSettled(promisesToFulfill);
+      
+      if (courseHomeCourseMetadataResult.status === 'fulfilled') {
+        const courseHomeMetaData = {
+          id: courseId,
+          ...courseHomeCourseMetadataResult.value,
+        };
+        
+        // If courseware metadata has shortDescription and courseHome doesn't, add it
+        if (coursewareMetadataResult.status === 'fulfilled' && 
+            coursewareMetadataResult.value.shortDescription &&
+            !courseHomeMetaData.shortDescription) {
+          courseHomeMetaData.shortDescription = coursewareMetadataResult.value.shortDescription;
+        }
+        
+        dispatch(addModel({
+          modelType: 'courseHomeMeta',
+          model: courseHomeMetaData,
+        }));
+      }
+      
+      if (outlineTabDataResult?.status === 'fulfilled') {
+        dispatch(addModel({
+          modelType: 'outline',
+          model: {
+            id: courseId,
+            ...outlineTabDataResult.value,
+          },
+        }));
+      }
+      
+      if (courseHomeCourseMetadataResult.status === 'rejected') {
+        throw courseHomeCourseMetadataResult.reason;
+      } else if (!courseHomeCourseMetadataResult.value.courseAccess.hasAccess) {
+        dispatch(fetchTabDenied({ courseId }));
+      } else if (outlineTabDataResult?.status === 'rejected') {
+        throw outlineTabDataResult.reason;
+      } else {
+        dispatch(fetchTabSuccess({ courseId }));
+      }
+    } catch (e) {
+      dispatch(fetchTabFailure({ courseId }));
+      logError(e);
+    }
+  };
 }
 
 export function fetchLiveTab(courseId) {
