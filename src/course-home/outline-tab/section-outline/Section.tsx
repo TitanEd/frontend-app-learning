@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Collapsible, IconButton } from '@openedx/paragon';
 import { Minus, Plus } from '@openedx/paragon/icons';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 
 import { useModel } from '../../../generic/model-store';
 import genericMessages from '../../../generic/messages';
@@ -60,23 +61,40 @@ const Section: React.FC<Props> = ({
         open={open}
         onToggle={() => { setOpen(!open); }}
         iconWhenClosed={(
-          <IconButton
-            alt={intl.formatMessage(messages.openSection)}
-            iconAs={Plus}
-            onClick={() => { setOpen(true); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_open_plugin_slot"
+            pluginProps={{
+              // Sumac used `messages.policy` here, which is not defined and makes formatMessage throw.
+              alt: intl.formatMessage(messages.openSection),
+              onClick: () => { setOpen(true); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(messages.openSection)}
+              iconAs={Plus}
+              onClick={() => { setOpen(true); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
         iconWhenOpen={(
-          <IconButton
-            alt={intl.formatMessage(genericMessages.close)}
-            iconAs={Minus}
-            onClick={() => { setOpen(false); }}
-            size="sm"
-          />
+          <PluginSlot
+            id="section_icon_close_plugin_slot"
+            pluginProps={{
+              alt: intl.formatMessage(genericMessages.close),
+              onClick: () => { setOpen(false); },
+            }}
+          >
+            <IconButton
+              alt={intl.formatMessage(genericMessages.close)}
+              iconAs={Minus}
+              onClick={() => { setOpen(false); }}
+              size="sm"
+            />
+          </PluginSlot>
         )}
       >
-        <ol className="list-unstyled">
+        <ol className="list-unstyled course-content-subcontent">
           {sequenceIds.map((sequenceId, index) => (
             <SequenceLink
               key={sequenceId}

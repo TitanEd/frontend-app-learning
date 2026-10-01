@@ -14,12 +14,12 @@ interface Props {
 const SectionTitle: React.FC<Props> = ({ complete, hideFromTOC, title }) => {
   const intl = useIntl();
   return (
-    <div className="d-flex row w-100 m-0">
+    <div className="d-flex row w-100 m-0 section-title-fix">
       <div className="col-auto p-0">
         {complete ? (
           <Icon
             src={CheckCircle}
-            className="float-left mt-1 text-success"
+            className="float-left mt-1 text-success custom-icon-styles"
             aria-hidden="true"
             svgAttrs={{ 'aria-label': intl.formatMessage(messages.completedSection) }}
             size="sm"
@@ -27,7 +27,7 @@ const SectionTitle: React.FC<Props> = ({ complete, hideFromTOC, title }) => {
         ) : (
           <Icon
             src={CheckCircleOutline}
-            className="float-left mt-1 text-gray-400"
+            className="float-left mt-1 text-gray-400 custom-icon-styles"
             aria-hidden="true"
             svgAttrs={{ 'aria-label': intl.formatMessage(messages.incompleteSection) }}
             size="sm"

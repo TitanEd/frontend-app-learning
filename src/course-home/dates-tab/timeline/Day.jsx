@@ -11,6 +11,7 @@ import { Tooltip, OverlayTrigger } from '@openedx/paragon';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../../generic/model-store';
 
 import { getBadgeListAndColor } from './badgelist';
@@ -36,28 +37,43 @@ const Day = ({
 
   return (
     <li className="dates-day pb-4" data-testid="dates-day">
-      {/* Top Line */}
-      {!first && <div className="dates-line-top border-1 border-left border-gray-900 bg-gray-900" />}
+      <PluginSlot
+        id="day_timeline_plugin_slot"
+        pluginProps={{
+          first, last, color, date,
+        }}
+      >
+        {/* Top Line */}
+        {!first && <div className="dates-line-top border-1 border-left border-gray-900 bg-gray-900" />}
 
-      {/* Dot */}
-      <div className={classNames(color, 'dates-dot border border-gray-900')} />
+        {/* Dot */}
+        <div className={classNames(color, 'dates-dot border border-gray-900')} />
 
-      {/* Bottom Line */}
-      {!last && <div className="dates-line-bottom border-1 border-left border-gray-900 bg-gray-900" />}
+        {/* Bottom Line */}
+        {!last && <div className="dates-line-bottom border-1 border-left border-gray-900 bg-gray-900" />}
+      </PluginSlot>
 
       {/* Content */}
       <div className="d-inline-block ml-3 pl-2">
-        <div className="row w-100 m-0 mb-1 align-items-center text-primary-700" data-testid="dates-header">
-          <FormattedDate
-            value={date}
-            day="numeric"
-            month="short"
-            weekday="short"
-            year="numeric"
-            {...timezoneFormatArgs}
-          />
-          {badges}
-        </div>
+        <PluginSlot
+          id="dates_tab_today_date_plugin_slot"
+          pluginProps={{
+            date,
+            ...timezoneFormatArgs,
+          }}
+        >
+          <div className="row w-100 m-0 mb-1 align-items-center text-primary-700" data-testid="dates-header">
+            <FormattedDate
+              value={date}
+              day="numeric"
+              month="short"
+              weekday="short"
+              year="numeric"
+              {...timezoneFormatArgs}
+            />
+          </div>
+        </PluginSlot>
+        {badges}
         {items.map((item) => {
           const { badges: itemBadges } = getBadgeListAndColor(date, intl, item, items);
 
@@ -95,7 +111,14 @@ const Day = ({
                   </OverlayTrigger>
                 )}
               </div>
-              {item.description && <div className="small mb-2">{item.description}</div>}
+              <PluginSlot
+                id="dates_tab_description_plugin_slot"
+                pluginProps={{
+                  item,
+                }}
+              >
+                {item.description && <div className="small mb-2">{item.description}</div>}
+              </PluginSlot>
             </div>
           );
         })}

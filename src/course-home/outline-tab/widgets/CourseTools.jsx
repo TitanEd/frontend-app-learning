@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import messages from '../messages';
 import { useModel } from '../../../generic/model-store';
 import LaunchCourseHomeTourButton from '../../../product-tours/newUserCourseHomeTour/LaunchCourseHomeTourButton';
@@ -63,22 +64,35 @@ const CourseTools = () => {
   };
 
   return (
-    <section className="mb-4">
-      <h2 className="h4">{intl.formatMessage(messages.tools)}</h2>
-      <ul className="list-unstyled">
-        {courseTools.map((courseTool) => (
-          <li key={courseTool.analyticsId} className="small">
-            <a href={courseTool.url} onClick={() => logClick(courseTool.analyticsId)}>
-              <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
-              {courseTool.title}
-            </a>
+    <PluginSlot
+      id="course_tools_plugin_slot"
+      pluginProps={{
+        intl,
+        courseTools,
+        org,
+        courseId,
+        eventProperties,
+        logClick,
+        renderIcon,
+      }}
+    >
+      <section className="mb-4">
+        <h2 className="h4">{intl.formatMessage(messages.tools)}</h2>
+        <ul className="list-unstyled">
+          {courseTools.map((courseTool) => (
+            <li key={courseTool.analyticsId} className="small">
+              <a href={courseTool.url} onClick={() => logClick(courseTool.analyticsId)}>
+                <FontAwesomeIcon icon={renderIcon(courseTool.analyticsId)} className="mr-2" fixedWidth />
+                {courseTool.title}
+              </a>
+            </li>
+          ))}
+          <li className="small" id="courseHome-launchTourLink">
+            <LaunchCourseHomeTourButton />
           </li>
-        ))}
-        <li className="small" id="courseHome-launchTourLink">
-          <LaunchCourseHomeTourButton />
-        </li>
-      </ul>
-    </section>
+        </ul>
+      </section>
+    </PluginSlot>
   );
 };
 

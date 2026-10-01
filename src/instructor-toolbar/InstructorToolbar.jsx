@@ -4,9 +4,9 @@ import { getConfig } from '@edx/frontend-platform';
 import { useIntl, FormattedMessage } from '@edx/frontend-platform/i18n';
 
 import { ALERT_TYPES, AlertList } from '../generic/user-messages';
+import messages from './messages';
 import Alert from '../generic/user-messages/Alert';
 import MasqueradeWidget from './masquerade-widget';
-import messages from './messages';
 import { useAccessExpirationMasqueradeBanner } from '../alerts/access-expiration-alert';
 import { useCourseStartMasqueradeBanner } from '../alerts/course-start-alert';
 
@@ -70,7 +70,7 @@ const InstructorToolbar = (props) => {
 
   return (!didMount ? null : (
     <div data-testid="instructor-toolbar">
-      <div className="bg-primary text-white">
+      <div className="bg-primary text-white custom-instructor-toolbar">
         <div className="container-xl py-3 d-md-flex justify-content-end align-items-start">
           <div className="align-items-center flex-grow-1 d-md-flex mx-1 my-1">
             <MasqueradeWidget courseId={courseId} onError={showMasqueradeError} />
