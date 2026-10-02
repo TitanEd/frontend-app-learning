@@ -353,6 +353,17 @@ const Layout = () => {
     };
   }, []);
 
+  // Build learner dashboard MFE links from config instead of a hardcoded host, so the right
+  // scheme/host/port is used in every environment.
+  const getLearnerDashboardUrl = (path) => {
+    const { LEARNER_HOME_MICROFRONTEND_URL } = getConfig();
+    if (LEARNER_HOME_MICROFRONTEND_URL) {
+      return `${LEARNER_HOME_MICROFRONTEND_URL.replace(/\/+$/, '')}${path}`;
+    }
+    // Standard Open edX behaviour: the LMS redirects /dashboard to the configured learner dashboard MFE.
+    return `${LMS_BASE_URL}/dashboard`;
+  };
+
   const handleNavigate = async (path) => {
     if (path === 'switch-to-old-view') {
       try {
@@ -366,9 +377,11 @@ const Layout = () => {
         console.error('Error switching to old UI:', error);
       }
     } else if (path === '/') {
-      window.location.href = `https://${getConfig().BASE_URL}/learner-dashboard${path}`;
+      // window.location.href = `https://${getConfig().BASE_URL}/learner-dashboard${path}`;
+      window.location.href = getLearnerDashboardUrl(path);
     } else if (path === '/my-courses') {
-      window.location.href = `https://${getConfig().BASE_URL}/learner-dashboard${path}`;
+      // window.location.href = `https://${getConfig().BASE_URL}/learner-dashboard${path}`;
+      window.location.href = getLearnerDashboardUrl(path);
     } else {
       navigate(path);
     }
