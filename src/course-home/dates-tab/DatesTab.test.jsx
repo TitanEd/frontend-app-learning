@@ -82,13 +82,6 @@ describe('DatesTab', () => {
     throw new Error('Did not find day container');
   }
 
-  // The custom TitanEd Day layout renders day-level badges next to the header instead of inside it,
-  // so collect the badges in the day that don't belong to an individual item.
-  function getDayBadges(day, items) {
-    return within(day).queryAllByTestId('dates-badge')
-      .filter(badge => !items.some(item => item.contains(badge)));
-  }
-
   describe('when receiving a full set of dates data', () => {
     beforeEach(() => {
       axiosMock.onGet(courseMetadataUrl).reply(200, courseMetadata);
@@ -99,16 +92,16 @@ describe('DatesTab', () => {
     });
 
     it('handles unreleased & complete', async () => {
-      const { day, items } = await getDay('Sun, May 3, 2020');
-      const badges = getDayBadges(day, items);
+      const { header } = await getDay('Sun, May 3, 2020');
+      const badges = within(header).getAllByTestId('dates-badge');
       expect(badges).toHaveLength(2);
       expect(badges[0]).toHaveTextContent('Completed');
       expect(badges[1]).toHaveTextContent('Not yet released');
     });
 
     it('handles unreleased & past due', async () => {
-      const { day, items } = await getDay('Mon, May 4, 2020');
-      const badges = getDayBadges(day, items);
+      const { header } = await getDay('Mon, May 4, 2020');
+      const badges = within(header).getAllByTestId('dates-badge');
       expect(badges).toHaveLength(2);
       expect(badges[0]).toHaveTextContent('Past due');
       expect(badges[1]).toHaveTextContent('Not yet released');
@@ -126,10 +119,9 @@ describe('DatesTab', () => {
     });
 
     it('same status items have header badge', async () => {
-      const { day, items } = await getDay('Tue, May 26, 2020');
-      const dayBadges = getDayBadges(day, items);
-      expect(dayBadges).toHaveLength(1);
-      expect(dayBadges[0]).toHaveTextContent('Past due'); // one header badge
+      const { day, header } = await getDay('Tue, May 26, 2020');
+      const badge = within(header).getByTestId('dates-badge');
+      expect(badge).toHaveTextContent('Past due'); // one header badge
       expect(within(day).getAllByTestId('dates-badge')).toHaveLength(1); // no other badges
     });
 

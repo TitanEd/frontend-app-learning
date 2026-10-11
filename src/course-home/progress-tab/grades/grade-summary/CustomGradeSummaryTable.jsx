@@ -3,6 +3,7 @@ import Chart from 'react-apexcharts';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import DroppableAssignmentFootnote from './DroppableAssignmentFootnote';
 import messages from '../messages';
+import { tokenPalette } from '../../../../utils/tokenColor';
 
 const CustomGradeSummaryTable = ({
   intl,
@@ -76,7 +77,7 @@ const CustomGradeSummaryTable = ({
     },
     yaxis: {
       title: {
-        text: 'Percentage (%)',
+        text: intl.formatMessage(messages.percentageAxisLabel),
       },
       labels: {
         formatter(val) {
@@ -97,7 +98,7 @@ const CustomGradeSummaryTable = ({
     legend: {
       position: 'top',
     },
-    colors: ['#2B2399', '#00E396', '#FEB019'],
+    colors: tokenPalette(3),
   };
 
   return (

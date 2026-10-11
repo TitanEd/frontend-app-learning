@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet';
 
 import { getConfig } from '@edx/frontend-platform';
 import { useToggle } from '@openedx/paragon';
-
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
+
 import { CourseTabsNavigationSlot } from '@src/plugin-slots/CourseTabsNavigationSlot';
 
 import { useModel } from '@src/generic/model-store';
@@ -63,20 +63,14 @@ const LoadedTabPage = ({
       <Helmet>
         <title>{`${activeTab ? `${activeTab.title} | ` : ''}${title} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
-      <PluginSlot
-        id="loaded_tab_page_plugin_slott"
-        pluginProps={{
-        }}
-      >
-        {originalUserIsStaff && (
-          <InstructorToolbar
-            courseId={courseId}
-            unitId={unitId}
-            tab={activeTabSlug}
-            isStudioButtonVisible={hasCourseAuthorAccess}
-          />
-        )}
-      </PluginSlot>
+      {originalUserIsStaff && (
+        <InstructorToolbar
+          courseId={courseId}
+          unitId={unitId}
+          tab={activeTabSlug}
+          isStudioButtonVisible={hasCourseAuthorAccess}
+        />
+      )}
       <StreakModal
         courseId={courseId}
         metadataModel={metadataModel}
@@ -86,26 +80,33 @@ const LoadedTabPage = ({
         streakDiscountCouponEnabled={streakDiscountCouponEnabled}
         verifiedMode={verifiedMode}
       />
-      <main className="d-flex flex-column flex-grow-1">
-        <AlertList
-          topic="outline"
-          className="mx-5 mt-3"
-          customAlerts={{
-            ...enrollmentAlert,
-            ...logistrationAlert,
-          }}
-        />
-        <PluginSlot
-          id="course_header_plugin_slot"
-          pluginProps={{
-            title,
-          }}
-        />
-        <CourseTabsNavigationSlot tabs={tabs} activeTabSlug={activeTabSlug} />
-        <div id="main-content" className="container-xl">
-          {children}
-        </div>
-      </main>
+      <PluginSlot
+        id="loaded_tab_page_main_plugin_slot"
+        pluginProps={{
+          courseId,
+          title,
+          tabs,
+          activeTabSlug,
+          enrollmentAlert,
+          logistrationAlert,
+          children,
+        }}
+      >
+        <main className="d-flex flex-column flex-grow-1">
+          <AlertList
+            topic="outline"
+            className="mx-5 mt-3"
+            customAlerts={{
+              ...enrollmentAlert,
+              ...logistrationAlert,
+            }}
+          />
+          <CourseTabsNavigationSlot tabs={tabs} activeTabSlug={activeTabSlug} />
+          <div id="main-content" className="container-xl">
+            {children}
+          </div>
+        </main>
+      </PluginSlot>
     </>
   );
 };

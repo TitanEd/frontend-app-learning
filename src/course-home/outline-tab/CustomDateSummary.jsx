@@ -24,11 +24,11 @@ const CustomDateSummary = ({
           maxWidth: 40,
           height: 40,
           borderRadius: '50%',
-          background: '#e8f0fe',
+          background: 'var(--pgn-color-primary-light)',
           flexShrink: 0,
         }}
       >
-        <FontAwesomeIcon icon={faCalendarAlt} style={{ color: '#5f6368', fontSize: 22 }} />
+        <FontAwesomeIcon icon={faCalendarAlt} style={{ color: 'var(--pgn-color-text-muted)', fontSize: 22 }} />
       </span>
       <div
         style={{
@@ -38,7 +38,7 @@ const CustomDateSummary = ({
           flex: 1,
         }}
       >
-        <div className="font-weight-bold" style={{ fontSize: '1rem', color: '#222' }}>
+        <div className="font-weight-bold" style={{ fontSize: '1rem', color: 'var(--pgn-color-text-base)' }}>
           <FormattedDate
             value={dateBlock.date}
             day="numeric"
@@ -48,7 +48,7 @@ const CustomDateSummary = ({
             {...timezoneFormatArgs}
           />
         </div>
-        <div className="date-summary-text" style={{ color: '#6b7280', fontSize: '0.95rem', fontWeight: 400 }}>
+        <div className="date-summary-text" style={{ color: 'var(--pgn-color-text-muted)', fontSize: '0.95rem', fontWeight: 400 }}>
           {dateBlock.title}
           {dateBlock.description && (
             <div className="date-summary-text mt-1">{dateBlock.description}</div>

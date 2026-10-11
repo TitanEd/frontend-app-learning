@@ -11,9 +11,7 @@ import CustomCourseTools from "./src/course-home/outline-tab/widgets/CustomCours
 import CustomDateSummary from "./src/course-home/outline-tab/CustomDateSummary";
 import CustomFlagButton from "./src/course-home/outline-tab/widgets/CustomFlagButton";
 import CustomWeeklyLearningGoalCard from "./src/course-home/outline-tab/widgets/CustomWeeklyLearningGoalCard";
-import CustomOutlineTab from "./src/course-home/outline-tab/CustomOutlineTab";
-import CourseHeader from "./src/tab-page/CourseHeader";
-import CustomProgressTab from "./src/course-home/progress-tab/CustomProgressTab";
+import CustomCourseHeader from "./src/tab-page/CustomCourseHeader";
 import classNames from "classnames";
 import CustomGradeBar from "./src/course-home/progress-tab/grades/course-grade/CustomGradeBar";
 import CustomGradeSummaryTable from "./src/course-home/progress-tab/grades/grade-summary/CustomGradeSummaryTable";
@@ -22,26 +20,70 @@ import CustomDateDescription from "./src/course-home/dates-tab/timeline/CustomDa
 import CustomTodayDate from "./src/course-home/dates-tab/timeline/CustomTodayDate";
 import CustomProgressGradeSummary from "./src/course-home/outline-tab/widgets/CustomProgressGradeSummary";
 import CustomUnitNavigation from "./src/courseware/course/sequence/CustomUnitNavigation";
+import CustomLayout from "./src/CustomLayout";
+import CustomSidebarTriggers from "./src/courseware/course/sidebar/CustomSidebarTriggers";
+import CustomLoadedTabPageMain from "./src/tab-page/CustomLoadedTabPageMain";
 const getPluginSlots = () => {
-  if (typeof window !== 'undefined' && localStorage.getItem('oldUI') === 'true') {
-    return {};
-  }
+return {
 
-  return {
-    example_plugin_slot: {
+    app_layout_plugin_slot: {
+      keepDefault: false,
       plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: "header_plugin_slot",
+            id: 'custom_app_layout',
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: () => <div>This is Header</div>, // Render "This is Header" text
+            RenderWidget: () => <CustomLayout />,
+          },
+        },
+      ],
+    },
+    // Stock learning header and footer: the custom layout has its own header.
+    'org.openedx.frontend.layout.header_learning.v1': {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+      ],
+    },
+    'org.openedx.frontend.layout.footer.v1': {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+      ],
+    },
+    // Unit page sidebar triggers: small screens only.
+    'org.openedx.frontend.learning.right_sidebar_trigger.v1': {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'custom_sidebar_triggers',
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: CustomSidebarTriggers,
           },
         },
       ],
     },
     section_icon_open_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -62,6 +104,7 @@ const getPluginSlots = () => {
       ],
     },
     section_icon_close_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -82,6 +125,7 @@ const getPluginSlots = () => {
       ],
     },
     course_dates_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -99,6 +143,7 @@ const getPluginSlots = () => {
       ],
     },
     course_tools_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -112,6 +157,7 @@ const getPluginSlots = () => {
       ],
     },
     date_summary_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -125,6 +171,7 @@ const getPluginSlots = () => {
       ],
     },
     flag_button_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -138,6 +185,7 @@ const getPluginSlots = () => {
       ],
     },
     weekly_learning_goal_card_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -152,46 +200,29 @@ const getPluginSlots = () => {
         },
       ],
     },
-    outline_tab_plugin_slot: {
+    // Keep default_contents (InstructorToolbar / primary staff banner).
+    // Course pages: custom content column (alerts, course header, tabs).
+    loaded_tab_page_main_plugin_slot: {
+      keepDefault: false,
       plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: "outline_tab_plugin_slot",
+            id: 'custom_loaded_tab_page_main',
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => <CustomOutlineTab {...props} />,
+            RenderWidget: (props) => <CustomLoadedTabPageMain {...props} />,
           },
         },
       ],
     },
-    loaded_tab_page_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "outline_tab_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: (props) => {},
-          },
-        },
-      ],
-    },
-    hide_header_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "hide_header_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: (props) => {},
-          },
-        },
-      ],
-    },
+
     course_header_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -199,38 +230,13 @@ const getPluginSlots = () => {
             id: "course_header_plugin_slot",
             type: DIRECT_PLUGIN,
             priority: 1,
-            RenderWidget: (props) => <CourseHeader {...props} />,
-          },
-        },
-      ],
-    },
-    progress_tab_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: "progress_tab_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: (props) => <CustomProgressTab {...props} />,
-          },
-        },
-      ],
-    },
-    footer_hide_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "footer_hide_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: () => {},
+            RenderWidget: (props) => <CustomCourseHeader {...props} />,
           },
         },
       ],
     },
     day_timeline_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -244,6 +250,7 @@ const getPluginSlots = () => {
       ],
     },
     dates_tab_description_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -257,6 +264,7 @@ const getPluginSlots = () => {
       ],
     },
     dates_tab_today_date_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -270,6 +278,7 @@ const getPluginSlots = () => {
       ],
     },
     grade_bar_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -282,20 +291,8 @@ const getPluginSlots = () => {
         },
       ],
     },
-    course_grade_footer_plugin_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "course_grade_footer_plugin_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-            RenderWidget: (props) => {},
-          },
-        },
-      ],
-    },
     progress_grade_summary_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -309,6 +306,7 @@ const getPluginSlots = () => {
       ],
     },
     progress_tab_grade_summary_plugin_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -322,6 +320,7 @@ const getPluginSlots = () => {
       ],
     },
     custom_unit_navigation_slot: {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
@@ -334,18 +333,6 @@ const getPluginSlots = () => {
         },
       ],
     },
-    course_sidebar_triggers_slot: {
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Hide,
-          widget: {
-            id: "course_sidebar_triggers_slot",
-            type: DIRECT_PLUGIN,
-            priority: 1,
-          },
-        },
-      ],
-    }
   };
 };
 

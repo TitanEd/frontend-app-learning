@@ -12,7 +12,7 @@ const ProblemScoreDrawer = ({ problemScores, subsection }) => {
   const scoreLabel = subsection.hasGradedAssignment ? messages.gradedScoreLabel : messages.practiceScoreLabel;
 
   return (
-    <span className="row w-100 m-0 x-small ml-4 pt-2 pl-1 text-gray-700 flex-nowrap custom-detailed-grades-accordion-title">
+    <span className="row w-100 m-0 x-small ml-4 pt-2 pl-1 text-gray-700 flex-nowrap">
       <span id="problem-score-label" className="col-auto p-0">{intl.formatMessage(scoreLabel)}</span>
       <div className={classNames('col', 'p-0', { 'greyed-out': !subsection.learnerHasAccess })}>
         <ul className="list-unstyled row w-100 m-0" aria-labelledby="problem-score-label">

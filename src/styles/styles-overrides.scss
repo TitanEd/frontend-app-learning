@@ -1,5 +1,5 @@
 #root {
-  background-color: #F4F7FF;
+  background-color: var(--pgn-color-primary-light);
 }
 
 // Mixins
@@ -103,20 +103,20 @@
 .flag-button-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #222;
+  color: var(--pgn-color-text-base);
 }
 
 .flag-button-subtitle {
   font-size: 0.95rem;
-  color: #8a94a6;
+  color: var(--pgn-color-text-muted);
 }
 
 .weekly-goal-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border: 1.5px solid #e0e4ea;
+  background: var(--pgn-color-bg-base);
+  border: 1.5px solid var(--pgn-color-light-400);
   border-radius: 1rem;
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
@@ -126,8 +126,8 @@
 }
 
 .weekly-goal-card.selected {
-  border: 2px solid #1AB7FF;
-  background: #fff;
+  border: 2px solid var(--pgn-color-primary-base);
+  background: var(--pgn-color-bg-base);
   box-shadow: 0 2px 8px 0 rgba(26, 183, 255, 0.08);
 }
 
@@ -149,7 +149,7 @@
   gap: 12px;
 
   .btn-link {
-    color: #222121;
+    color: var(--pgn-color-text-base);
   }
 }
 
@@ -169,10 +169,10 @@
 }
 
 .weekly-goal-reminder-box {
-  background-color: #F5F5F5;
+  background-color: var(--pgn-color-light-200);
   padding: 0.5rem;
   border-radius: 0.5rem;
-  color: #535862;
+  color: var(--pgn-color-text-muted);
 }
 
 .outline-sidebar-heading-wrapper {
@@ -182,7 +182,7 @@
 
 .sequence {
   border-radius: 1rem;
-  background-color: #FFFFFF;
+  background-color: var(--pgn-color-bg-base);
 }
 
 .outline-sidebar-wrapper {
@@ -190,17 +190,17 @@
 }
 
 .outline-sidebar-heading-wrapper {
-  border: 1px solid #E5E6E6;
+  border: 1px solid var(--pgn-color-light-400);
 }
 
 #outline-sidebar-outline {
-  border: 1px solid #E5E6E6;
+  border: 1px solid var(--pgn-color-light-400);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
   .bg-info-100 {
-    border-left: 3px solid #2B2399;
-    background-color: #E6EDFF !important;
+    border-left: 3px solid var(--pgn-color-primary-base);
+    background-color: var(--pgn-color-primary-light) !important;
   }
 
   .course-sidebar-section {
@@ -220,13 +220,33 @@
 
 
 // Course Tabs Navigation Styles
+// Content column = tels-content-width on #courseTabsNavigation (brand +
+// custom-layout). Pill background on the outer shell; inner .container-xl
+// must not add a second gutter so tabs align with .course-header / #main-content.
 .course-tabs-navigation {
-  background-color: #E6EDFF;
   font-weight: 400;
-  border-radius: 4px;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 0;
+  margin-right: 0;
   margin-bottom: 1.5rem !important;
+  border-bottom: none;
+  border-radius: var(--pgn-size-border-radius-base, 4px);
+  background-color: color-mix(in srgb, var(--pgn-color-primary-base) 12%, var(--pgn-color-bg-base));
+
+  > .container-xl {
+    background-color: transparent;
+    border-radius: 0;
+    max-width: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .nav-menu {
+    padding: 0.5rem 0;
+    margin-left: 0;
+  }
 
   .nav a {
     &:not(.active):hover {
@@ -236,36 +256,51 @@
 }
 
 .nav-underline-tabs .nav-link.active {
-  background-color: #FFFFFF;
+  background-color: var(--pgn-color-bg-base);
   border-bottom: none;
+  border-bottom-color: transparent !important;
   border-radius: 0.5rem;
   font-weight: 600;
+  color: var(--primary, var(--pgn-color-primary-base)) !important;
 }
 
 .nav-underline-tabs .nav-link {
-  &:hover {
-    color: var(--primary) !important;
+  color: var(--primary, var(--pgn-color-primary-base)) !important;
+  border-bottom-color: transparent !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+
+  &:hover,
+  &:focus {
+    color: var(--primary, var(--pgn-color-primary-base)) !important;
+    border-bottom-color: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0.5rem;
   }
 }
 
 .nav-menu {
   padding: 0.5rem 0;
-  margin-left: -4px;
+  margin-left: 0;
 }
 
-/* Breadcrumb and Title styles */
+/* Breadcrumb and Title styles — align with #main-content / tabs column */
+.course-header {
+  margin-bottom: 0.5rem !important;
+}
+
 .ca-breadcrumb-bg {
   width: 100%;
-  padding: 0.5rem 0 0 0;
+  padding: 0;
 }
 
 .ca-breadcrumb-container {
   margin: 0 auto;
-  padding: 1rem 0rem;
+  padding: 0.75rem 0 0.5rem;
 }
 
 .ca-breadcrumb {
-  color: #b0b7c3;
+  color: var(--pgn-color-text-muted);
   font-size: 14px;
   margin-bottom: 8px;
 }
@@ -285,13 +320,13 @@
 }
 
 .ca-breadcrumb .ca-breadcrumb-current {
-  color: #6b7280;
+  color: var(--pgn-color-text-muted);
 }
 
 .ca-title {
   font-weight: 600;
   font-size: 20px;
-  color: #22223b;
+  color: var(--pgn-color-text-base);
 }
 
 /* Main layout styles */
@@ -338,16 +373,16 @@
   padding: 16px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--pgn-color-light-400);
 }
 
 .ca-mobile-nav-select {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--pgn-color-light-400);
   border-radius: 8px;
-  background-color: white;
+  background-color: var(--pgn-color-bg-base);
 
   /* Remove default arrow and add a custom one with spacing */
   -webkit-appearance: none;
@@ -392,7 +427,7 @@
 
 // Progress tab styles
 .progress-tab-card-style {
-  background-color: #FFFFFF !important;
+  background-color: var(--pgn-color-bg-base) !important;
   border-radius: 0.5rem !important;
 }
 
@@ -438,8 +473,8 @@
 }
 
 .dates-tab-container {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E6E6;
+  background-color: var(--pgn-color-bg-base);
+  border: 1px solid var(--pgn-color-light-400);
   border-radius: 1rem;
   padding-left: 2rem;
   margin: 0 0rem 1rem 0rem;
@@ -456,8 +491,8 @@
     }
 
     .dates-info {
-      background-color: #F5F5F5;
-      border: 1px solid #E0E0E0;
+      background-color: var(--pgn-color-light-200);
+      border: 1px solid var(--pgn-color-light-400);
       padding: 12px 16px;
       border-radius: 8px;
       margin-top: 4rem;
@@ -468,7 +503,7 @@
 
 
 .first {
-  background-color: #2B2399 !important;
+  background-color: var(--pgn-color-primary-base) !important;
 
   &::after {
     content: '';
@@ -477,7 +512,7 @@
     left: 50%;
     width: 1rem;
     height: 0.5rem;
-    border: 3px solid white;
+    border: 3px solid var(--pgn-color-white);
     border-top: none;
     border-right: none;
     transform: translate(-50%, -60%) rotate(-45deg);
@@ -485,8 +520,8 @@
 }
 
 .bg-warning-300 {
-  border: 3px solid #2B2399 !important;
-  background-color: #FFFFFF !important;
+  border: 3px solid var(--pgn-color-primary-base) !important;
+  background-color: var(--pgn-color-bg-base) !important;
 }
 
 .today {
@@ -498,20 +533,20 @@
     transform: translate(-50%, -50%);
     width: 0.75rem;
     height: 0.75rem;
-    background-color: #2B2399;
+    background-color: var(--pgn-color-primary-base);
     border-radius: 50%;
   }
 }
 
 .text-dark {
-  background-color: white !important;
-  color: #222121 !important;
+  background-color: var(--pgn-color-bg-base) !important;
+  color: var(--pgn-color-text-base) !important;
   font-size: 14px;
-  border: 1px solid #E0E0E0 !important;
+  border: 1px solid var(--pgn-color-light-400) !important;
 }
 
 .last {
-  background-color: #FFFFFF !important;
+  background-color: var(--pgn-color-bg-base) !important;
   border-color: none !important;
 }
 
@@ -523,20 +558,20 @@
   span {
     .font-weight-bold {
       font-weight: normal !important;
-      color: #9E9F9E !important;
+      color: var(--pgn-color-text-muted) !important;
       font-size: 14px;
     }
   }
 }
 
 .today-date-style {
-  color: #2B2399 !important;
+  color: var(--pgn-color-primary-base) !important;
 }
 
 // Custom color for today's date line
 .today-line {
-  border-left-color: #2B2399 !important;
-  border: 2px solid #2B2399;
+  border-left-color: var(--pgn-color-primary-base) !important;
+  border: 2px solid var(--pgn-color-primary-base);
 }
 
 .apexcharts-toolbar {
@@ -544,7 +579,7 @@
 }
 
 .grade-bar .grade-bar--passing {
-  fill: #2B2399 !important;
+  fill: var(--pgn-color-primary-base) !important;
 }
 
 .grade-bar rect {
@@ -668,9 +703,9 @@
     justify-content: space-between;
     gap: 12px;
     padding: 12px 14px;
-    border: 1.5px solid #e5e7eb;
+    border: 1.5px solid var(--pgn-color-light-400);
     border-radius: 12px;
-    background: #fff;
+    background: var(--pgn-color-bg-base);
     cursor: pointer;
     transition: box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
     margin-bottom: 12px;
@@ -685,7 +720,7 @@
   .goal-card.selected {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(71, 163, 255, 0.12) inset;
-    background: #ffffff !important;
+    background: var(--pgn-color-bg-base) !important;
   }
  
   .goal-card-body {
@@ -715,43 +750,43 @@
   /* Default (unselected) tint for each level */
   .casual-goal .goal-card-body .pgn__icon,
   .casual-goal .goal-card-body svg {
-    background: #e8f4ff;   /* light blue */
-    color: #1e88e5;        /* blue glyph */
+    background: var(--pgn-color-primary-light);   /* light blue */
+    color: var(--pgn-color-primary-base);        /* blue glyph */
   }
  
   .regular-goal .goal-card-body .pgn__icon,
   .regular-goal .goal-card-body svg {
-    background: #eaf7ec;   /* light green */
-    color: #2e7d32;        /* green glyph */
+    background: var(--pgn-color-success-100, var(--pgn-color-light-200));   /* light green */
+    color: var(--pgn-color-success-base);        /* green glyph */
   }
  
   .intense-goal .goal-card-body .pgn__icon,
   .intense-goal .goal-card-body svg {
-    background: #fff5e5;   /* light amber */
-    color: #b26a00;        /* amber glyph */
+    background: var(--pgn-color-warning-100, var(--pgn-color-light-200));   /* light amber */
+    color: var(--pgn-color-warning-700);        /* amber glyph */
   }
  
   /* Slightly stronger tint when that card is selected */
   .casual-goal.selected .goal-card-body .pgn__icon,
   .casual-goal.selected .goal-card-body svg {
-    background: #e0f0ff;
+    background: var(--pgn-color-primary-light);
   }
  
   .regular-goal.selected .goal-card-body .pgn__icon,
   .regular-goal.selected .goal-card-body svg {
-    background: #e3f6e7;
+    background: var(--pgn-color-success-100, var(--pgn-color-light-200));
   }
  
   .intense-goal.selected .goal-card-body .pgn__icon,
   .intense-goal.selected .goal-card-body svg {
-    background: #fff0d9;
+    background: var(--pgn-color-warning-100, var(--pgn-color-light-200));
   }
   /* Switch styles - border and thumb for unchecked state */
   .pgn__form-switch-input:not(:checked) {
     border-color: var(--primary) !important;
     /* Override the background-image SVG and use a solid color approach */
     background-image: none !important;
-    background-color: #fff !important;
+    background-color: var(--pgn-color-bg-base) !important;
     position: relative;
     
     /* Create the thumb circle using a pseudo-element */
@@ -785,7 +820,7 @@
       width: 1rem;
       height: 1rem;
       border-radius: 50%;
-      background-color: #fff !important;
+      background-color: var(--pgn-color-bg-base) !important;
       transition: left 150ms ease, background-color 150ms ease;
     }
   }
@@ -872,18 +907,16 @@ a {
   }
 }
  
-// Fix for course tabs navigation width - align with content on large screens
+// Large screens: keep the same content-column pill (no second gutter).
 @media (min-width: 1700px) {
   .course-tabs-navigation {
-    background-color: transparent !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-   
-    .container-xl {
-      background-color: #E6EDFF;
-      border-radius: 4px;
-      padding-left: 12px;
-      padding-right: 12px;
+
+    > .container-xl {
+      background-color: transparent !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
   }
 }
@@ -944,45 +977,53 @@ a {
   font-size: 16px !important;
 }
 
-.custom-instructor-toolbar {
-  background-color: var(--primary) !important;
-  color: var(--text-white) !important;
+[data-testid="instructor-toolbar"] > .bg-primary {
+  background-color: var(--primary, var(--pgn-color-primary-base)) !important;
+  color: var(--pgn-color-white) !important;
 
   .btn-inverse-outline-primary {
-    color: var(--text-white) !important;
-    border-color: var(--text-white) !important;
+    color: var(--pgn-color-btn-text-inverse-outline-primary, var(--pgn-color-white)) !important;
+    border-color: var(--pgn-color-btn-border-inverse-outline-primary, var(--pgn-color-white)) !important;
+    background-color: var(--pgn-color-btn-bg-inverse-outline-primary, transparent) !important;
 
-    &:hover {
-      color: var(--primary) !important;
-      border-color: var(--text-white) !important;
-      background-color: var(--text-white) !important;
-    }
-
+    &:hover,
     &:focus {
-      border-color: var(--text-white) !important;
+      color: var(--pgn-color-btn-hover-text-inverse-outline-primary, var(--pgn-color-primary-base)) !important;
+      border-color: var(--pgn-color-btn-hover-border-inverse-outline-primary, var(--pgn-color-white)) !important;
+      background-color: var(--pgn-color-btn-hover-bg-inverse-outline-primary, var(--pgn-color-white)) !important;
     }
 
     &:focus::before {
-      border-color: var(--text-white) !important;
+      border-color: var(--pgn-color-white) !important;
     }
 
     &:active {
-      color: var(--primary) !important;
-      border-color: var(--text-white) !important;
-      background-color: var(--text-white) !important;
+      color: var(--pgn-color-btn-hover-text-inverse-outline-primary, var(--pgn-color-primary-base)) !important;
+      border-color: var(--pgn-color-btn-hover-border-inverse-outline-primary, var(--pgn-color-white)) !important;
+      background-color: var(--pgn-color-btn-hover-bg-inverse-outline-primary, var(--pgn-color-white)) !important;
     }
   }
 
+  // Open toggle: primary text on white fill (readable on the primary banner)
   .show > .btn-inverse-outline-primary.dropdown-toggle {
-    color: var(--primary) !important;
+    color: var(--pgn-color-btn-hover-text-inverse-outline-primary, var(--pgn-color-primary-base)) !important;
+    background-color: var(--pgn-color-btn-hover-bg-inverse-outline-primary, var(--pgn-color-white)) !important;
+    border-color: var(--pgn-color-btn-hover-border-inverse-outline-primary, var(--pgn-color-white)) !important;
   }
 
-  .dropdown-item:hover {
-    color: var(--primary) !important;
-  }
+  // Match brand dropdown tokens: light text on primary hover/active fill
+  // (previous rule set text to --primary, which matched the hover bg).
+  .dropdown-item {
+    color: var(--pgn-color-dropdown-item-text, var(--pgn-color-text-base)) !important;
 
-  .dropdown-item:active, .dropdown-item.active {
-    color: var(--text-white) !important;
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &.active {
+      background-color: var(--pgn-color-dropdown-item-hover-bg, var(--pgn-color-primary-base)) !important;
+      color: var(--pgn-color-dropdown-item-hover-text, var(--pgn-color-white)) !important;
+    }
   }
 }
 
@@ -1112,7 +1153,7 @@ a {
 }
 
 .navbarContainer .usermenu-dropdown .dropdown-item:active {
-  color: var(--text-white) !important;
+  color: var(--pgn-color-white) !important;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1130,5 +1171,237 @@ a {
 
   .sidebar.collapsed {
     display: none !important;
+  }
+}
+// ---------------------------------------------------------------------------
+// Stock Verawood components used inside the custom UI keep their upstream
+// markup (no extra class names in core files). The rules above that were
+// written for those class hooks are applied to the upstream markup here.
+// ---------------------------------------------------------------------------
+.tels-custom-learning {
+  // Progress tab section titles / descriptions
+  .progress-tab-card-style section > h2,
+  .progress-tab-card-style section > h3.h4,
+  .progress-tab-card-style section .row h2 {
+    @extend .custom-progress-tabs-titles;
+  }
+
+  .progress-tab-card-style section > p.x-small,
+  .related-links-styles section li p {
+    @extend .custom-progress-tabs-subtitles;
+  }
+
+  // Detailed grades table
+  .grades .muted-link.small,
+  .grades .greyed-out.small,
+  .grades .x-small.text-gray-700.flex-nowrap {
+    @extend .custom-detailed-grades-accordion-title;
+  }
+
+  .grades .h5.mb-0 {
+    @extend .custom-detailed-grades-subtitles;
+  }
+
+  // Course outline (sections, subsections, important dates)
+  #courseHome-outline .collapsible-body > ol.list-unstyled {
+    @extend .course-content-subcontent;
+  }
+
+  #courseHome-dates > ol.list-unstyled {
+    @extend .imp-dates-styles;
+  }
+
+  #courseHome-outline .collapsible-trigger .d-flex.row.w-100.m-0 {
+    @extend .section-title-fix;
+  }
+
+  #courseHome-outline .col-auto > .float-left.mt-1 {
+    @extend .custom-icon-styles;
+  }
+
+  // Unit page
+  .previous-button,
+  .next-button {
+    @extend .custom-unit-navigation-button;
+  }
+
+  .border.border-light-400.rounded-sm.zindex-0 {
+    @extend .custom-sidebar-base-iframe;
+  }
+
+  // Dates timeline: larger dots (was $dot-radius: 1rem in Day.scss)
+  .dates-tab-container {
+    .dates-line-top {
+      left: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .dates-dot {
+      left: .5rem;
+      top: 1.5rem;
+      height: 2rem;
+      width: 2rem;
+
+      &.dates-bg-today {
+        left: 0;
+        top: .5rem;
+        height: 3rem;
+        width: 3rem;
+      }
+    }
+
+    .dates-line-bottom {
+      top: 3.5rem;
+      left: 1.5rem;
+    }
+
+    .badge.ml-2 {
+      margin-left: 0 !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Custom UI shapes and sizes from the design tokens (--pgn-*).
+.tels-custom-learning {
+  // Shapes and sizes: titaned-frontend-library hardcodes these for Paragon /
+  // Bootstrap components (e.g. 1rem radios against Paragon's 20px min-width,
+  // which drew them as ovals). Use the design tokens instead.
+  .pgn__form-checkbox-input,
+  .pgn__form-radio-input {
+    width: var(--pgn-size-form-control-indicator-base);
+    height: var(--pgn-size-form-control-indicator-base);
+    min-width: var(--pgn-size-form-control-indicator-base);
+    min-height: var(--pgn-size-form-control-indicator-base);
+    flex-shrink: 0;
+  }
+
+  .pgn__form-radio-input {
+    border-radius: 50%;
+  }
+
+  // Focused/selected Paragon Menu item: brand tint from the existing
+  // primary-light token (the menu token keeps its Paragon default).
+  .pgn__menu-item:focus {
+    background-color: var(--pgn-color-primary-light);
+  }
+
+  // Indicator centered on its label (Paragon offsets it with a fixed
+  // margin-top, which drifts when the label font/line-height changes).
+  // Options with a description keep the top alignment.
+  .pgn__form-checkbox:not(:has(.pgn__form-control-description)),
+  .pgn__form-radio:not(:has(.pgn__form-control-description)) {
+    display: flex;
+    align-items: center;
+
+    > .pgn__form-checkbox-input,
+    > .pgn__form-radio-input {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .pgn__form-label {
+      margin-bottom: 0;
+    }
+  }
+
+  // Page content and modals only: the header/sidebar keep their own shapes
+  // (pill language selector, user menu).
+  .main-content,
+  .pgn__modal-layer {
+    .btn:not(.btn-icon) {
+      border-radius: var(--pgn-size-btn-border-radius-base) !important;
+    }
+
+    .btn-sm:not(.btn-icon) {
+      border-radius: var(--pgn-size-btn-border-radius-sm) !important;
+    }
+
+    .btn-lg:not(.btn-icon) {
+      border-radius: var(--pgn-size-btn-border-radius-lg) !important;
+    }
+
+    // Button groups stay joined (only the outer corners are rounded).
+    .btn-group > .btn:not(:last-child):not(.dropdown-toggle):not(.btn-icon),
+    .btn-group > .btn-group:not(:last-child) > .btn:not(.btn-icon) {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    .btn-group > .btn:not(:first-child):not(.btn-icon),
+    .btn-group > .btn-group:not(:first-child) > .btn:not(.btn-icon) {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    .form-control,
+    .pgn__form-control-decorator-group .form-control {
+      border-radius: var(--pgn-size-form-input-radius-border-base);
+    }
+
+    .card,
+    .pgn__card {
+      border-radius: var(--pgn-size-card-border-radius-base);
+    }
+
+    .badge {
+      border-radius: var(--pgn-size-badge-border-radius-base);
+    }
+
+    .alert {
+      border-radius: var(--pgn-size-alert-border-radius);
+    }
+
+    .dropdown-menu {
+      border-radius: var(--pgn-size-dropdown-border-radius-base);
+    }
+
+    .modal-content,
+    .pgn__modal {
+      border-radius: var(--pgn-size-modal-content-border-radius);
+    }
+
+    .pgn__selectable_box {
+      border-radius: var(--pgn-size-border-radius-base);
+    }
+  }
+}
+
+// Unit page: let the unit content fill its column (stock caps it at 1024px).
+.unit-container {
+  max-width: none !important;
+}
+
+// Course Tools: the Launch tour link button inside a tool badge takes the
+// badge's text color (design token) instead of the link color, which matched
+// the badge background and made the text invisible.
+.badge-style {
+  .btn-link,
+  .btn-link:hover,
+  .btn-link:focus {
+    color: inherit !important;
+    text-decoration: none;
+  }
+}
+
+// Unit header: the title keeps its natural width (no wrapping of "Unit 2");
+// the navigation row takes only the remaining space.
+.unit > .d-flex.justify-content-between {
+  gap: var(--pgn-spacing-spacer-3);
+
+  > .mb-0 {
+    flex: 0 1 auto;
+    min-width: 0;
+
+    .h3 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  > .custom-unit-navigation {
+    width: auto !important;
+    flex: 1 0 auto;
   }
 }

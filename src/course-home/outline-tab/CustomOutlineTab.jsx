@@ -9,11 +9,11 @@ import CourseDates from './widgets/CourseDates';
 import CourseHandouts from './widgets/CourseHandouts';
 import WeeklyLearningGoalCard from './widgets/WeeklyLearningGoalCard';
 import CourseTools from './widgets/CourseTools';
-import { fetchOutlineTabWithMetadata } from '../data';
+import { fetchOutlineTab } from '../data';
 import messages from './messages';
+import customMessages from './customMessages';
 import Section from './section-outline/Section';
 import ShiftDatesAlert from '../suggested-schedule-messaging/ShiftDatesAlert';
-// UpgradeNotification was removed upstream in Verawood (provided via plugin on outline_tab_notifications_slot).
 // import UpgradeNotification from '../../generic/upgrade-notification/UpgradeNotification';
 import { CourseOutlineTabNotificationsSlot } from '../../plugin-slots/CourseOutlineTabNotificationsSlot';
 import UpgradeToShiftDatesAlert from '../suggested-schedule-messaging/UpgradeToShiftDatesAlert';
@@ -109,13 +109,13 @@ const CustomOutlineTab = ({
               <div className="col-12 col-md-auto">
                 <img
                   src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
-                  alt="Course"
+                  alt={intl.formatMessage(customMessages.courseImageAlt)}
                   className="course-card-image-responsive"
                 />
               </div>
               <div className="col-12 col-md custom-outline-card-body">
                 <Card.Body>
-                  <Badge variant="light" className="mb-2 text-dark">Course</Badge>
+                  <Badge variant="light" className="mb-2 text-dark">{intl.formatMessage(customMessages.courseBadge)}</Badge>
                   <div className="h4 font-weight-bold mb-2">{title}</div>
                   <div
                     className="mb-3 text-muted course-outline-tab-short-description"
@@ -151,8 +151,7 @@ const CustomOutlineTab = ({
           />
           {isSelfPaced && hasDeadlines && (
             <>
-              <ShiftDatesAlert model="outline" fetch={fetchOutlineTabWithMetadata} />
-              <UpgradeToShiftDatesAlert model="outline" logUpgradeLinkClick={logUpgradeToShiftDatesLinkClick} />
+              <ShiftDatesAlert model="outline" fetch={fetchOutlineTab} />              <UpgradeToShiftDatesAlert model="outline" logUpgradeLinkClick={logUpgradeToShiftDatesLinkClick} />
             </>
           )}
           <WelcomeMessage courseId={courseId} />
@@ -161,7 +160,7 @@ const CustomOutlineTab = ({
               <Card.Body className="course-outline-card-body">
                 <div className="row w-100 m-0 mb-3 justify-content-between align-items-center">
                   <div className="col-auto p-0">
-                    <h4 className="mb-0">Course Content</h4>
+                    <h4 className="mb-0">{intl.formatMessage(customMessages.courseContent)}</h4>
                   </div>
                   <div className="col-12 col-md-auto p-0 custom-mobile-view-expand-all-button">
                     <Button variant="link" onClick={() => { setExpandAll(!expandAll); }}>
@@ -189,7 +188,7 @@ const CustomOutlineTab = ({
             <ProctoringInfoPanel />
             { /** Defer showing the goal widget until the ProctoringInfoPanel has resolved or has been determined as
              disabled to avoid components bouncing around too much as screen is rendered */ }
-            {/* Group all sidebar widgets in a single card */}
+            {/* Group all sidebar widgets in a single card (as on tels/sumac.1) */}
             <Card className="mb-3 raised-card" data-testid="course-sidebar-card">
               <Card.Body className="p-4">
                 {(!enableProctoredExams || proctoringPanelStatus === 'loaded') && weeklyLearningGoalEnabled && (
@@ -204,29 +203,6 @@ const CustomOutlineTab = ({
               </Card.Body>
             </Card>
             <CourseOutlineTabNotificationsSlot courseId={courseId} />
-            {/* Sumac version (UpgradeNotification no longer exists in Verawood):
-            <PluginSlot
-              id="outline_tab_notifications_slot"
-              pluginProps={{
-                courseId,
-                model: 'outline',
-              }}
-            >
-              <UpgradeNotification
-                offer={offer}
-                verifiedMode={verifiedMode}
-                accessExpiration={accessExpiration}
-                contentTypeGatingEnabled={datesBannerInfo.contentTypeGatingEnabled}
-                marketingUrl={marketingUrl}
-                upsellPageName="course_home"
-                userTimezone={userTimezone}
-                shouldDisplayBorder
-                timeOffsetMillis={timeOffsetMillis}
-                courseId={courseId}
-                org={org}
-              />
-            </PluginSlot>
-            */}
           </div>
         )}
       </div>

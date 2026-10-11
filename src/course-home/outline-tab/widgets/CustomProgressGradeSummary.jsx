@@ -1,18 +1,21 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { IconButton, OverlayTrigger, Popover } from '@openedx/paragon';
+import React, { useState } from 'react';
+import {
+  Icon, IconButton, OverlayTrigger, Popover,
+} from '@openedx/paragon';
+import { Blocked, InfoOutline } from '@openedx/paragon/icons';
 
+// Custom grade summary header (progress_tab_grade_summary_plugin_slot):
+// click-to-open help popover instead of the stock hover tooltip.
 const CustomProgressGradeSummary = ({
-  showTooltip,
-  setShowTooltip,
   intl,
   messages,
-  InfoOutline,
-  Icon,
   gradesFeatureIsFullyLocked,
   allOfSomeAssignmentTypeIsLocked,
-  Blocked,
-}) => (
+}) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
   <>
     <div className="row w-100 m-0 align-items-center">
       <h3 className="h2 custom-progress-tabs-titles">{intl.formatMessage(messages.gradeSummary)}</h3>
@@ -48,5 +51,7 @@ const CustomProgressGradeSummary = ({
     </div>
     <hr className="customHr" />
   </>
-);
+  );
+};
+
 export default CustomProgressGradeSummary;

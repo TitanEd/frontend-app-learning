@@ -34,7 +34,7 @@ const SequenceTitle: React.FC<Props> = ({
         {complete ? (
           <Icon
             src={CheckCircle}
-            className="float-left text-success mt-1 custom-icon-styles"
+            className="float-left text-success mt-1"
             aria-hidden={complete}
             svgAttrs={{ 'aria-label': intl.formatMessage(messages.completedAssignment) }}
             size="sm"
@@ -42,7 +42,7 @@ const SequenceTitle: React.FC<Props> = ({
         ) : (
           <Icon
             src={CheckCircleOutline}
-            className="float-left text-gray-400 mt-1 custom-icon-styles"
+            className="float-left text-gray-400 mt-1"
             aria-hidden={complete}
             svgAttrs={{ 'aria-label': intl.formatMessage(messages.incompleteAssignment) }}
             size="sm"

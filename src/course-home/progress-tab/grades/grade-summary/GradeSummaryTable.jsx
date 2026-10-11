@@ -115,7 +115,6 @@ const GradeSummaryTable = ({ setAllOfSomeAssignmentTypeIsLocked }) => {
       id="progress_grade_summary_plugin_slot"
       pluginProps={{
         intl,
-        // Verawood renamed the model field `assignmentPolicies` to `assignmentTypeGradeSummary`
         // (same item shape); keep the old prop name for the custom widget.
         assignmentPolicies: assignmentTypeGradeSummary,
         setAllOfSomeAssignmentTypeIsLocked,
