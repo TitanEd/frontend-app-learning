@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import {
@@ -9,7 +8,7 @@ import {
   Stack,
   Tooltip,
 } from '@openedx/paragon';
-import { Blocked, InfoOutline, Locked } from '@openedx/paragon/icons';
+import { InfoOutline, Locked } from '@openedx/paragon/icons';
 import { useContextId } from '../../../../data/hooks';
 
 import messages from '../messages';
@@ -22,22 +21,15 @@ const GradeSummaryHeader = ({ allOfSomeAssignmentTypeIsLocked }) => {
     verifiedMode,
     gradesFeatureIsFullyLocked,
   } = useModel('progress', courseId);
-  // Used by the custom progress_tab_grade_summary_plugin_slot widget (click-to-open popover).
-  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <PluginSlot
       id="progress_tab_grade_summary_plugin_slot"
       pluginProps={{
-        showTooltip,
-        setShowTooltip,
         intl,
         messages,
-        InfoOutline,
-        Icon,
         gradesFeatureIsFullyLocked,
         allOfSomeAssignmentTypeIsLocked,
-        Blocked,
         verifiedMode,
       }}
     >

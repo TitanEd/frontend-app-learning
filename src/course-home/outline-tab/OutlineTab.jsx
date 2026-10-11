@@ -5,7 +5,6 @@ import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Button } from '@openedx/paragon';
-import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { CourseOutlineTabNotificationsSlot } from '../../plugin-slots/CourseOutlineTabNotificationsSlot';
 import { AlertList } from '../../generic/user-messages';
 
@@ -40,13 +39,11 @@ const OutlineTab = () => {
     isSelfPaced,
     org,
     title,
-    userTimezone,
   } = useModel('courseHomeMeta', courseId);
 
   const expandButtonRef = useRef();
 
   const {
-    accessExpiration,
     courseBlocks: {
       courses,
       sections,
@@ -55,19 +52,11 @@ const OutlineTab = () => {
       selectedGoal,
       weeklyLearningGoalEnabled,
     } = {},
-    datesBannerInfo,
     datesWidget: {
       courseDateBlocks,
     },
     enableProctoredExams,
-    offer,
-    timeOffsetMillis,
-    verifiedMode,
   } = useModel('outline', courseId);
-
-  const {
-    marketingUrl,
-  } = useModel('coursewareMeta', courseId);
 
   const [expandAll, setExpandAll] = useState(false);
   const navigate = useNavigate();
@@ -128,44 +117,7 @@ const OutlineTab = () => {
   }, [location.search]);
 
   return (
-    <PluginSlot
-      id="outline_tab_plugin_slot"
-      pluginProps={{
-        intl,
-        courseId,
-        proctoringPanelStatus,
-        isSelfPaced,
-        org,
-        title,
-        userTimezone,
-        accessExpiration,
-        courseStartAlert,
-        courseEndAlert,
-        certificateAvailableAlert,
-        privateCourseAlert,
-        scheduledContentAlert,
-        eventProperties,
-        navigate,
-        rootCourseId,
-        hasDeadlines,
-        isEnterpriseUser,
-        logUpgradeToShiftDatesLinkClick,
-        learnerType,
-        location,
-        expandAll,
-        setExpandAll,
-        enableProctoredExams,
-        selectedGoal,
-        offer,
-        verifiedMode,
-        datesBannerInfo,
-        marketingUrl,
-        timeOffsetMillis,
-        courses,
-        sections,
-        weeklyLearningGoalEnabled,
-      }}
-    >
+    <>
       <div data-learner-type={learnerType} className="row w-100 mx-0 my-3 justify-content-between">
         <div className="col-12 col-sm-auto p-0">
           <div role="heading" aria-level="1" className="h2">{title}</div>
@@ -235,7 +187,7 @@ const OutlineTab = () => {
           </div>
         )}
       </div>
-    </PluginSlot>
+    </>
   );
 };
 

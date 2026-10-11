@@ -64,7 +64,6 @@ const Section: React.FC<Props> = ({
           <PluginSlot
             id="section_icon_open_plugin_slot"
             pluginProps={{
-              // Sumac used `messages.policy` here, which is not defined and makes formatMessage throw.
               alt: intl.formatMessage(messages.openSection),
               onClick: () => { setOpen(true); },
             }}
@@ -94,7 +93,7 @@ const Section: React.FC<Props> = ({
           </PluginSlot>
         )}
       >
-        <ol className="list-unstyled course-content-subcontent">
+        <ol className="list-unstyled">
           {sequenceIds.map((sequenceId, index) => (
             <SequenceLink
               key={sequenceId}

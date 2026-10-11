@@ -10,7 +10,7 @@ import { Email } from '@openedx/paragon/icons';
 import { useSelector } from 'react-redux';
 import { useModel } from '../../../generic/model-store';
 import messages from '../messages';
-import LearningGoalButton from './LearningGoalButton';
+import CustomLearningGoalButton from './CustomLearningGoalButton';
 import { saveWeeklyLearningGoal } from '../../data';
 import './FlagButton.scss';
 
@@ -129,7 +129,7 @@ const CustomWeeklyLearningGoalCard = ({ intl }) => {
               onClick={() => (daysPerWeekGoal === 1 ? handleSelect(null) : handleSelect(1))}
               className="goal-card-body"
             >
-              <LearningGoalButton
+              <CustomLearningGoalButton
                 level="casual"
                 isSelected={daysPerWeekGoal === 1}
                 handleSelect={handleSelect}
@@ -154,7 +154,7 @@ const CustomWeeklyLearningGoalCard = ({ intl }) => {
               onClick={() => (daysPerWeekGoal === 3 ? handleSelect(null) : handleSelect(3))}
               className="goal-card-body"
             >
-              <LearningGoalButton
+              <CustomLearningGoalButton
                 level="regular"
                 isSelected={daysPerWeekGoal === 3}
                 handleSelect={handleSelect}
@@ -179,7 +179,7 @@ const CustomWeeklyLearningGoalCard = ({ intl }) => {
               onClick={() => (daysPerWeekGoal === 5 ? handleSelect(null) : handleSelect(5))}
               className="goal-card-body"
             >
-              <LearningGoalButton
+              <CustomLearningGoalButton
                 level="intense"
                 isSelected={daysPerWeekGoal === 5}
                 handleSelect={handleSelect}

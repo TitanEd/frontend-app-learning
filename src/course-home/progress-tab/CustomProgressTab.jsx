@@ -4,7 +4,7 @@ import React from 'react';
 
 import CertificateStatus from './certificate-status/CertificateStatus';
 import CourseCompletion from './course-completion/CourseCompletion';
-import CourseGrade from './grades/course-grade/CourseGrade';
+import CustomCourseGrade from './grades/course-grade/CustomCourseGrade';
 import DetailedGrades from './grades/detailed-grades/DetailedGrades';
 import GradeSummary from './grades/grade-summary/GradeSummary';
 // import ProgressHeader from './ProgressHeader';
@@ -27,7 +27,7 @@ const CustomProgressTab = ({
           {!wideScreen && <CertificateStatus />}
         </div>
         <div className="progress-tab-card-style">
-          <CourseGrade />
+          <CustomCourseGrade />
         </div>
         <div className={`grades my-4 p-4 rounded raised-card progress-tab-card-style ${applyLockedOverlay}`} aria-hidden={gradesFeatureIsFullyLocked}>
           <GradeSummary />

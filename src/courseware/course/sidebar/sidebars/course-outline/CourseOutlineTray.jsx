@@ -5,7 +5,6 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import {
   MenuOpen as MenuOpenIcon,
   ChevronLeft as ChevronLeftIcon,
-  MenuIcon,
 } from '@openedx/paragon/icons';
 
 import { LOADING } from '@src/constants';
@@ -71,7 +70,7 @@ const CourseOutlineTray = () => {
       <IconButton
         alt={intl.formatMessage(messages.toggleCourseOutlineTrigger)}
         className="outline-sidebar-toggle-btn flex-shrink-0 text-dark bg-light-200"
-        iconAs={MenuIcon}
+        iconAs={MenuOpenIcon}
         onClick={handleToggleCollapse}
       />
     </div>
@@ -101,7 +100,7 @@ const CourseOutlineTray = () => {
   return (
     <div className={classNames('outline-sidebar-wrapper', {
       'flex-shrink-0 mr-4 h-auto': !shouldDisplayFullScreen,
-      'bg-white m-0 w-100 vh-100': shouldDisplayFullScreen, // Added by Mahendra : remove fix-top classname on this line after m-0
+      'bg-white m-0 fixed-top w-100 vh-100': shouldDisplayFullScreen,
     })}
     >
       <section className="outline-sidebar w-100">

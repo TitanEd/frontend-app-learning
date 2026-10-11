@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getConfig } from '@edx/frontend-platform';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { breakpoints, useWindowSize } from '@openedx/paragon';
 
 import { AlertList } from '@src/generic/user-messages';
 import { useModel } from '@src/generic/model-store';
-import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { LearnerToolsSlot } from '../../plugin-slots/LearnerToolsSlot';
-import { getCoursewareOutlineSidebarSettings } from '../data/selectors';
 import SidebarProvider from './sidebar/SidebarContextProvider';
 import { RightSidebarTriggerSlot } from '../../plugin-slots/RightSidebarTriggerSlot';
 import { CelebrationModal, shouldCelebrateOnSectionLoad, WeeklyGoalCelebrationModal } from './celebration';
@@ -36,8 +34,6 @@ const Course = ({
   } = useModel('courseHomeMeta', courseId);
   const sequence = useModel('sequences', sequenceId);
   const section = useModel('sections', sequence ? sequence.sectionId : null);
-  const { enableNavigationSidebar } = useSelector(getCoursewareOutlineSidebarSettings);
-  const navigationDisabled = enableNavigationSidebar || (sequence?.navigationDisabled ?? false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -62,8 +58,6 @@ const Course = ({
     celebrations && !celebrations.streakLengthToCelebrate && celebrations.weeklyGoal,
   );
   const shouldDisplayLearnerTools = windowWidth >= breakpoints.medium.minWidth;
-  // Sumac named this `shouldDisplayChat`; in Verawood chat is rendered through LearnerToolsSlot.
-  const shouldDisplayChat = shouldDisplayLearnerTools;
   const daysPerWeek = course?.courseGoals?.selectedGoal?.daysPerWeek;
 
   useEffect(() => {
@@ -82,7 +76,6 @@ const Course = ({
       <Helmet>
         <title>{`${pageTitleBreadCrumbs.join(' | ')} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
-      {(!navigationDisabled || !shouldDisplayChat) && (
       <div className="position-relative d-flex align-items-xl-center mb-4 mt-1 flex-column flex-xl-row">
         <CourseBreadcrumbsSlot
           courseId={courseId}
@@ -99,18 +92,10 @@ const Course = ({
             unitId={unitId}
           />
         )}
-
-      </div>
-      ) }
-      <div className="w-100 d-flex align-items-center">
-        <CourseOutlineMobileSidebarTriggerSlot />
-        {windowWidth < breakpoints.small.minWidth ? (<RightSidebarTriggerSlot courseId={courseId} />) : (
-          <PluginSlot
-            id="course_sidebar_triggers_slot"
-          >
-            <RightSidebarTriggerSlot courseId={courseId} />
-          </PluginSlot>
-        )}
+        <div className="w-100 d-flex align-items-center">
+          <CourseOutlineMobileSidebarTriggerSlot />
+          <RightSidebarTriggerSlot courseId={courseId} />
+        </div>
       </div>
 
       <AlertList topic="sequence" />

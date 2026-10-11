@@ -50,14 +50,6 @@ jest.mock('./course-home/discussion-tab/DiscussionTab', () => 'Discussion Tab');
 jest.mock('./course-home/progress-tab/ProgressTab', () => 'Progress Tab');
 jest.mock('./courseware/course/course-exit', () => ({ CourseExit: 'Course Exit' }));
 jest.mock('./courseware', () => 'Courseware Container');
-// titaned-frontend-library ships untranspiled ESM, which Jest does not transform.
-jest.mock('titaned-frontend-library', () => ({ dynamicTheme: jest.fn() }));
-jest.mock('./Layout', () => 'Layout');
-// index.jsx wraps the app in IntlProvider; i18n is configured by initialize(), which is mocked here.
-jest.mock('@edx/frontend-platform/i18n', () => ({
-  ...jest.requireActual('@edx/frontend-platform/i18n'),
-  getMessages: () => ({}),
-}));
 
 describe('app registry', () => {
   let getElement;

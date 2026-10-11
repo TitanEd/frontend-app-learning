@@ -24,7 +24,7 @@ const UnitNavigation = ({
   } = useSequenceNavigationMetadata(sequenceId, unitId);
 
   const renderPreviousButton = () => {
-    const buttonStyle = `previous-button ${isAtTop ? 'text-dark mr-3' : 'justify-content-center'} custom-unit-navigation-button`;
+    const buttonStyle = `previous-button ${isAtTop ? 'text-dark mr-3' : 'justify-content-center'}`;
     return (
       <PreviousButton
         isFirstUnit={isFirstUnit}
@@ -43,7 +43,7 @@ const UnitNavigation = ({
     const buttonText = (isLastUnit && exitText) ? exitText : intl.formatMessage(messages.nextButton);
     const disabled = isLastUnit && !exitActive;
     const variant = 'outline-primary';
-    const buttonStyle = `next-button ${isAtTop ? 'text-dark' : 'justify-content-center'} custom-unit-navigation-button`;
+    const buttonStyle = `next-button ${isAtTop ? 'text-dark' : 'justify-content-center'}`;
 
     if (isAtTop) {
       return (

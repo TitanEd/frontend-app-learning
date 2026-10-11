@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useIntl } from '@edx/frontend-platform/i18n';
-import {
-  BookOpen, OutlinedFlag, Flag, LocalFireDepartment,
-} from '@openedx/paragon/icons';
+// These flag svgs are derivatives of the Flag icon from paragon
+import { ReactComponent as FlagIntenseIcon } from './flag_black.svg';
+import { ReactComponent as FlagCasualIcon } from './flag_outline.svg';
+import { ReactComponent as FlagRegularIcon } from './flag_gray.svg';
 import FlagButton from './FlagButton';
 import messages from '../messages';
 
@@ -19,19 +20,19 @@ const LearningGoalButton = ({
       daysPerWeek: 1,
       title: messages.casualGoalButtonTitle,
       text: messages.casualGoalButtonText,
-      icon: <BookOpen />,
+      icon: <FlagCasualIcon />,
     },
     regular: {
       daysPerWeek: 3,
       title: messages.regularGoalButtonTitle,
       text: messages.regularGoalButtonText,
-      icon: <OutlinedFlag />,
+      icon: <FlagRegularIcon />,
     },
     intense: {
       daysPerWeek: 5,
       title: messages.intenseGoalButtonTitle,
       text: messages.intenseGoalButtonText,
-      icon: <LocalFireDepartment />,
+      icon: <FlagIntenseIcon />,
     },
   };
 
