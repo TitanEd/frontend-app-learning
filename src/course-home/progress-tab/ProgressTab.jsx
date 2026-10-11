@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { useWindowSize } from '@openedx/paragon';
+import { breakpoints, useWindowSize } from '@openedx/paragon';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useContextId } from '../../data/hooks';
 import { useModel } from '../../generic/model-store';
 import ProgressTabCertificateStatusSidePanelSlot from '../../plugin-slots/ProgressTabCertificateStatusSidePanelSlot';
@@ -15,7 +16,11 @@ import { useGetExamsData } from './hooks';
 
 const ProgressTab = () => {
   const courseId = useContextId();
-  const { disableProgressGraph, sectionScores } = useModel('progress', courseId);
+  const {
+    disableProgressGraph, sectionScores, gradesFeatureIsFullyLocked,
+  } = useModel('progress', courseId);
+
+  const applyLockedOverlay = gradesFeatureIsFullyLocked ? 'locked-overlay' : '';
 
   const sequenceIds = useMemo(() => (
     sectionScores.flatMap((section) => (section.subsections)).map((subsection) => subsection.blockKey)
@@ -31,8 +36,17 @@ const ProgressTab = () => {
     return null;
   }
 
+  const wideScreen = windowWidth >= breakpoints.large.minWidth;
   return (
-    <>
+    <PluginSlot
+      id="progress_tab_plugin_slot"
+      pluginProps={{
+        disableProgressGraph,
+        wideScreen,
+        applyLockedOverlay,
+        gradesFeatureIsFullyLocked,
+      }}
+    >
       <ProgressHeader />
       <div className="row w-100 m-0">
         {/* Main body */}
@@ -49,7 +63,7 @@ const ProgressTab = () => {
           <ProgressTabRelatedLinksSlot />
         </div>
       </div>
-    </>
+    </PluginSlot>
   );
 };
 

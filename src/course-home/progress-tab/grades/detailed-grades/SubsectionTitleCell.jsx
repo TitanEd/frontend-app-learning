@@ -69,7 +69,7 @@ const SubsectionTitleCell = ({ subsection }) => {
           {url ? (
             <a
               href={url}
-              className="muted-link small"
+              className="muted-link small custom-detailed-grades-accordion-title"
               onClick={logSubsectionClicked}
               tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
               aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
@@ -77,7 +77,7 @@ const SubsectionTitleCell = ({ subsection }) => {
               {displayName}
             </a>
           ) : (
-            <span className="greyed-out small">{displayName}</span>
+            <span className="greyed-out small custom-detailed-grades-accordion-title">{displayName}</span>
           )}
         </span>
       </Row>

@@ -32,5 +32,7 @@ jobs:
     - name: Upload coverage
       uses: codecov/codecov-action@v5
       with:
-        fail_ci_if_error: true
+        # The TitanEd fork has no CODECOV_TOKEN secret; a failed coverage upload
+        # should not fail the build (lint and tests above still do).
+        fail_ci_if_error: false
         token: ${{ secrets.CODECOV_TOKEN }}

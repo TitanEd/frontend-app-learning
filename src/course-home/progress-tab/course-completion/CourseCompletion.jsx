@@ -10,7 +10,7 @@ const CourseCompletion = () => {
     <section className="text-dark-700 mb-4 rounded raised-card p-4">
       <div className="row w-100 m-0">
         <div className="col-12 col-sm-6 col-md-7 p-0">
-          <h2>{intl.formatMessage(messages.courseCompletion)}</h2>
+          <h2 className="custom-progress-tabs-titles">{intl.formatMessage(messages.courseCompletion)}</h2>
           <p className="small">
             {intl.formatMessage(messages.completionBody)}
           </p>

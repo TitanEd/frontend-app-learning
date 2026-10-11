@@ -32,14 +32,14 @@ const RelatedLinks = () => {
 
   return (
     <section className="mb-4 x-small">
-      <h3 className="h4">{intl.formatMessage(messages.relatedLinks)}</h3>
+      <h3 className="h4 custom-progress-tabs-titles">{intl.formatMessage(messages.relatedLinks)}</h3>
       <ul className="pl-4">
         {datesTabUrl && (
         <li>
           <Hyperlink destination={datesTabUrl} onClick={() => logLinkClicked('dates')}>
             {intl.formatMessage(messages.datesCardLink)}
           </Hyperlink>
-          <p>{intl.formatMessage(messages.datesCardDescription)}</p>
+          <p className="custom-progress-tabs-subtitles">{intl.formatMessage(messages.datesCardDescription)}</p>
         </li>
         )}
         {overviewTabUrl && (
@@ -47,7 +47,7 @@ const RelatedLinks = () => {
           <Hyperlink destination={overviewTabUrl} onClick={() => logLinkClicked('course_outline')}>
             {intl.formatMessage(messages.outlineCardLink)}
           </Hyperlink>
-          <p>{intl.formatMessage(messages.outlineCardDescription)}</p>
+          <p className="custom-progress-tabs-subtitles">{intl.formatMessage(messages.outlineCardDescription)}</p>
         </li>
         )}
       </ul>

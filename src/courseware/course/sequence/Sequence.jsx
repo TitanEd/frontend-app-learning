@@ -13,6 +13,7 @@ import SequenceExamWrapper from '@edx/frontend-lib-special-exams';
 import PageLoading from '@src/generic/PageLoading';
 import { useModel } from '@src/generic/model-store';
 import { useSequenceBannerTextAlert, useSequenceEntranceExamAlert } from '@src/alerts/sequence-alerts/hooks';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import SequenceContainerSlot from '@src/plugin-slots/SequenceContainerSlot';
 import { CourseOutlineSidebarSlot } from '@src/plugin-slots/CourseOutlineSidebarSlot';
 import { CourseOutlineSidebarTriggerSlot } from '@src/plugin-slots/CourseOutlineSidebarTriggerSlot';
@@ -167,20 +168,38 @@ const Sequence = ({
   const gated = sequence && sequence.gatedContent !== undefined && sequence.gatedContent.gated;
 
   const renderUnitNavigation = (isAtTop) => (
-    <UnitNavigation
-      courseId={courseId}
-      sequenceId={sequenceId}
-      unitId={unitId}
-      isAtTop={isAtTop}
-      onClickPrevious={() => {
-        logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
-        handlePrevious();
+    <PluginSlot
+      id="custom_unit_navigation_slot"
+      pluginProps={{
+        courseId,
+        sequenceId,
+        unitId,
+        isAtTop,
+        onClickPrevious: () => {
+          logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
+          handlePrevious();
+        },
+        onClickNext: () => {
+          logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
+          handleNext();
+        },
       }}
-      onClickNext={() => {
-        logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
-        handleNext();
-      }}
-    />
+    >
+      <UnitNavigation
+        courseId={courseId}
+        sequenceId={sequenceId}
+        unitId={unitId}
+        isAtTop={isAtTop}
+        onClickPrevious={() => {
+          logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
+          handlePrevious();
+        }}
+        onClickNext={() => {
+          logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
+          handleNext();
+        }}
+      />
+    </PluginSlot>
   );
 
   const defaultContent = (

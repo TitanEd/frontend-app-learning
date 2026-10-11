@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { getLocale, isRtl, useIntl } from '@edx/frontend-platform/i18n';
 import { DataTable } from '@openedx/paragon';
 import { Lock } from '@openedx/paragon/icons';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useContextId } from '../../../../data/hooks';
 import { useModel } from '../../../../generic/model-store';
-
 import AssignmentTypeCell from './AssignmentTypeCell';
 import DroppableAssignmentFootnote from './DroppableAssignmentFootnote';
 import GradeSummaryTableFooter from './GradeSummaryTableFooter';
@@ -111,7 +111,18 @@ const GradeSummaryTable = ({ setAllOfSomeAssignmentTypeIsLocked }) => {
   const getCell = (locked, value) => <span className={locked ? 'greyed-out' : ''}>{value}</span>;
 
   return (
-    <>
+    <PluginSlot
+      id="progress_grade_summary_plugin_slot"
+      pluginProps={{
+        intl,
+        // Verawood renamed the model field `assignmentPolicies` to `assignmentTypeGradeSummary`
+        // (same item shape); keep the old prop name for the custom widget.
+        assignmentPolicies: assignmentTypeGradeSummary,
+        setAllOfSomeAssignmentTypeIsLocked,
+        footnotes,
+        getFootnoteId,
+      }}
+    >
       <ul className="micro mb-3 pl-3 text-gray-700">
         <li>
           <b>{intl.formatMessage(messages.hiddenScoreLabel)}: </b>
@@ -162,7 +173,7 @@ const GradeSummaryTable = ({ setAllOfSomeAssignmentTypeIsLocked }) => {
       {footnotes && (
         <DroppableAssignmentFootnote footnotes={footnotes} />
       )}
-    </>
+    </PluginSlot>
   );
 };
 

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 import { getLocale, isRtl, useIntl } from '@edx/frontend-platform/i18n';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useContextId } from '../../../../data/hooks';
 import { useModel } from '../../../../generic/model-store';
 import CurrentGradeTooltip from './CurrentGradeTooltip';
 import PassingGradeTooltip from './PassingGradeTooltip';
-
 import messages from '../messages';
 
 const GradeBar = ({ passingGrade }) => {
@@ -27,23 +27,37 @@ const GradeBar = ({ passingGrade }) => {
   const adjustedRtlStyle = (percentOffest) => (isRtl(getLocale()) ? { transform: `translateX(${100 - percentOffest}%)` } : {});
 
   return (
-    <div className="col-12 col-sm-6 align-self-center p-0">
-      <div className="sr-only">{intl.formatMessage(messages.courseGradeBarAltText, { currentGrade, passingGrade })}</div>
-      <svg width="100%" height="100px" className="grade-bar" aria-hidden="true">
-        <g style={{ transform: 'translateY(2.61em)' }}>
-          <rect className="grade-bar__base" width="100%" />
-          <rect className="grade-bar--passing" width={`${passingGrade}%`} style={adjustedRtlStyle(passingGrade)} />
-          <rect className={`grade-bar--current-${isPassing ? 'passing' : 'non-passing'}`} width={`${currentGrade}%`} style={adjustedRtlStyle(currentGrade)} />
+    <PluginSlot
+      id="grade_bar_plugin_slot"
+      pluginProps={{
+        intl,
+        passingGrade,
+        courseId,
+        isPassing,
+        percent,
+        gradesFeatureIsFullyLocked,
+        currentGrade,
+        adjustedRtlStyle,
+      }}
+    >
+      <div className="col-12 col-sm-6 align-self-center p-0">
+        <div className="sr-only">{intl.formatMessage(messages.courseGradeBarAltText, { currentGrade, passingGrade })}</div>
+        <svg width="100%" height="100px" className="grade-bar" aria-hidden="true">
+          <g style={{ transform: 'translateY(2.61em)' }}>
+            <rect className="grade-bar__base" width="100%" />
+            <rect className="grade-bar--passing" width={`${passingGrade}%`} style={adjustedRtlStyle(passingGrade)} />
+            <rect className={`grade-bar--current-${isPassing ? 'passing' : 'non-passing'}`} width={`${currentGrade}%`} style={adjustedRtlStyle(currentGrade)} />
 
-          {/* Start divider */}
-          <rect className="grade-bar__divider" />
-          {/* End divider */}
-          <rect className="grade-bar__divider" x="99.7%" />
-        </g>
-        <PassingGradeTooltip passingGrade={passingGrade} tooltipClassName={lockedTooltipClassName} />
-        <CurrentGradeTooltip tooltipClassName={lockedTooltipClassName} />
-      </svg>
-    </div>
+            {/* Start divider */}
+            <rect className="grade-bar__divider" />
+            {/* End divider */}
+            <rect className="grade-bar__divider" x="99.7%" />
+          </g>
+          <PassingGradeTooltip passingGrade={passingGrade} tooltipClassName={lockedTooltipClassName} />
+          <CurrentGradeTooltip tooltipClassName={lockedTooltipClassName} />
+        </svg>
+      </div>
+    </PluginSlot>
   );
 };
 

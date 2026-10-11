@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { getConfig } from '@edx/frontend-platform';
 import { useToggle } from '@openedx/paragon';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { CourseTabsNavigationSlot } from '@src/plugin-slots/CourseTabsNavigationSlot';
 
 import { useModel } from '@src/generic/model-store';
@@ -62,14 +63,20 @@ const LoadedTabPage = ({
       <Helmet>
         <title>{`${activeTab ? `${activeTab.title} | ` : ''}${title} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
-      {originalUserIsStaff && (
-        <InstructorToolbar
-          courseId={courseId}
-          unitId={unitId}
-          tab={activeTabSlug}
-          isStudioButtonVisible={hasCourseAuthorAccess}
-        />
-      )}
+      <PluginSlot
+        id="loaded_tab_page_plugin_slott"
+        pluginProps={{
+        }}
+      >
+        {originalUserIsStaff && (
+          <InstructorToolbar
+            courseId={courseId}
+            unitId={unitId}
+            tab={activeTabSlug}
+            isStudioButtonVisible={hasCourseAuthorAccess}
+          />
+        )}
+      </PluginSlot>
       <StreakModal
         courseId={courseId}
         metadataModel={metadataModel}
@@ -86,6 +93,12 @@ const LoadedTabPage = ({
           customAlerts={{
             ...enrollmentAlert,
             ...logistrationAlert,
+          }}
+        />
+        <PluginSlot
+          id="course_header_plugin_slot"
+          pluginProps={{
+            title,
           }}
         />
         <CourseTabsNavigationSlot tabs={tabs} activeTabSlug={activeTabSlug} />

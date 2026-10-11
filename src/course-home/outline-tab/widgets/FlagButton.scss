@@ -1,3 +1,8 @@
+// Paragon 23 no longer ships SCSS core/variables; this file uses CSS variables instead.
+// @import "~@edx/brand/paragon/variables";
+// @import "~@openedx/paragon/scss/core/core";
+// @import "~@edx/brand/paragon/overrides";
+
 .flag-button {
   background-color: var(--pgn-color-white);
   border: 1px solid var(--pgn-color-light-400);

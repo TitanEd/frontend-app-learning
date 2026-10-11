@@ -54,7 +54,7 @@ const DetailedGrades = () => {
 
   return (
     <section className="text-dark-700">
-      <h3 className="h4">{intl.formatMessage(messages.detailedGrades)}</h3>
+      <h3 className="h4 custom-progress-tabs-titles">{intl.formatMessage(messages.detailedGrades)}</h3>
       <ul className="micro mb-3 pl-3 text-gray-700">
         <li>
           <b>{intl.formatMessage(messages.practiceScoreLabel)} </b>
@@ -78,7 +78,7 @@ const DetailedGrades = () => {
         <p className="small">{intl.formatMessage(emptyTableMsg)}</p>
       )}
       {overviewTabUrl && !showUngradedAssignments() && (
-        <p className="x-small m-0">
+        <p className="custom-progress-tabs-subtitles m-0">
           {intl.formatMessage(messages.ungradedAlert, { outlineLink })}
         </p>
       )}

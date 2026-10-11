@@ -9,6 +9,7 @@ import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Email } from '@openedx/paragon/icons';
 import { useSelector } from 'react-redux';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import messages from '../messages';
 import LearningGoalButton from './LearningGoalButton';
 import { saveWeeklyLearningGoal } from '../../data';
@@ -88,49 +89,65 @@ const WeeklyLearningGoalCard = ({
   }, [location.search]);
 
   return (
-    <Card
-      id="courseHome-weeklyLearningGoal"
-      className="row w-100 m-0 mb-3 raised-card"
-      data-testid="weekly-learning-goal-card"
+    <PluginSlot
+      id="weekly_learning_goal_card_plugin_slot"
+      pluginProps={{
+        administrator,
+        daysPerWeek,
+        daysPerWeekGoal,
+        subscribedToReminders,
+        location,
+        intl,
+        courseId,
+        isMasquerading,
+        org,
+        handleSelect,
+        handleSubscribeToReminders,
+      }}
     >
-      <Card.Header
-        size="sm"
-        title={(<div id="set-weekly-goal-header">{intl.formatMessage(messages.setWeeklyGoal)}</div>)}
-        subtitle={intl.formatMessage(messages.setWeeklyGoalDetail)}
-      />
-      <Card.Section className="text-gray-700 small">
-        <div
-          role="radiogroup"
-          aria-labelledby="set-weekly-goal-header"
-          className="flag-button-container m-0 p-0"
-        >
-          <LearningGoalButton
-            level="casual"
-            isSelected={daysPerWeekGoal === 1}
-            handleSelect={handleSelect}
-          />
-          <LearningGoalButton
-            level="regular"
-            isSelected={daysPerWeekGoal === 3}
-            handleSelect={handleSelect}
-          />
-          <LearningGoalButton
-            level="intense"
-            isSelected={daysPerWeekGoal === 5}
-            handleSelect={handleSelect}
-          />
-        </div>
-        <div className="d-flex pt-3">
-          <Form.Switch
-            checked={isGetReminderSelected}
-            onChange={(event) => handleSubscribeToReminders(event)}
-            disabled={!daysPerWeekGoal}
+      <Card
+        id="courseHome-weeklyLearningGoal"
+        className="row w-100 m-0 mb-3 raised-card"
+        data-testid="weekly-learning-goal-card"
+      >
+        <Card.Header
+          size="sm"
+          title={(<div id="set-weekly-goal-header">{intl.formatMessage(messages.setWeeklyGoal)}</div>)}
+          subtitle={intl.formatMessage(messages.setWeeklyGoalDetail)}
+        />
+        <Card.Section className="text-gray-700 small">
+          <div
+            role="radiogroup"
+            aria-labelledby="set-weekly-goal-header"
+            className="flag-button-container m-0 p-0"
           >
-            <small>{intl.formatMessage(messages.setGoalReminder)}</small>
-          </Form.Switch>
-        </div>
-      </Card.Section>
-      {isGetReminderSelected && (
+            <LearningGoalButton
+              level="casual"
+              isSelected={daysPerWeekGoal === 1}
+              handleSelect={handleSelect}
+            />
+            <LearningGoalButton
+              level="regular"
+              isSelected={daysPerWeekGoal === 3}
+              handleSelect={handleSelect}
+            />
+            <LearningGoalButton
+              level="intense"
+              isSelected={daysPerWeekGoal === 5}
+              handleSelect={handleSelect}
+            />
+          </div>
+          <div className="d-flex pt-3">
+            <Form.Switch
+              checked={isGetReminderSelected}
+              onChange={(event) => handleSubscribeToReminders(event)}
+              disabled={!daysPerWeekGoal}
+            >
+              <small>{intl.formatMessage(messages.setGoalReminder)}</small>
+            </Form.Switch>
+          </div>
+        </Card.Section>
+        {isGetReminderSelected && (
         <Card.Section muted>
           <div className="row w-100 m-0 small align-center">
             <div className="d-flex align-items-center pr-1">
@@ -144,8 +161,9 @@ const WeeklyLearningGoalCard = ({
             </div>
           </div>
         </Card.Section>
-      )}
-    </Card>
+        )}
+      </Card>
+    </PluginSlot>
   );
 };
 

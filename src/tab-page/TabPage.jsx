@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 import { Toast } from '@openedx/paragon';
 import { FooterSlot } from '@edx/frontend-component-footer';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import HeaderSlot from '../plugin-slots/HeaderSlot';
 import PageLoading from '../generic/PageLoading';
 import { getAccessDeniedRedirectUrl } from '../shared/access';
@@ -70,7 +71,9 @@ const TabPage = (props) => {
         </>
       )}
 
-      <HeaderSlot courseOrg={org} courseNumber={number} courseTitle={title} />
+      <PluginSlot id="hide_header_plugin_slot">
+        <HeaderSlot courseOrg={org} courseNumber={number} courseTitle={title} />
+      </PluginSlot>
 
       {courseStatus === 'loading' && (
         <PageLoading srMessage={intl.formatMessage(messages.loading)} />
@@ -86,7 +89,11 @@ const TabPage = (props) => {
           {errorMessage || intl.formatMessage(messages.failure)}
         </p>
       )}
-      <FooterSlot />
+      <PluginSlot
+        id="footer_hide_plugin_slot"
+      >
+        <FooterSlot />
+      </PluginSlot>
     </>
   );
 };

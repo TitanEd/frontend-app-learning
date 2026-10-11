@@ -5,6 +5,7 @@ import { FormattedDate } from '@edx/frontend-platform/i18n';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { useModel } from '../../generic/model-store';
 import { isLearnerAssignment } from '../dates-tab/utils';
 import './DateSummary.scss';
@@ -35,35 +36,47 @@ const DateSummary = ({
   };
 
   return (
-    <li className="p-0 mb-3 small text-dark-500">
-      <div className="row">
-        <FontAwesomeIcon icon={faCalendarAlt} className="ml-3 mt-1 mr-1" fixedWidth />
-        <div className="ml-1 font-weight-bold">
-          <FormattedDate
-            value={dateBlock.date}
-            day="numeric"
-            month="short"
-            weekday="short"
-            year="numeric"
-            {...timezoneFormatArgs}
-          />
+    <PluginSlot
+      id="date_summary_plugin_slot"
+      pluginProps={{
+        dateBlock,
+        userTimezone,
+        courseId,
+        org,
+        logVerifiedUpgradeClick,
+        linkedTitle,
+        timezoneFormatArgs,
+      }}
+    >
+      <li className="p-0 mb-3 small text-dark-500">
+        <div className="row">
+          <FontAwesomeIcon icon={faCalendarAlt} className="ml-3 mt-1 mr-1" fixedWidth />
+          <div className="ml-1 font-weight-bold">
+            <FormattedDate
+              value={dateBlock.date}
+              day="numeric"
+              month="short"
+              weekday="short"
+              year="numeric"
+              {...timezoneFormatArgs}
+            />
+          </div>
         </div>
-      </div>
-      <div className="row ml-4 pr-2">
-        <div className="date-summary-text">
-          {linkedTitle && (
+        <div className="row ml-4 pr-2">
+          <div className="date-summary-text">
+            {linkedTitle && (
             <div className="font-weight-bold mt-2">
               <a href={dateBlock.link}>{dateBlock.title}</a>
             </div>
-          )}
-          {!linkedTitle && (
+            )}
+            {!linkedTitle && (
             <div className="font-weight-bold mt-2">{dateBlock.title}</div>
-          )}
-        </div>
-        {dateBlock.description && (
+            )}
+          </div>
+          {dateBlock.description && (
           <div className="date-summary-text mt-1">{dateBlock.description}</div>
-        )}
-        {!linkedTitle && dateBlock.link && (
+          )}
+          {!linkedTitle && dateBlock.link && (
           <a
             id={dateBlock.dateType === 'verified-upgrade-deadline' ? 'date-verified-upgrade-deadline' : ''}
             href={dateBlock.link}
@@ -72,9 +85,10 @@ const DateSummary = ({
           >
             {dateBlock.linkText}
           </a>
-        )}
-      </div>
-    </li>
+          )}
+        </div>
+      </li>
+    </PluginSlot>
   );
 };
 

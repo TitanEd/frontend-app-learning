@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useIntl } from '@edx/frontend-platform/i18n';
 
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import DateSummary from '../DateSummary';
 import messages from '../messages';
 import { useModel } from '../../../generic/model-store';
@@ -30,7 +31,7 @@ const CourseDates = () => {
     <section className="mb-4">
       <div id="courseHome-dates">
         <h2 className="h4">{intl.formatMessage(messages.dates)}</h2>
-        <ol className="list-unstyled">
+        <ol className="list-unstyled imp-dates-styles">
           {courseDateBlocks.map((courseDateBlock) => (
             <DateSummary
               key={courseDateBlock.title + courseDateBlock.date}
@@ -39,9 +40,17 @@ const CourseDates = () => {
             />
           ))}
         </ol>
-        <a id="dates-tab-link" className="font-weight-bold ml-4 pl-1 small" href={datesTabLink}>
-          {intl.formatMessage(messages.allDates)}
-        </a>
+        <PluginSlot
+          id="course_dates_plugin_slot"
+          pluginProps={{
+            href: datesTabLink,
+            messages: intl.formatMessage(messages.allDates),
+          }}
+        >
+          <a id="dates-tab-link" className="font-weight-bold ml-4 pl-1 small" href={datesTabLink}>
+            {intl.formatMessage(messages.allDates)}
+          </a>
+        </PluginSlot>
       </div>
     </section>
   );
