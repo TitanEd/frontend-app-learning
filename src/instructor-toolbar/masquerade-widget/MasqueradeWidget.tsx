@@ -87,19 +87,27 @@ export const MasqueradeWidget: React.FC<Props> = ({ courseId, onError }) => {
   }, []);
 
   const specificLearnerInputText = intl.formatMessage(messages.placeholder);
+  // The LMS sends these three option names in English only (courseware/masquerade.py); the
+  // names of enrollment tracks and cohorts are course data and are shown as they are.
+  const fixedNames: Record<string, string> = {
+    Staff: intl.formatMessage(messages.titleStaff),
+    Learner: intl.formatMessage(messages.optionLearner),
+    'Specific Student...': intl.formatMessage(messages.optionSpecificStudent),
+  };
+  const displayName = (name?: string | null) => (name && fixedNames[name]) || name;
   return (
     <div className="flex-grow-1">
       <div className="row">
         <span className="col-auto col-form-label pl-3"><FormattedMessage {...messages.titleViewAs} /></span>
         <Dropdown className="flex-shrink-1 mx-1">
           <Dropdown.Toggle id="masquerade-widget-toggle" variant="inverse-outline-primary">
-            {active.groupName ?? active.userName ?? intl.formatMessage(messages.titleStaff)}
+            {displayName(active.groupName) ?? active.userName ?? intl.formatMessage(messages.titleStaff)}
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {available.map(group => (
               <MasqueradeWidgetOption
                 groupId={group.groupId}
-                groupName={group.name}
+                groupName={displayName(group.name) as string}
                 key={group.name}
                 role={group.role}
                 selected={active}

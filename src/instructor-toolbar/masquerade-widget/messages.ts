@@ -26,6 +26,16 @@ const messages = defineMessages({
     defaultMessage: 'Staff',
     description: 'Button Staff',
   },
+  optionLearner: {
+    id: 'instructor.toolbar.option.learner',
+    defaultMessage: 'Learner',
+    description: 'Option of the "View this course as" menu: see the course as any learner does',
+  },
+  optionSpecificStudent: {
+    id: 'instructor.toolbar.option.specificStudent',
+    defaultMessage: 'Specific Student...',
+    description: 'Option of the "View this course as" menu: see the course as one learner, chosen next',
+  },
 });
 
 export default messages;
