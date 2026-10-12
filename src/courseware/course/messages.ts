@@ -1,6 +1,11 @@
 import { defineMessages } from '@edx/frontend-platform/i18n';
 
 const messages = defineMessages({
+  breadcrumbsLabel: {
+    id: 'learn.custom.breadcrumbs.label',
+    defaultMessage: 'breadcrumb',
+    description: 'Accessible name (screen readers) of the breadcrumb navigation above a unit',
+  },
   closeSidebarTrigger: {
     id: 'sidebar.close.button',
     defaultMessage: 'Close sidebar',

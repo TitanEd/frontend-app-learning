@@ -60,7 +60,7 @@ describe('DiscussionTab', () => {
 
   it('resizes when it gets a size hint from iframe', async () => {
     window.postMessage({ ...messageEvent, payload: { height: 1234 } }, '*');
-    await waitFor(() => expect(screen.getByTitle('discussion'))
+    await waitFor(() => expect(screen.getByTitle('Discussions'))
       .toHaveAttribute('height', String(1234)));
   });
 });

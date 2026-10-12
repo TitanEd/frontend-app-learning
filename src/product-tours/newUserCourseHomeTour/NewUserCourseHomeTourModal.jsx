@@ -19,7 +19,7 @@ const NewUserCourseHomeTourModal = ({
   return (
     <MarketingModal
       isOpen={isOpen}
-      title="New user course home prompt"
+      title={intl.formatMessage(messages.newUserModalAriaTitle)}
       className="new-user-tour-dialog"
       heroIsDark
       hasCloseButton={false}

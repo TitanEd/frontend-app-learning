@@ -2,12 +2,13 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from '@edx/frontend-platform/i18n';
+import { FormattedMessage, useIntl } from '@edx/frontend-platform/i18n';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import { useModel, useModels } from '../../../generic/model-store';
 import BreadcrumbItem from './BreadcrumbItem';
+import messages from '../messages';
 
 const CourseBreadcrumbs = ({
   courseId,
@@ -16,6 +17,7 @@ const CourseBreadcrumbs = ({
   unitId,
   isStaff,
 }) => {
+  const intl = useIntl();
   const course = useModel('coursewareMeta', courseId);
   const courseStatus = useSelector((state) => state.courseware.courseStatus);
   const sequenceStatus = useSelector(
@@ -60,7 +62,7 @@ const CourseBreadcrumbs = ({
   }, [courseStatus, sequenceStatus, allSequencesInSections]);
 
   return (
-    <nav aria-label="breadcrumb" className="d-inline-block col-sm-10 mb-3">
+    <nav aria-label={intl.formatMessage(messages.breadcrumbsLabel)} className="d-inline-block col-sm-10 mb-3">
       <ol className="list-unstyled d-flex flex-nowrap align-items-center m-0">
         <li className="list-unstyled col-auto m-0 p-0">
           <Link

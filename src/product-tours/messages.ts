@@ -11,6 +11,11 @@ const messages = defineMessages({
     defaultMessage: 'Launch tour',
     description: 'A button used to launch a tour of the website',
   },
+  newUserModalAriaTitle: {
+    id: 'tours.custom.newUserModal.ariaTitle',
+    defaultMessage: 'New user course home prompt',
+    description: 'Accessible name (screen readers) of the dialog that offers a new learner a tour of the course home page',
+  },
   newUserModalBody: {
     id: 'tours.newUserModal.body',
     defaultMessage: 'Let’s take a quick tour of {siteName} so you can get the most out of your course.',

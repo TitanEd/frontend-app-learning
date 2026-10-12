@@ -11,6 +11,11 @@ const messages = defineMessages({
     defaultMessage: 'Due next',
     description: 'Shown as label for the assignment which date is in the future',
   },
+  dueTime: {
+    id: 'learning.dates.custom.dueTime',
+    defaultMessage: 'due {time}',
+    description: 'Shown after the title of an assignment in the dates timeline; {time} is the time of day the assignment is due, e.g. "due 5:30 PM UTC"',
+  },
   pastDue: {
     id: 'learning.dates.badge.pastDue',
     defaultMessage: 'Past due',

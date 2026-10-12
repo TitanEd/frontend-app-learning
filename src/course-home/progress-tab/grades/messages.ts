@@ -218,6 +218,11 @@ const messages = defineMessages({
     defaultMessage: 'Weighted grade',
     description: 'Weighed grade is calculated by (weight %) * (grade score) ',
   },
+  percentageAxisLabel: {
+    id: 'progress.custom.percentageAxisLabel',
+    defaultMessage: 'Percentage',
+    description: 'Title of the vertical axis of the grade summary chart (values are percentages)',
+  },
   weightedGradeSummary: {
     id: 'progress.weightedGradeSummary',
     defaultMessage: 'Your current weighted grade summary',
