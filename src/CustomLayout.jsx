@@ -16,7 +16,11 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext, PageWrap } from '@edx/frontend-platform/react';
 
 import { fetchDiscussionTab, fetchLiveTab } from './course-home/data/thunks';
-import { customFetchOutlineTab } from './course-home/data/customThunks';
+import {
+  customFetchBookmarksTab, customFetchOutlineTab, customFetchUpdatesTab,
+} from './course-home/data/customThunks';
+import CustomBookmarksTab from './course-home/bookmarks-tab/CustomBookmarksTab';
+import CustomUpdatesTab from './course-home/updates-tab/CustomUpdatesTab';
 import DiscussionTab from './course-home/discussion-tab/DiscussionTab';
 import CustomOutlineTabPage from './course-home/outline-tab/CustomOutlineTabPage';
 import { CourseExit } from './courseware/course/course-exit';
@@ -37,6 +41,7 @@ import PageNotFound from './generic/PageNotFound';
 import customGetUserMenuItems from './utils/customGetUserMenuItems';
 import getLearnerDashboardUrl from './utils/getLearnerDashboardUrl';
 import messages from './messages';
+import HeaderExtras, { headerUser } from './customHeaderExtras';
 
 // Custom UI styles load after the stock Verawood styles (as in the previous
 // version), so on equal specificity the custom rules win.
@@ -145,13 +150,8 @@ const CustomLayoutShell = () => {
     };
   }, []);
 
-  const updatedAuthenticatedUser = {
-    ...authenticatedUser,
-    username: userMenuItemsFromAPI?.username || authenticatedUser?.username,
-    avatar: userMenuItemsFromAPI?.profile_image?.has_image
-      ? userMenuItemsFromAPI.profile_image.image_url_small
-      : authenticatedUser?.avatar,
-  };
+  // Full name and profile picture, as the header shows them (customHeaderExtras.jsx).
+  const updatedAuthenticatedUser = headerUser(authenticatedUser, userMenuItemsFromAPI);
 
   const userMenuItems = customGetUserMenuItems({
     intl,
@@ -180,6 +180,7 @@ const CustomLayoutShell = () => {
             headerButtons={headerButtons}
             languageSelectorList={languageSelectorList}
           />
+          <HeaderExtras />
         </div>
         <div className="content-wrapper">
           <div className="sidebar-container">
@@ -248,6 +249,26 @@ const CustomLayout = () => (
           <DecodePageRoute>
             <TabContainer tab="dates" fetch={fetchDatesTab} slice="courseHome">
               <CustomDatesTab />
+            </TabContainer>
+          </DecodePageRoute>
+        )}
+      />
+      <Route
+        path={DECODE_ROUTES.BOOKMARKS}
+        element={(
+          <DecodePageRoute>
+            <TabContainer tab="bookmarks" fetch={customFetchBookmarksTab} slice="courseHome">
+              <CustomBookmarksTab />
+            </TabContainer>
+          </DecodePageRoute>
+        )}
+      />
+      <Route
+        path={DECODE_ROUTES.UPDATES}
+        element={(
+          <DecodePageRoute>
+            <TabContainer tab="updates" fetch={customFetchUpdatesTab} slice="courseHome">
+              <CustomUpdatesTab />
             </TabContainer>
           </DecodePageRoute>
         )}

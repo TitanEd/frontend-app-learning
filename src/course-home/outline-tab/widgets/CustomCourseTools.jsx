@@ -3,6 +3,7 @@ import { AccessTime, BookmarkBorder } from '@openedx/paragon/icons';
 
 import { Badge, Icon } from '@openedx/paragon';
 import messages from '../messages';
+import { BOOKMARKS_TAB_SLUG, UPDATES_TAB_SLUG, getCustomTabUrl } from '../../../course-tabs/customCourseTabs';
 import LaunchCourseHomeTourButton from '../../../product-tours/newUserCourseHomeTour/LaunchCourseHomeTourButton';
 
 const CustomCourseTools = ({
@@ -17,7 +18,7 @@ const CustomCourseTools = ({
           key={courseTool.analyticsId}
           className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center w-100 mb-2 badge-border-radius bookmarks-badge"
           as="a"
-          href={courseTool.url}
+          href={getCustomTabUrl(courseId, BOOKMARKS_TAB_SLUG)}
           onClick={() => logClick(courseTool.analyticsId)}
         >
           <Icon className="mr-2" src={BookmarkBorder} />
@@ -31,7 +32,7 @@ const CustomCourseTools = ({
             key={courseTool.analyticsId}
             className="bg-white border border-gray-300 text-dark d-flex align-items-center justify-content-center badge-border-radius badge-style"
             as="a"
-            href={courseTool.url}
+            href={getCustomTabUrl(courseId, UPDATES_TAB_SLUG)}
             onClick={() => logClick(courseTool.analyticsId)}
           >
             <Icon className="mr-2" src={AccessTime} />

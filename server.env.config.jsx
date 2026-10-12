@@ -25,6 +25,7 @@ const { default: CustomProgressGradeSummary } = await import('./src/course-home/
 const { default: CustomUnitNavigation } = await import('./src/courseware/course/sequence/CustomUnitNavigation');
 const { default: CustomLayout } = await import('./src/CustomLayout');
 const { default: CustomSidebarTriggers } = await import('./src/courseware/course/sidebar/CustomSidebarTriggers');
+const { default: CustomLoadedTabPageMain } = await import('./src/tab-page/CustomLoadedTabPageMain');
 
 {% raw %}
 
