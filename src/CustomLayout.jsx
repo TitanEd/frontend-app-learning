@@ -42,6 +42,7 @@ import PreferencesUnsubscribe from './preferences-unsubscribe';
 import PageNotFound from './generic/PageNotFound';
 import customGetUserMenuItems from './utils/customGetUserMenuItems';
 import getLearnerDashboardUrl from './utils/getLearnerDashboardUrl';
+import { useSiteFeatures, withSiteFeatures } from './useSiteFeatures';
 import messages from './messages';
 import HeaderExtras, { headerUser } from './customHeaderExtras';
 
@@ -90,7 +91,9 @@ const CustomLayoutShell = () => {
   const [userMenuItemsFromAPI, setUserMenuItemsFromAPI] = useState({});
 
   // Sidebar items open pages of the learner dashboard MFE.
-  const sidebarItems = [
+  // "My Assessments" and "My Achievements" are features a site may not have (useSiteFeatures.js).
+  const siteFeatures = useSiteFeatures();
+  const sidebarItems = withSiteFeatures([
     {
       label: intl.formatMessage(messages.sidebarDashboardTitle),
       path: '/',
@@ -104,14 +107,16 @@ const CustomLayoutShell = () => {
     {
       label: intl.formatMessage(messages.sidebarMyAssessmentsTitle),
       path: '/assessments',
+      feature: 'assessment_center',
       icon: <Assignment />,
     },
     {
       label: intl.formatMessage(messages.sidebarMyAchievementsTitle),
       path: '/achievements',
+      feature: 'gamification',
       icon: <EmojiEvents />,
     },
-  ];
+  ], siteFeatures);
 
   useEffect(() => {
     document.documentElement.classList.add(CUSTOM_UI_CLASS);
