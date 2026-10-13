@@ -855,6 +855,16 @@ a {
   }
 }
 
+// The rule above would paint the label of an active pill in the pill's own colour
+// (TELS Copilot tool tabs): keep the label colour the pills are designed with.
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  &,
+  &:hover {
+    color: var(--pgn-color-nav-pills-base-link-active-text, #fff) !important;
+  }
+}
+
 .custom-unit-navigation {
   margin-top: -0.5rem;
 }
