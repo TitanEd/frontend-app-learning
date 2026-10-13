@@ -2,7 +2,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { Spinner } from '@openedx/paragon';
-import { Home, LmsBook } from '@openedx/paragon/icons';
+import {
+  Assignment, EmojiEvents, Home, LmsBook,
+} from '@openedx/paragon/icons';
 import {
   Outlet, Route, Routes, useLocation,
 } from 'react-router-dom';
@@ -98,6 +100,16 @@ const CustomLayoutShell = () => {
       label: intl.formatMessage(messages.sidebarMyCoursesTitle),
       path: '/my-courses',
       icon: <LmsBook />,
+    },
+    {
+      label: intl.formatMessage(messages.sidebarMyAssessmentsTitle),
+      path: '/assessments',
+      icon: <Assignment />,
+    },
+    {
+      label: intl.formatMessage(messages.sidebarMyAchievementsTitle),
+      path: '/achievements',
+      icon: <EmojiEvents />,
     },
   ];
 
