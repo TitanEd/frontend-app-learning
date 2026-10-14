@@ -43,7 +43,7 @@ pull_translations:
 	           translations/frontend-lib-special-exams/src/i18n/messages:frontend-lib-special-exams \
 	           translations/frontend-app-learning/src/i18n/messages:frontend-app-learning
 
-	$(intl_imports) frontend-platform paragon frontend-component-header frontend-component-footer frontend-lib-special-exams frontend-app-learning
+	$(intl_imports) frontend-plugin-notifications frontend-platform paragon frontend-component-header frontend-component-footer frontend-lib-special-exams frontend-app-learning
 
 
 # This target is used by Travis.
