@@ -25,8 +25,10 @@ const TabContainer = (props) => {
     } else {
       dispatch(fetch(courseIdFromUrl));
     }
+  // React keeps this container when the route moves to another tab of the same course
+  // (bookmarks -> home): `tab` makes it load the new tab's data.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [courseIdFromUrl, targetUserId]);
+  }, [courseIdFromUrl, targetUserId, tab]);
 
   // The courseId from the store is the course we HAVE loaded.  If the URL changes,
   // we don't want the application to adjust to it until it has actually loaded the new data.

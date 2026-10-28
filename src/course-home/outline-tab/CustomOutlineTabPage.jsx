@@ -14,8 +14,10 @@ import usePrivateCourseAlert from './alerts/private-course-alert';
 import useScheduledContentAlert from './alerts/scheduled-content-alert';
 import { useModel } from '../../generic/model-store';
 import CustomOutlineTab from './CustomOutlineTab';
+import PageLoading from '../../generic/PageLoading';
+import tabPageMessages from '../../tab-page/messages';
 
-const CustomOutlineTabPage = () => {
+const CustomOutlineTabContent = () => {
   const intl = useIntl();
   const {
     courseId,
@@ -153,6 +155,18 @@ const CustomOutlineTabPage = () => {
       subscribedToReminders={selectedGoal && 'subscribedToReminders' in selectedGoal ? selectedGoal.subscribedToReminders : false}
     />
   );
+};
+
+// Coming from a page that loads only the course metadata (bookmarks, updates), the course is already
+// "loaded" when this page first renders but its outline is not fetched yet: wait for it.
+const CustomOutlineTabPage = () => {
+  const intl = useIntl();
+  const { courseId } = useSelector(state => state.courseHome);
+  const outline = useModel('outline', courseId);
+  if (!outline?.courseBlocks) {
+    return <PageLoading srMessage={intl.formatMessage(tabPageMessages.loading)} />;
+  }
+  return <CustomOutlineTabContent />;
 };
 
 export default CustomOutlineTabPage;
