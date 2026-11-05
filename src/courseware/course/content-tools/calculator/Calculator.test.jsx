@@ -44,11 +44,12 @@ describe('Calculator', () => {
 
     const instructionsButton = screen.getByRole('button', { name: 'Calculator Instructions' });
     expect(instructionsButton.querySelector('svg')).toHaveClass('fa-question-circle');
-    expect(screen.queryByText(/For detailed information, see/)).not.toBeInTheDocument();
+    expect(screen.queryByText('Useful tips:')).not.toBeInTheDocument();
 
     fireEvent.click(instructionsButton);
     expect(instructionsButton.querySelector('svg')).toHaveClass('fa-times-circle');
-    expect(screen.getByText(/For detailed information, see/)).toBeInTheDocument();
+    expect(screen.getByText('Useful tips:')).toBeInTheDocument();
+    expect(screen.queryByText(/Help Center/)).not.toBeInTheDocument();
 
     fireEvent.click(instructionsButton);
     expect(instructionsButton.querySelector('svg')).toHaveClass('fa-question-circle');

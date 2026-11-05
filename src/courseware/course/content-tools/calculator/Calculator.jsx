@@ -87,23 +87,6 @@ const Calculator = () => {
             </Collapsible.Trigger>
           </div>
           <Collapsible.Body className="container-xl pt-3" style={{ maxHeight: '50vh', overflow: 'auto' }}>
-            <FormattedMessage
-              tagName="h6"
-              id="calculator.instructions"
-              defaultMessage="For detailed information, see the {expressions_link}."
-              description="Text that precedes the link which redirects to help page calculator"
-              values={{
-                expressions_link: (
-                  <a href={getConfig().SUPPORT_URL_CALCULATOR_MATH}>
-                    <FormattedMessage
-                      id="calculator.instructions.support.title"
-                      defaultMessage="Help Center"
-                      description="Anchor text for link which redirects to help page calculator"
-                    />
-                  </a>
-                ),
-              }}
-            />
             <p>
               <strong>
                 <FormattedMessage
