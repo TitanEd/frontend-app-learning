@@ -23,6 +23,7 @@ const { default: CustomDateDescription } = await import('./src/course-home/dates
 const { default: CustomTodayDate } = await import('./src/course-home/dates-tab/timeline/CustomTodayDate');
 const { default: CustomProgressGradeSummary } = await import('./src/course-home/outline-tab/widgets/CustomProgressGradeSummary');
 const { default: CustomUnitNavigation } = await import('./src/courseware/course/sequence/CustomUnitNavigation');
+const { default: CustomSequenceUnavailable } = await import('./src/courseware/course/sequence/CustomSequenceUnavailable');
 const { default: CustomLayout } = await import('./src/CustomLayout');
 const { default: CustomSidebarTriggers } = await import('./src/courseware/course/sidebar/CustomSidebarTriggers');
 const { default: CustomLoadedTabPageMain } = await import('./src/tab-page/CustomLoadedTabPageMain');
@@ -335,6 +336,20 @@ return {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => <CustomUnitNavigation {...props} />,
+          },
+        },
+      ],
+    },
+    custom_sequence_load_failure_slot: {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "custom_sequence_load_failure_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomSequenceUnavailable {...props} />,
           },
         },
       ],

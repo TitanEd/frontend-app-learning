@@ -273,9 +273,11 @@ const Sequence = ({
 
   // sequence status 'failed' and any other unexpected sequence status.
   return (
-    <p className="text-center py-5 mx-auto" style={{ maxWidth: '30em' }}>
-      {intl.formatMessage(messages.loadFailure)}
-    </p>
+    <PluginSlot id="custom_sequence_load_failure_slot" pluginProps={{ courseId, sequenceId }}>
+      <p className="text-center py-5 mx-auto" style={{ maxWidth: '30em' }}>
+        {intl.formatMessage(messages.loadFailure)}
+      </p>
+    </PluginSlot>
   );
 };
 
