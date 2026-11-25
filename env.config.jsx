@@ -20,6 +20,7 @@ import CustomDateDescription from "./src/course-home/dates-tab/timeline/CustomDa
 import CustomTodayDate from "./src/course-home/dates-tab/timeline/CustomTodayDate";
 import CustomProgressGradeSummary from "./src/course-home/outline-tab/widgets/CustomProgressGradeSummary";
 import CustomUnitNavigation from "./src/courseware/course/sequence/CustomUnitNavigation";
+import CustomSequenceUnavailable from "./src/courseware/course/sequence/CustomSequenceUnavailable";
 import CustomLayout from "./src/CustomLayout";
 import CustomSidebarTriggers from "./src/courseware/course/sidebar/CustomSidebarTriggers";
 import CustomLoadedTabPageMain from "./src/tab-page/CustomLoadedTabPageMain";
@@ -329,6 +330,20 @@ return {
             type: DIRECT_PLUGIN,
             priority: 1,
             RenderWidget: (props) => <CustomUnitNavigation {...props} />,
+          },
+        },
+      ],
+    },
+    custom_sequence_load_failure_slot: {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: "custom_sequence_load_failure_slot",
+            type: DIRECT_PLUGIN,
+            priority: 1,
+            RenderWidget: (props) => <CustomSequenceUnavailable {...props} />,
           },
         },
       ],
